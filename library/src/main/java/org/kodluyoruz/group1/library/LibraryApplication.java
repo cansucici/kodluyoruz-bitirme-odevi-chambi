@@ -9,8 +9,4 @@ public class LibraryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LibraryApplication.class, args);
 	}
-	// muhammed branch 1
-	// test branch 2
-	// muhammed branch 3
-	// muhammed branch 4
 }
