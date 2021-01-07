@@ -9,7 +9,4 @@ public class LibraryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LibraryApplication.class, args);
 	}
-	//muhammed new 1
-	//muhammed new 2
-	//test br 3
 }
