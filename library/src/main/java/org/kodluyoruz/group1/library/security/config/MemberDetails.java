@@ -34,7 +34,7 @@ public class MemberDetails implements UserDetails {
         this.password = member.getPassword();
         this.phoneNumber = member.getPhoneNumber();
         this.adress = member.getAdress();
-        this.birthDate = member.getBirthDate();
+        this.birthDate = member.getBirthOfDate();
         this.createDate = member.getCreateDate();
         this.updateDate = member.getUpdateDate();
         this.memberStatus = member.getMemberStatus();
@@ -77,10 +77,10 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        if(memberStatus.equals(MemberStatusEnum.ACTIVE)) {
+        if (memberStatus == MemberStatusEnum.ACTIVE){
             return true;
-        } else
-        return false;
-
+        }else {
+            return false;
+        }
     }
 }
