@@ -1,7 +1,7 @@
 package org.kodluyoruz.group1.library.security.config;
 
 import org.kodluyoruz.group1.library.model.entities.Member;
-import org.kodluyoruz.group1.library.model.enums.MemberStatusEnum;
+import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +22,7 @@ public class MemberDetails implements UserDetails {
     private Date birthDate;
     private Date createDate;
     private Date updateDate;
-    private MemberStatusEnum memberStatus;
+    private StatusEnum memberStatus;
     private List<GrantedAuthority> authorities;
 
 
@@ -77,7 +77,7 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        if (memberStatus == MemberStatusEnum.ACTIVE){
+        if (memberStatus == StatusEnum.ACTIVE){
             return true;
         }else {
             return false;
