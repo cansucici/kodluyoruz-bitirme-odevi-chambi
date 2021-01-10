@@ -53,7 +53,7 @@ public class Member {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "Birth_Date", nullable = false ,updatable = false)
-    private Date birthDate;
+    private Date birthOfDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "Created_Date", nullable = false ,updatable = false)
