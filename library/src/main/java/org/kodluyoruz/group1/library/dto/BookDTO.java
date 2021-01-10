@@ -1,11 +1,7 @@
 package org.kodluyoruz.group1.library.dto;
 
 import lombok.*;
-import org.kodluyoruz.group1.library.model.enums.BookStatusEnum;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 @Getter
 @Setter
@@ -26,5 +22,5 @@ public class BookDTO extends BaseDTO {
     private String category;
     //private Date createDate;
    // private Date updateDate;
-    private BookStatusEnum bookStatus;
+    private StatusEnum bookStatus;
 }

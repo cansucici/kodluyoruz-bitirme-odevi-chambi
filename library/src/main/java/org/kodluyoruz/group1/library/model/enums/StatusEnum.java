@@ -1,6 +1,6 @@
 package org.kodluyoruz.group1.library.model.enums;
 
-public enum MemberStatusEnum {
+public enum StatusEnum {
 
-    ACTIVE, DELETED
+    ACTIVE,PASSIVE,DELETED
 }
