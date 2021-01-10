@@ -1,14 +1,11 @@
-package org.kodluyoruz.group1.library.securityConfig;
+package org.kodluyoruz.group1.library.security.config;
 
-import org.hibernate.annotations.Type;
 import org.kodluyoruz.group1.library.model.entities.Member;
-import org.kodluyoruz.group1.library.model.entities.Role;
 import org.kodluyoruz.group1.library.model.enums.MemberStatusEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
