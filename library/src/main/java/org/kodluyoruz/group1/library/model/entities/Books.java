@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kodluyoruz.group1.library.model.enums.BookStatusEnum;
+import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -60,7 +59,7 @@ public class Books extends BaseEntity {
 
     @Enumerated(value = EnumType.STRING)
     @Column (name = "Book_Status", length = 7, nullable = false)
-    private BookStatusEnum bookStatus = BookStatusEnum.ACTIVE;
+    private StatusEnum bookStatus = StatusEnum.ACTIVE ;
 
 /*
     @JoinColumn(name = "Author_ID")
