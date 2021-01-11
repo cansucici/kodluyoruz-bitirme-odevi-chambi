@@ -66,13 +66,8 @@ public class Books extends BaseEntity {
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private AuthorEntity author;*/
 
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "book_author",
-            joinColumns = { @JoinColumn(name = "book_no", referencedColumnName = "id") },
-            inverseJoinColumns =  { @JoinColumn(name = "author_no" , referencedColumnName = "id") }
-    )
-    private List<Authors> authors;
+   @OneToOne
+    private Authors authors;
 
 
 

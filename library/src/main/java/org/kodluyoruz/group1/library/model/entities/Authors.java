@@ -47,7 +47,7 @@ public class Authors extends BaseEntity {
     private List<BookEntity> books;*/
 
     @JsonIgnore //Belirtilen alanın json'a çevrilmemesini sağlar
-    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private List<Books> books;
 
     //bir yazar ---> birden çok kitapla eşleşebilir
