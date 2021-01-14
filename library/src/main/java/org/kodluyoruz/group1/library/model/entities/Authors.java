@@ -1,15 +1,15 @@
 package org.kodluyoruz.group1.library.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import lombok.*;
+import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -43,12 +43,12 @@ public class Authors extends BaseEntity {
     @Column(name = "Update_Date")
     private Date updateDate;*/
 
- /*   @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<BookEntity> books;*/
-
     @JsonIgnore //Belirtilen alanın json'a çevrilmemesini sağlar
-    @OneToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id",
+                    referencedColumnName = "id"))
     private List<Books> books;
 
-    //bir yazar ---> birden çok kitapla eşleşebilir
 }
