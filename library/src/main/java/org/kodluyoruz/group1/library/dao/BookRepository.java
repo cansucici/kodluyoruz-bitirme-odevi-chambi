@@ -1,11 +1,9 @@
 package org.kodluyoruz.group1.library.dao;
 
-import io.lettuce.core.dynamic.annotation.Param;
 import org.kodluyoruz.group1.library.model.entities.Books;
+import org.springframework.data.repository.query.Param;
 
-import java.awt.print.Book;
 import java.util.Collection;
-import java.util.List;
 
 
 public interface BookRepository {
