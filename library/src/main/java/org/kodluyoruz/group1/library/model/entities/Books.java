@@ -17,19 +17,9 @@ import java.util.List;
 @Table(name = "BOOK")
 public class Books extends BaseEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "Book_ID")
-//    private Long id;
-
     @Column(name = "Book_Name", unique = false, length = 200, nullable = false)
     private String bookName;
 
-    //@Column(name = "Author_ID")
-    // private Long authorId;
-
-    /*@Column(name = "Author",unique = false , length = 200 , nullable = false)
-    private String author;*/
 
     @Column(name = "Page_Number", unique = false, length = 5, nullable = false)
     private Long pageNumber;
@@ -49,24 +39,11 @@ public class Books extends BaseEntity {
     @Column(name = "Category", unique = false, length = 50, nullable = false)
     private String category;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Created_Date", nullable = false ,updatable = false)
-//    private Date createDate;
-//
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Update_Date")
-//    private Date updateDate;
-
     @Enumerated(value = EnumType.STRING)
     @Column(name = "Book_Status", length = 7, nullable = false)
     private StatusEnum bookStatus = StatusEnum.ACTIVE;
 
-/*
-    @JoinColumn(name = "Author_ID")
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    private AuthorEntity author;*/
-
-    @ManyToMany(mappedBy = "books")
+    @OneToMany(mappedBy = "books")
     private List<Authors> authors;
 
 }
