@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,6 +36,8 @@ public class Role {
 
     private boolean deleted;
 
+    @ManyToMany(mappedBy = "roles")//ilişkinin sahibi
+    private List<Member> members ;
 
   /*  @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Collection<Member> users;*/
