@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeResourceController {
-
+// naber gençlik
 
     @Autowired
     MemberRepository memberRepository;
