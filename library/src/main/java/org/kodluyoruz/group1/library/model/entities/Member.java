@@ -5,13 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
-import org.kodluyoruz.group1.library.model.enums.MemberStatusEnum;
+import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Getter
@@ -53,7 +50,7 @@ public class Member {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "Birth_Date", nullable = false ,updatable = false)
-    private Date birthDate;
+    private Date birthOfDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "Created_Date", nullable = false ,updatable = false)
@@ -65,7 +62,7 @@ public class Member {
 
     @Enumerated(value = EnumType.STRING)
     @Column (name = "User_Status", length = 7, nullable = false)
-    private MemberStatusEnum memberStatus;
+    private StatusEnum memberStatus;
 
 
     private String memberRole;

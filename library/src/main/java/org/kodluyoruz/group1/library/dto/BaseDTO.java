@@ -14,4 +14,5 @@ public class BaseDTO implements Serializable {
     private Long id;
     private Date createDate;
     private Date updateDate;
+    private boolean deleted;
 }

@@ -26,6 +26,8 @@ public class BaseEntity  {
     @Column(name = "Update_Date")
     private Date updateDate;
 
+    @Column(name = "Deleted")
+    private boolean deleted;
 
 
 }
