@@ -2,7 +2,7 @@ package org.kodluyoruz.group1.library.control;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.BookDTO;
-import org.kodluyoruz.group1.library.model.entities.Books;
+import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +25,7 @@ public class BookController {
 
 
 @GetMapping("/bookList")
-public Collection<Books> getBookList(){
+public Collection<Book> getBookList(){
     return bookService.getAllBooks();
 }
 
@@ -45,15 +45,15 @@ public Collection<Books> getBookList(){
 
 
 @PostMapping("/createBook")
-public Books saveBook(@RequestBody BookDTO bookDTO){
-    Books books= bookService.save(bookDTO);
-    return books;
+public Book saveBook(@RequestBody BookDTO bookDTO){
+    Book book = bookService.save(bookDTO);
+    return book;
 
 }
 @PutMapping("/updateInfo")
-public Books updateBook(@RequestBody BookDTO bookDTO){
-    Books books= bookService.update(bookDTO);
-    return books;
+public Book updateBook(@RequestBody BookDTO bookDTO){
+    Book book = bookService.update(bookDTO);
+    return book;
 }
     @DeleteMapping("/delete/{id}")
     public void deleteBook (@PathVariable Long id){
@@ -61,7 +61,7 @@ public Books updateBook(@RequestBody BookDTO bookDTO){
     }
 
     @GetMapping("/showSearchResult/{bookName}")
-    public Collection<Books> showSearchResult(@PathVariable String bookName){
+    public Collection<Book> showSearchResult(@PathVariable String bookName){
     return bookService.getBooksByBookName(bookName);
     }
 

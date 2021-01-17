@@ -3,15 +3,13 @@ package org.kodluyoruz.group1.library.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dao.AuthorRepository;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
-import org.kodluyoruz.group1.library.model.entities.Authors;
+import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.service.AuthorService;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,15 +19,15 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorConverterServiceImpl converterService;
 
     @Override
-    public Authors saveAuthor(AuthorDTO dto) {
+    public Author saveAuthor(AuthorDTO dto) {
 
-        Authors author = converterService.convertToAuthor(dto);
+        Author author = converterService.convertToAuthor(dto);
         return repository.save(author);
     }
 
     @Override
-    public Collection<Authors> getAllActive() {
-        List<Authors> authors = repository.findAll();
+    public Collection<Author> getAllActive() {
+        List<Author> authors = repository.findAll();
         return authors;
     }
 
@@ -39,8 +37,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Authors updateAuthor(AuthorDTO dto) {
-      Authors author=repository.findById(dto.getId()).orElse(null);
+    public Author updateAuthor(AuthorDTO dto) {
+      Author author=repository.findById(dto.getId()).orElse(null);
         author.setUpdateDate(new Date());
         author.setDeleted(dto.isDeleted());
         author.setAbout(dto.getAbout());
@@ -49,7 +47,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Collection<Authors> findByNameSurname(String name) {
+    public Collection<Author> findByNameSurname(String name) {
 
         return repository.findAllByNameSurname(name);
     }

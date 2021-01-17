@@ -22,7 +22,7 @@ public class BooksOperationRepositoryImpl implements BooksOperationRepository {
     @Override
     public boolean hasExistSameBookIsbn(Long bookIsbn) {
         Long result = getSession()
-                .createQuery("SELECT COUNT (*) FROM Books WHERE isbn=:givenIsbn", Long.class)
+                .createQuery("SELECT COUNT (*) FROM Book WHERE isbn=:givenIsbn", Long.class)
                 .setParameter("givenIsbn", bookIsbn)
                 .uniqueResult();
         return result >0;
