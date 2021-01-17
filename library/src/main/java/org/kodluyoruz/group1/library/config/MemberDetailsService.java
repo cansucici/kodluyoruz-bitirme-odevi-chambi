@@ -1,8 +1,7 @@
-package org.kodluyoruz.group1.library.securityConfig;
+package org.kodluyoruz.group1.library.config;
 
 import org.kodluyoruz.group1.library.dao.MemberRepository;
 import org.kodluyoruz.group1.library.model.entities.Member;
-import org.kodluyoruz.group1.library.securityConfig.MemberDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

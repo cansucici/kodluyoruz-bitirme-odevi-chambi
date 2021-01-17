@@ -1,5 +1,6 @@
 package org.kodluyoruz.group1.library.model.enums;
 
-public enum RoleNameEnum {
-    USER, ADMIN, EVERYONE
+public enum StatusEnum {
+
+    ACTIVE,PASSIVE,DELETED
 }
