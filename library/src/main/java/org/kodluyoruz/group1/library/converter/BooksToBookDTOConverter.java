@@ -3,17 +3,17 @@ package org.kodluyoruz.group1.library.converter;
 
 import org.kodluyoruz.group1.library.convert.LibraryAPIConverter;
 import org.kodluyoruz.group1.library.dto.BookDTO;
-import org.kodluyoruz.group1.library.model.entities.Books;
+import org.kodluyoruz.group1.library.model.entities.Book;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Component
-public class BooksToBookDTOConverter implements LibraryAPIConverter<Books, BookDTO> {
+public class BooksToBookDTOConverter implements LibraryAPIConverter<Book, BookDTO> {
 
     @Override
-    public BookDTO convert(Books input) {
+    public BookDTO convert(Book input) {
 
         BookDTO bookDTO = new BookDTO();
 
@@ -30,7 +30,7 @@ public class BooksToBookDTOConverter implements LibraryAPIConverter<Books, BookD
         bookDTO.setUpdateDate(input.getUpdateDate());
         bookDTO.setDeleted(input.isDeleted());
 
-        bookDTO.setAuthors(input.getAuthor());
+        bookDTO.setAuthor(input.getAuthor());
         bookDTO.setMember(input.getMember());
 
 

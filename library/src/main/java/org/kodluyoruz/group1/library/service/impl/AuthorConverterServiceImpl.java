@@ -1,7 +1,7 @@
 package org.kodluyoruz.group1.library.service.impl;
 
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
-import org.kodluyoruz.group1.library.model.entities.Authors;
+import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.service.AuthorConverterService;
 import org.springframework.stereotype.Service;
 
@@ -10,21 +10,21 @@ public class AuthorConverterServiceImpl implements AuthorConverterService {
 
 
     @Override
-    public Authors convertToAuthor(AuthorDTO authorDTO) {
-        Authors  authors=new Authors();
-        authors.setId(authorDTO.getId());
-        authors.setNameSurname(authorDTO.getNameSurname());
-        authors.setAbout(authorDTO.getAbout());
-        authors.setUpdateDate(authorDTO.getUpdateDate());
-        authors.setDeleted(authorDTO.isDeleted());
-        authors.setCreateDate(authorDTO.getCreateDate());
+    public Author convertToAuthor(AuthorDTO authorDTO) {
+        Author author =new Author();
+        author.setId(authorDTO.getId());
+        author.setNameSurname(authorDTO.getNameSurname());
+        author.setAbout(authorDTO.getAbout());
+        author.setUpdateDate(authorDTO.getUpdateDate());
+        author.setDeleted(authorDTO.isDeleted());
+        author.setCreateDate(authorDTO.getCreateDate());
 
-        return authors;
+        return author;
 
     }
 
     @Override
-    public AuthorDTO convertToAuthorDto(Authors author) {
+    public AuthorDTO convertToAuthorDto(Author author) {
         AuthorDTO  authorDTO=new AuthorDTO();
         authorDTO.setId(author.getId());
         authorDTO.setNameSurname(author.getNameSurname());
