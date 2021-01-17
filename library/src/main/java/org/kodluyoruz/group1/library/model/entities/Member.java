@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 
@@ -69,15 +70,15 @@ public class Member {
 
 
 
-    /*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
+                    name = "member_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
 
-    private Collection < Role > roles;*/
+    private Collection< Role > roles;
 
 
 
