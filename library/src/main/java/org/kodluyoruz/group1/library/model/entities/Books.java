@@ -7,17 +7,22 @@ import lombok.Setter;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "BOOK")
+@Table(name = "book")
 public class Books extends BaseEntity {
 
-    @Column(name = "Book_Name", unique = false, length = 200, nullable = false)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "Book_ID")
+//    private Long id;
+
+    @Column(name = "book_name",unique = false , length = 200 , nullable = false)
+
     private String bookName;
 
 
@@ -40,10 +45,28 @@ public class Books extends BaseEntity {
     private String category;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "Book_Status", length = 7, nullable = false)
-    private StatusEnum bookStatus = StatusEnum.ACTIVE;
 
-    @OneToMany(mappedBy = "books")
-    private List<Authors> authors;
+    @Column (name = "Book_Status", length = 7, nullable = false)
+    private StatusEnum status = StatusEnum.ACTIVE ;
+
+
+    @JoinColumn(name = "Author_ID")
+    @OneToOne(optional = true, fetch = FetchType.LAZY)
+    private Authors author;
+
+
+
+    @OneToOne
+    @JoinTable(name = "book_member",
+            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id"),
+
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "member_id", referencedColumnName = "id")
+            }
+    )
+    private Member member;
+
+
 
 }

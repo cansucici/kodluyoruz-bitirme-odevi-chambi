@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
 
 
