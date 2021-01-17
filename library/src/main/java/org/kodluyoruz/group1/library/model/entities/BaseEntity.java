@@ -15,16 +15,17 @@ import java.util.Date;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseEntity  {
+public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-   // @Column(name = "Created_Date", nullable = false ,updatable = false)
-    @Column(name = "Created_Date", nullable = false )
+    //@Temporal(TemporalType.TIMESTAMP)
+    //@Column(name = "Created_Date", nullable = false ,updatable = false)
+    @Column(name = "Created_Date", nullable = false)
+    @CreationTimestamp
     private Date createDate;
 
     @Temporal(TemporalType.TIMESTAMP)
