@@ -3,9 +3,13 @@ package org.kodluyoruz.group1.library.model.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.sql.Timestamp;
+
 import java.util.Date;
 
 @Getter
@@ -19,7 +23,8 @@ public class BaseEntity  {
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Created_Date", nullable = false ,updatable = false)
+   // @Column(name = "Created_Date", nullable = false ,updatable = false)
+    @Column(name = "Created_Date", nullable = false )
     private Date createDate;
 
     @Temporal(TemporalType.TIMESTAMP)
