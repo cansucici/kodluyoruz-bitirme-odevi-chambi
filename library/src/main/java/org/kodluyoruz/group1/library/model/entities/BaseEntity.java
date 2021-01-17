@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Getter
@@ -19,13 +18,16 @@ public class BaseEntity  {
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Created_Date", nullable = false ,updatable = false)
+   // @Column(name = "Created_Date", nullable = false ,updatable = false)
+    @Column(name = "Created_Date", nullable = false )
     private Date createDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "Update_Date")
     private Date updateDate;
 
+    @Column(name = "Deleted")
+    private boolean deleted;
 
 
 }

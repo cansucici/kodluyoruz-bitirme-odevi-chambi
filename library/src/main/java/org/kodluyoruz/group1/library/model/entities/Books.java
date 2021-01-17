@@ -4,18 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kodluyoruz.group1.library.model.enums.BookStatusEnum;
+import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "BOOK")
+@Table(name = "book")
 public class Books extends BaseEntity {
 
 //    @Id
@@ -23,7 +21,7 @@ public class Books extends BaseEntity {
 //    @Column(name = "Book_ID")
 //    private Long id;
 
-    @Column(name = "Book_Name",unique = false , length = 200 , nullable = false)
+    @Column(name = "book_name",unique = false , length = 200 , nullable = false)
     private String bookName;
 
     //@Column(name = "Author_ID")
@@ -60,20 +58,34 @@ public class Books extends BaseEntity {
 
     @Enumerated(value = EnumType.STRING)
     @Column (name = "Book_Status", length = 7, nullable = false)
-    private BookStatusEnum bookStatus = BookStatusEnum.ACTIVE;
+    private StatusEnum status = StatusEnum.ACTIVE ;
 
-/*
+
     @JoinColumn(name = "Author_ID")
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    private AuthorEntity author;*/
+    @OneToOne(optional = true, fetch = FetchType.LAZY)
+    private Authors author;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "book_author",
-            joinColumns = { @JoinColumn(name = "book_no", referencedColumnName = "id") },
-            inverseJoinColumns =  { @JoinColumn(name = "author_no" , referencedColumnName = "id") }
+
+    @OneToOne
+    @JoinTable(name = "book_member",
+            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id"),
+
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "member_id", referencedColumnName = "id")
+            }
     )
-    private List<Authors> authors;
+    private Member member;
+
+
+
+
+
+
+
+
+
 
 
 

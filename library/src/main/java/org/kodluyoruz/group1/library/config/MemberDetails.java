@@ -1,14 +1,11 @@
-package org.kodluyoruz.group1.library.securityConfig;
+package org.kodluyoruz.group1.library.config;
 
-import org.hibernate.annotations.Type;
 import org.kodluyoruz.group1.library.model.entities.Member;
-import org.kodluyoruz.group1.library.model.entities.Role;
-import org.kodluyoruz.group1.library.model.enums.MemberStatusEnum;
+import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,7 +22,7 @@ public class MemberDetails implements UserDetails {
     private Date birthDate;
     private Date createDate;
     private Date updateDate;
-    private MemberStatusEnum memberStatus;
+    private StatusEnum memberStatus;
     private List<GrantedAuthority> authorities;
 
 
@@ -37,7 +34,7 @@ public class MemberDetails implements UserDetails {
         this.password = member.getPassword();
         this.phoneNumber = member.getPhoneNumber();
         this.adress = member.getAdress();
-        this.birthDate = member.getBirthDate();
+        this.birthDate = member.getBirthOfDate();
         this.createDate = member.getCreateDate();
         this.updateDate = member.getUpdateDate();
         this.memberStatus = member.getMemberStatus();
@@ -80,10 +77,10 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        if(memberStatus.equals(MemberStatusEnum.ACTIVE)) {
+        if (memberStatus == StatusEnum.ACTIVE){
             return true;
-        } else
-        return false;
-
+        }else {
+            return false;
+        }
     }
 }
