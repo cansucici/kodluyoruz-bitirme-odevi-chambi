@@ -22,8 +22,6 @@ public class BaseEntity {
     @Column(name = "ID")
     private Long id;
 
-    //@Temporal(TemporalType.TIMESTAMP)
-    //@Column(name = "Created_Date", nullable = false ,updatable = false)
     @Column(name = "Created_Date", nullable = false)
     @CreationTimestamp
     private Date createDate;
@@ -34,6 +32,4 @@ public class BaseEntity {
 
     @Column(name = "Deleted")
     private boolean deleted;
-
-
 }
