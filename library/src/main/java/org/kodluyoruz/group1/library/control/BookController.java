@@ -11,7 +11,6 @@ import java.util.Collection;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/books")
-
 public class BookController {
 
     private final BookService bookService;
@@ -122,6 +121,5 @@ public Books updateBook(@RequestBody BookDTO bookDTO){
 //        Collection<BookDTO> getOrderBooks = bookService.getOrderedBooks();
 //        return ResponseEntity.ok().body(getOrderBooks);
 //    }
-
 
 }

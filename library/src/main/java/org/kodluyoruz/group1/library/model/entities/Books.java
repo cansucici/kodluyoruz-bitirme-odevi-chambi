@@ -22,41 +22,30 @@ public class Books extends BaseEntity {
 //    private Long id;
 
     @Column(name = "book_name",unique = false , length = 200 , nullable = false)
+
     private String bookName;
 
-    //@Column(name = "Author_ID")
-   // private Long authorId;
 
-    /*@Column(name = "Author",unique = false , length = 200 , nullable = false)
-    private String author;*/
-
-    @Column(name = "Page_Number",unique = false , length =5 , nullable = false)
+    @Column(name = "Page_Number", unique = false, length = 5, nullable = false)
     private Long pageNumber;
 
-    @Column(name = "Publisher",unique = false , length =100 , nullable = false)
+    @Column(name = "Publisher", unique = false, length = 100, nullable = false)
     private String publisherName;
 
-    @Column(name = "Edition_Number",unique = false , length = 50 , nullable = false)
+    @Column(name = "Edition_Number", unique = false, length = 50, nullable = false)
     private Integer editionNumber;
 
-    @Column(name = "ISBN",unique = true , length = 50 , nullable = false)
+    @Column(name = "ISBN", unique = true, length = 50, nullable = false)
     private Long isbn;
 
-    @Column(name = "Language",unique = false , length = 50 , nullable = false)
+    @Column(name = "Language", unique = false, length = 50, nullable = false)
     private String language;
 
-    @Column(name = "Category",unique = false , length = 50 , nullable = false)
+    @Column(name = "Category", unique = false, length = 50, nullable = false)
     private String category;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Created_Date", nullable = false ,updatable = false)
-//    private Date createDate;
-//
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Update_Date")
-//    private Date updateDate;
-
     @Enumerated(value = EnumType.STRING)
+
     @Column (name = "Book_Status", length = 7, nullable = false)
     private StatusEnum status = StatusEnum.ACTIVE ;
 
@@ -77,18 +66,6 @@ public class Books extends BaseEntity {
             }
     )
     private Member member;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
