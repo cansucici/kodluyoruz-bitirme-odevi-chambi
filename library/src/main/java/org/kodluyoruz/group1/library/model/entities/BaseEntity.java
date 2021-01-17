@@ -8,22 +8,23 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
+
 import java.util.Date;
 
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseEntity  {
+public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-
-    @Column(name = "Created_Date",updatable = false)
+    //@Temporal(TemporalType.TIMESTAMP)
+    //@Column(name = "Created_Date", nullable = false ,updatable = false)
+    @Column(name = "Created_Date", nullable = false)
     @CreationTimestamp
     private Date createDate;
 

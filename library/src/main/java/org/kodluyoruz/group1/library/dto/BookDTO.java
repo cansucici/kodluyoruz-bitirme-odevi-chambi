@@ -1,6 +1,8 @@
 package org.kodluyoruz.group1.library.dto;
 
 import lombok.*;
+import org.kodluyoruz.group1.library.model.entities.Authors;
+import org.kodluyoruz.group1.library.model.entities.Member;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 @Getter
@@ -13,7 +15,7 @@ public class BookDTO extends BaseDTO {
 
     //private Long id;
     private String bookName;
-    private Long authorId;
+   // private Long authorId;
     private Long pageNumber;
     private String publisherName;
     private Integer editionNumber;
@@ -22,5 +24,7 @@ public class BookDTO extends BaseDTO {
     private String category;
     //private Date createDate;
    // private Date updateDate;
-    private StatusEnum bookStatus;
+    private StatusEnum status;
+   private Authors authors;
+    private Member member;
 }
