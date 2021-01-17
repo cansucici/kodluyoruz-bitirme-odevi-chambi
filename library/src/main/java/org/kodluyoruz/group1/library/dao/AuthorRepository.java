@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 
-
+//
 public interface AuthorRepository extends JpaRepository<Authors, Long> {
 
     @Query("select a from Authors a where a.deleted=false")
