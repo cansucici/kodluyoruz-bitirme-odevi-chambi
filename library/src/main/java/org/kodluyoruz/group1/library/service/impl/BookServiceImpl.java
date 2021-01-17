@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookDTOToBooksConverter;
 import org.kodluyoruz.group1.library.dao.BooksOperationRepository;
 import org.kodluyoruz.group1.library.dto.BookDTO;
-import org.kodluyoruz.group1.library.model.entities.Books;
+import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.repo.BookRepository;
 import org.kodluyoruz.group1.library.service.BookService;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public Collection<Books> getAllBooks() {
-        Collection<Books> books = bookRepository.findAllBooks();
+    public Collection<Book> getAllBooks() {
+        Collection<Book> books = bookRepository.findAllBooks();
         if (CollectionUtils.isEmpty(books)) {
             throw new RuntimeException("Mevcutta henüz bir kitap bulunmamaktadır.");
         }
@@ -36,7 +36,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public Books save(BookDTO dto) {
+    public Book save(BookDTO dto) {
         String bookName = dto.getBookName();
         if (bookName.isEmpty()) {
             throw new RuntimeException("Kitap ismi boş bırakılamaz.");
@@ -48,28 +48,28 @@ public class BookServiceImpl implements BookService {
                     " Barkod numaranızı tekrar kontrol ediniz!");
         }
 
-        Books books = bookDTOToBooksConverter.convert(dto);
-        return bookRepository.save(books);
+        Book book = bookDTOToBooksConverter.convert(dto);
+        return bookRepository.save(book);
     }
 
     @Override
-    public Books update(BookDTO dto) {
+    public Book update(BookDTO dto) {
 
 
-        Books books = bookRepository.findById(dto.getId()).orElse(null);
+        Book book = bookRepository.findById(dto.getId()).orElse(null);
 
-        books.setUpdateDate(new Date());
-        books.setDeleted(dto.isDeleted());
-        books.setPublisherName(dto.getPublisherName());
-        books.setCategory(dto.getCategory());
-        books.setLanguage(dto.getLanguage());
-        books.setEditionNumber(dto.getEditionNumber());
-        books.setPageNumber(dto.getPageNumber());
-        books.setIsbn(dto.getIsbn());
-        books.setBookName(dto.getBookName());
-        books.setStatus(dto.getStatus());
+        book.setUpdateDate(new Date());
+        book.setDeleted(dto.isDeleted());
+        book.setPublisherName(dto.getPublisherName());
+        book.setCategory(dto.getCategory());
+        book.setLanguage(dto.getLanguage());
+        book.setEditionNumber(dto.getEditionNumber());
+        book.setPageNumber(dto.getPageNumber());
+        book.setIsbn(dto.getIsbn());
+        book.setBookName(dto.getBookName());
+        book.setStatus(dto.getStatus());
 
-        return bookRepository.save(books);
+        return bookRepository.save(book);
     }
 
 
@@ -81,7 +81,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Books> getBooksByBookName(String bookName) {
+    public List<Book> getBooksByBookName(String bookName) {
         return bookRepository.findBooksByBookName(bookName);
     }
 }
