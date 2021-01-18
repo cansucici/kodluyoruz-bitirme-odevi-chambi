@@ -23,7 +23,7 @@ public class BookController {
 //     return "listBook";
 // }
 
-
+// bu bir deneme pushudur.
 @GetMapping("/bookList")
 public Collection<Books> getBookList(){
     return bookService.getAllBooks();
