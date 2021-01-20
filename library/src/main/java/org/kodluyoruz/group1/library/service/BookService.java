@@ -7,7 +7,7 @@ import org.kodluyoruz.group1.library.model.entities.Book;
 import java.util.Collection;
 import java.util.List;
 
-public interface BookService  {
+public interface BookService {
 
         Collection<Book> getAllBooks();
 
@@ -15,9 +15,9 @@ public interface BookService  {
 
         Book update (BookDTO dto);
 
-    void updateBookStatus(Long id); //deleted
+    void deleteBook(Long id); //deleted
 
-    List<Book>   getBooksByBookName (String bookName);
+    List<Book> getBooksByBookName (String bookName);
 
 
 
