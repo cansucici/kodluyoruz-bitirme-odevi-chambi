@@ -3,7 +3,11 @@ package org.kodluyoruz.group1.library.dto;
 import lombok.*;
 import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.model.entities.Member;
+import org.kodluyoruz.group1.library.model.enums.LanguagesEnum;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
+
+import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,19 +16,23 @@ import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 @AllArgsConstructor
 public class BookDTO extends BaseDTO {
 
+    //TODO : long enum ve ınteger için @validationu uygualayamadım Notempty, notnull, notblank hata verdi
+    //Stringler için okey
 
-    //private Long id;
+    @NotEmpty(message = "Kitap ismi boş bırakılamaz.")
     private String bookName;
-   // private Long authorId;
+
     private Long pageNumber;
+    @NotEmpty(message = "Yayınevi bilgisi boş bırakılamaz.")
     private String publisherName;
+
     private Integer editionNumber;
+
     private Long isbn;
-    private String language;
+    private LanguagesEnum languagesEnum;
+    @NotEmpty(message = "Kitap türü boş bırakılamaz.")
     private String category;
-    //private Date createDate;
-   // private Date updateDate;
     private StatusEnum status;
-   private Author author;
+    private List<Author> authors;
     private Member member;
 }
