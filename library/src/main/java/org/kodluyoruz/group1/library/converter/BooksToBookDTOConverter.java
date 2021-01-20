@@ -23,14 +23,14 @@ public class BooksToBookDTOConverter implements LibraryAPIConverter<Book, BookDT
         bookDTO.setPublisherName(input.getPublisherName());
         bookDTO.setEditionNumber(input.getEditionNumber());
         bookDTO.setIsbn(input.getIsbn());
-        bookDTO.setLanguage(input.getLanguage());
+        bookDTO.setLanguagesEnum(input.getLanguagesEnum());
         bookDTO.setCategory(input.getCategory());
         bookDTO.setStatus(input.getStatus());
         bookDTO.setCreateDate(Objects.isNull(input.getCreateDate()) ? new Date():input.getCreateDate());
         bookDTO.setUpdateDate(input.getUpdateDate());
         bookDTO.setDeleted(input.isDeleted());
 
-        bookDTO.setAuthor(input.getAuthor());
+        bookDTO.setAuthors(input.getAuthors());
         bookDTO.setMember(input.getMember());
 
 
