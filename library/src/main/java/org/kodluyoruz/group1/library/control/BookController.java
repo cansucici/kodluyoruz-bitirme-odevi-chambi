@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.BookService;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,25 +21,26 @@ public class BookController {
     private final BookService bookService;
 
 
-    @GetMapping
-    public Collection<Book> getBookList() {
-        return bookService.getAllBooks();
+    @GetMapping("/booklist")
+    public String getBookList(Model model) {
+        model.addAttribute("booklist", bookService.getAllBooks());
+        return "book_list";
     }
 
 
-    @PostMapping
-    public Book saveBook(@RequestBody @Validated BookDTO bookDTO) {
-        return bookService.save(bookDTO);
-
+    @PostMapping("/saveBook")
+    public String saveBook(@ModelAttribute("book") @Validated BookDTO bookDTO) {
+       bookService.save(bookDTO);
+return "redirect:/booklist";
     }
 
-    @PutMapping
-    public Book updateBook(@RequestBody  @Validated BookDTO bookDTO) {
-        return bookService.update(bookDTO);
-
+    @PutMapping("/showBookFormForUpdate/{id}")
+    public String updateBook(@ModelAttribute @Validated BookDTO bookDTO) {
+         bookService.update(bookDTO);
+        return  "redirect:/booklist";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
     }
