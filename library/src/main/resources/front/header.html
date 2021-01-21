@@ -1,67 +1,92 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="tr">
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+          crossorigin="anonymous"/>
 
-    <div th:fragment="header-css">
-        <!-- this is header-css -->
+    <!-- <div th:fragment="header-css">
+            this is header-css -->
 
-        <script language="javascript" src="../gotoTop.js"></script>
-        <style type="text/css">
-            #buttonDesign {
-                background-color: lightGray;
-                border-radius: 10px;
-                padding-left: 8px;
-                padding-right: 8px;
-                margin-left: 4px;
-            }
-        </style>
-        <meta charset="UTF-8">
-        <!-- viewport The viewport is the user's visible area of a web page.-->
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style type="text/css">
+        #buttonDesign {
+            background-color: lightGray;
+            border-radius: 10px;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-left: 4px;
+        }
 
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-              integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-              crossorigin="anonymous">
-        <link rel="stylesheet"
-              href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-              integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-              crossorigin="anonymous" />
-    </div>
-        </head>
+        .headerList li {
+            display: inline;
+            margin: 10px;
+            position: relative;
+            float: left;
+        }
+
+        .navright li {
+            display: inline;
+            margin: 10px;
+            position: relative;
+            float: right;
+        }
+
+        body {
+            width:100%; height:100%;
+            background-image:revert ;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+          background-color: steelblue;
+            opacity: revert;
+
+        }
+    </style>
+</head>
 <body>
-<div th:fragment="header" style="margin-bottom: 20px;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/"
-           style="padding-right: 10px; color: #17A1B7;"><h2> CHAMBI LIBRARY</h2></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/"
+       style="padding-right: 10px; color: #17A1B7;"><h2> CHAMBI LIBRARY</h2></a>
 
-        <div class="headerList" id="headerList">
-            <ul class="navleft">
+    <div class="headerList" id="headerList">
+        <ul class="navleft">
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link"
-                                                          href="book_list"><i class="fas fa-book"></i> Book List </a></li>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link"
+                                                      href="book_list"><i class="fas fa-book"></i> Book List </a>
+            </li>
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link"
-                                                          href="/author_list"><i class="fas fa-pen"></i> Author List </a></li>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link"
+                                                      href="/author_list"><i class="fas fa-pen"></i> Author List
+            </a></li>
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link"
-                                                          href="/add_book"><i class="plus-circle"></i> Add New Book </a></li>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link"
+                                                      href="/add_book"><i class="plus-circle"></i> Add New Book </a>
+            </li>
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link"
-                                                          href="/add_author"><i class="user-edit"></i>Information of Author</a></li>
-            </ul>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link"
+                                                      href="/add_author"><i class="user-edit"></i>Information of
+                Author</a></li>
 
-            <ul class="navright" >
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link"
-                                                          href="/registration"><i class="sign-in-alt"></i>Sign In</a></li>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link"
+                                                      href="/registration"><i class="sign-in-alt"></i>Sign In</a>
+            </li>
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link"
-                                                          href="/login"><i class="fas fa-pen"></i> Login </a></li>
-            </ul>
-        </div>
-    </nav>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link"
+                                                      href="/login"><i class="fas fa-pen"></i> Login </a></li>
+        </ul>
+    </div>
+</nav>
 </div>
 
 </body>
