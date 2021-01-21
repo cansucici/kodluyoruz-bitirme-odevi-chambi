@@ -11,7 +11,7 @@ public interface AuthorService {
 
     Collection<Author> getAllActive();
 
-    Collection<Author> findByNameSurname(String name); //can have same namesurname
+    Collection<Author> findByNameSurname(String name,String surname); //can have same namesurname
 
     void deleteById(Long id);
 
