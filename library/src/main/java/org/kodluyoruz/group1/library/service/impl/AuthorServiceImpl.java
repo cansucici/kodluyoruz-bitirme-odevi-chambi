@@ -47,7 +47,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Collection<Author> findByNameSurname(String nameSurname) {
+    public Author findByNameSurname(String nameSurname) {
 
         return authorRepository.findByNameSurnameWhereDeletedIsFalse(nameSurname)
     }

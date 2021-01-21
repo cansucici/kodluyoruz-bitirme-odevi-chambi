@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-
 @RestController
 @RequestMapping("/authors")
 @RequiredArgsConstructor
@@ -27,21 +26,18 @@ public class AuthorController {
         return authorService.getAllActive();
     }
 
-
-    //iki variable tanımlayacağım
     @GetMapping("/{name}")
-    public Collection<Author> getAllAuthorsByName(@PathVariable String nameSurname) {
-        return authorService.findByNameSurname(name, surname);
+    public Author getAuthorsByName(@PathVariable String nameSurname) {
+        return authorService.findByNameSurname(nameSurname);
     }
 
     @DeleteMapping("/{id}")
     public void deleteAuthor(@PathVariable Long id) {
-        service.deleteById(id);
+        authorService.deleteById(id);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public Author updateAuthors(@RequestBody AuthorDTO dto) {
-        Author author = service.updateAuthor(dto);
-        return author;
+        return authorService.updateAuthor(dto);
     }
 }
