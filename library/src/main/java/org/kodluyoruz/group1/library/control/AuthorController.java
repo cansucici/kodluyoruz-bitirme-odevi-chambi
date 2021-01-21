@@ -15,23 +15,23 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class AuthorController {
 
-    private final AuthorService service;
+    private final AuthorService authorService;
 
     @PostMapping
     public Author save(@RequestBody AuthorDTO dto) {
-        return service.saveAuthor(dto);
+        return authorService.saveAuthor(dto);
     }
 
     @GetMapping
     public Collection<Author> getAllActiveAuthors() {
-        return service.getAllActive();
+        return authorService.getAllActive();
     }
 
 
     //iki variable tanımlayacağım
-    @GetMapping("/{name}{surname}")
-    public Collection<Author> getAllAuthorsByName(@PathVariable String name,String surname) {
-        return service.findByNameSurname(name,surname);
+    @GetMapping("/{name}")
+    public Collection<Author> getAllAuthorsByName(@PathVariable String nameSurname) {
+        return authorService.findByNameSurname(name, surname);
     }
 
     @DeleteMapping("/{id}")

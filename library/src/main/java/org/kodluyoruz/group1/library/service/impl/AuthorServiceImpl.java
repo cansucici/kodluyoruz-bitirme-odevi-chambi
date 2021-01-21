@@ -21,36 +21,34 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author saveAuthor(AuthorDTO dto) {
-
         Author author = converterService.convertToAuthor(dto);
-        return repository.save(author);
+        return authorRepository.save(author);
     }
 
     @Override
     public Collection<Author> getAllActive() {
-        List<Author> authors = repository.findAllByDeletedIsFalse();
+        List<Author> authors = authorRepository.findAllByDeletedIsFalse();
         return authors;
     }
 
     @Override
     public void deleteById(Long id) {
-        repository.updateAuthorStatus(id);
+        authorRepository.updateAuthorStatus(id);
     }
 
     @Override
     public Author updateAuthor(AuthorDTO dto) {
-      Author author=repository.findById(dto.getId()).orElse(null);
-        author.setUpdateDate(new Date());
+      Author author=authorRepository.findById(dto.getId()).orElse(null);
+        author.authorRepository(new Date());
         author.setDeleted(dto.isDeleted());
         author.setAbout(dto.getAbout());
-        author.setName(dto.getName());
-        author.setSurname(dto.getSurname());
-      return repository.save(author);
+      author.setNameSurname(dto.getNameSurname);
+      return authorRepository.save(author);
     }
 
     @Override
-    public Collection<Author> findByNameSurname(String name,String surname) {
+    public Collection<Author> findByNameSurname(String nameSurname) {
 
-        return repository.findByNameAndSurname(name,surname);
+        return authorRepository.findByNameSurnameWhereDeletedIsFalse(nameSurname)
     }
 }
