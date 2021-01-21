@@ -41,7 +41,7 @@
         </thead>
 
         <tbody>
-        <tr th:each="book : ${bookList}">
+        <tr th:each="book : ${booklist}">
             <td th:text="${book.bookName}"></td>
             <td th:text="${book.publisherName}"></td>
             <td th:text="${book.category}"></td>
@@ -49,9 +49,9 @@
             <td th:text="${book.editionNumber}"></td>
             <td th:text="${book.language}"></td>
             <td th:text="${book.isbn}"></td>
-            <td><a th:href="@{/book_list/{id}(id=${book.id})}" class="btn btn-info">
+            <td><a th:href="@{/showBookFormForUpdate/{id}(id=${book.id})}" class="btn btn-info">
                 <i class="fas fa-edit"></i> Update </a>
-                <a th:href="@{/deleteBook/{id}(id=${book.id})}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete </a>
+                <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete </a>
             </td>
         </tr>
         </tbody>
