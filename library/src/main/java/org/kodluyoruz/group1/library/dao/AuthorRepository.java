@@ -14,18 +14,15 @@ import java.util.List;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     List<Author> findAllByDeletedIsFalse();
-<<<<<<< HEAD
-    Author findAuthorByNameSurnameAndDeletedIsFalse(String nameSurname);
-=======
-    Collection<Author> findByNameSurnameWhereDeletedIsFalse(String nameSurname);
+    
 
->>>>>>> 5e511ea (author's changed)
+    Author findAuthorByNameSurnameLikeAndDeletedIsFalse(String nameSurname);
+
     @Modifying
     @Transactional
     @Query("update Author a set a.deleted=true where a.id=:id")
-    void updateAuthorStatus(Long id);
+    void deleteAuthor(Long id);
 
-  
 
 
 }

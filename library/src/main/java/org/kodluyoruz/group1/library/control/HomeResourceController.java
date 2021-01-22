@@ -24,8 +24,8 @@ public class HomeResourceController {
 
     @PostMapping("/newrecord")
     public Member member (@RequestBody Member member){
-        Member newrecord = memberRepository.save(member);
-        return newrecord;
+    
+        return memberRepository.save(member);
     }
 
     @GetMapping("/")

@@ -9,18 +9,14 @@ import java.util.Collection;
 @Service
 public interface AuthorService {
 
-    Author saveAuthor(AuthorDTO dto);
+    Author save(AuthorDTO dto);
 
     Collection<Author> getAllActive();
 
-<<<<<<< HEAD
     Author findByNameSurname(String nameSurname);
-=======
-    Collection<Author> findByNameSurname(String name,String surname); //can have same namesurname
->>>>>>> 5e511ea (author's changed)
 
     void deleteById(Long id);
 
-    Author updateAuthor(AuthorDTO dto);
+    Author update(AuthorDTO dto);
 
 }
