@@ -25,7 +25,7 @@ public class Author extends BaseEntity {
     private String about;
 
     //Bu ilişki OK , muhammed
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "authors", cascade = CascadeType.ALL)
     private List<Book> books;
 
 }

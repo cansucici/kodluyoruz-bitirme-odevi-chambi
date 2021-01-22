@@ -14,8 +14,7 @@ import java.util.List;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     List<Author> findAllByDeletedIsFalse();
-    Author findByNameSurnameWhereDeletedIsFalse(String nameSurname);
-
+    Author findAuthorByNameSurnameAndDeletedIsFalse(String nameSurname);
     @Modifying
     @Transactional
     @Query("update Author a set a.deleted=true where a.id=:id")

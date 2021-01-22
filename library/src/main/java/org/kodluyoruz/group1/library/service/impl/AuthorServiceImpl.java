@@ -39,16 +39,16 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author updateAuthor(AuthorDTO dto) {
       Author author=authorRepository.findById(dto.getId()).orElse(null);
-        author.authorRepository(new Date());
+        author.setUpdateDate(new Date());
         author.setDeleted(dto.isDeleted());
         author.setAbout(dto.getAbout());
-      author.setNameSurname(dto.getNameSurname);
+      author.setNameSurname(dto.getNameSurname());
       return authorRepository.save(author);
     }
 
     @Override
     public Author findByNameSurname(String nameSurname) {
 
-        return authorRepository.findByNameSurnameWhereDeletedIsFalse(nameSurname)
+        return authorRepository.findAuthorByNameSurnameAndDeletedIsFalse(nameSurname);
     }
 }
