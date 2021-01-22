@@ -2,22 +2,19 @@ package org.kodluyoruz.group1.library.service;
 
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
 import org.kodluyoruz.group1.library.model.entities.Author;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
-@Service
 public interface AuthorService {
 
-    Author save(AuthorDTO dto);
+    Author saveAuthor(AuthorDTO dto);
 
     Collection<Author> getAllActive();
 
-    Author findByNameSurname(String nameSurname);
-
+    Collection<Author> findByNameSurname(String nameSurname); //can have same namesurname
 
     void deleteById(Long id);
 
-    Author update(AuthorDTO dto);
+    Author updateAuthor(AuthorDTO dto);
 
 }

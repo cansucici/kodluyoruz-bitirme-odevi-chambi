@@ -7,22 +7,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-
+import java.util.Collection;
 import java.util.List;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     List<Author> findAllByDeletedIsFalse();
-    
-
-    Author findAuthorByNameSurnameLikeAndDeletedIsFalse(String nameSurname);
+    Collection<Author> findByNameSurnameWhereDeletedIsFalse(String nameSurname);
 
     @Modifying
     @Transactional
     @Query("update Author a set a.deleted=true where a.id=:id")
-    void deleteAuthor(Long id);
+    void updateAuthorStatus(Long id);
 
+  
 
 
 }
