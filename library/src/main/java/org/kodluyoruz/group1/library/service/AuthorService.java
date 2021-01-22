@@ -15,6 +15,7 @@ public interface AuthorService {
 
     Author findByNameSurname(String nameSurname);
 
+
     void deleteById(Long id);
 
     Author update(AuthorDTO dto);

@@ -22,6 +22,7 @@ public class AuthorDTO extends BaseDTO {
 
     private String about;
 
+    
     private List<Book> books;
 
 }

@@ -17,7 +17,9 @@ import java.util.List;
 @Table(name = "author")
 public class Author extends BaseEntity {
 
+
     @Column(length = 100, nullable = false)
+
     private String nameSurname;
 
     @Type(type = "text")

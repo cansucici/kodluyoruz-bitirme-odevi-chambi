@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Date;
 
-
 @Service
 @RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
@@ -21,6 +20,7 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorConverterService converterService;
 
     @Override
+
     public Author save(AuthorDTO dto) {
         Author author = converterService.convertToAuthor(dto);
         return authorRepository.save(author);
@@ -29,6 +29,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Collection<Author> getAllActive() {
         return authorRepository.findAllByDeletedIsFalse();
+
     }
 
     @Override
@@ -38,17 +39,21 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author update(AuthorDTO dto) {
-      Author author=authorRepository.findById(dto.getId()).orElseThrow(() -> new AuthorNotFoundException("Böyle bir yazar bilgisi mevcut değildir."));
+        Author author = authorRepository.findById(dto.getId())
+                .orElseThrow(() -> new AuthorNotFoundException("Böyle bir yazar bilgisi mevcut değildir."));
         author.setUpdateDate(new Date());
         author.setDeleted(dto.isDeleted());
         author.setAbout(dto.getAbout());
-      author.setNameSurname(dto.getNameSurname());
-      return authorRepository.save(author);
+        author.setNameSurname(dto.getNameSurname());
+        authorRepo
+        return author;
+     
     }
-
     @Override
+
     public Author findByNameSurname(String nameSurname) {
 
         return authorRepository.findAuthorByNameSurnameLikeAndDeletedIsFalse(nameSurname);
+
     }
 }
