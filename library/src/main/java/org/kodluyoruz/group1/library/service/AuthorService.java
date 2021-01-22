@@ -13,7 +13,11 @@ public interface AuthorService {
 
     Collection<Author> getAllActive();
 
+<<<<<<< HEAD
     Author findByNameSurname(String nameSurname);
+=======
+    Collection<Author> findByNameSurname(String name,String surname); //can have same namesurname
+>>>>>>> 5e511ea (author's changed)
 
     void deleteById(Long id);
 

@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5e511ea (author's changed)
 @RestController
 @RequestMapping("/authors")
 @RequiredArgsConstructor
@@ -18,7 +22,11 @@ public class AuthorController {
 
     @PostMapping
     public Author save(@RequestBody AuthorDTO dto) {
+<<<<<<< HEAD
         return authorService.saveAuthor(dto);
+=======
+        return service.saveAuthor(dto);
+>>>>>>> 5e511ea (author's changed)
     }
 
     @GetMapping
@@ -26,14 +34,26 @@ public class AuthorController {
         return authorService.getAllActive();
     }
 
+<<<<<<< HEAD
     @GetMapping("/{name}")
     public Author getAuthorsByName(@PathVariable String nameSurname) {
         return authorService.findByNameSurname(nameSurname);
+=======
+
+    //iki variable tanımlayacağım
+    @GetMapping("/{name}{surname}")
+    public Collection<Author> getAllAuthorsByName(@PathVariable String name,String surname) {
+        return service.findByNameSurname(name,surname);
+>>>>>>> 5e511ea (author's changed)
     }
 
     @DeleteMapping("/{id}")
     public void deleteAuthor(@PathVariable Long id) {
+<<<<<<< HEAD
         authorService.deleteById(id);
+=======
+        service.deleteById(id);
+>>>>>>> 5e511ea (author's changed)
     }
 
     @PutMapping

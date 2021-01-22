@@ -27,7 +27,11 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Collection<Author> getAllActive() {
+<<<<<<< HEAD
         List<Author> authors = authorRepository.findAllByDeletedIsFalse();
+=======
+        List<Author> authors = repository.findAllByDeletedIsFalse();
+>>>>>>> 5e511ea (author's changed)
         return authors;
     }
 
@@ -42,6 +46,7 @@ public class AuthorServiceImpl implements AuthorService {
         author.setUpdateDate(new Date());
         author.setDeleted(dto.isDeleted());
         author.setAbout(dto.getAbout());
+<<<<<<< HEAD
       author.setNameSurname(dto.getNameSurname());
       return authorRepository.save(author);
     }
@@ -50,5 +55,16 @@ public class AuthorServiceImpl implements AuthorService {
     public Author findByNameSurname(String nameSurname) {
 
         return authorRepository.findAuthorByNameSurnameAndDeletedIsFalse(nameSurname);
+=======
+        author.setName(dto.getName());
+        author.setSurname(dto.getSurname());
+      return repository.save(author);
+    }
+
+    @Override
+    public Collection<Author> findByNameSurname(String name,String surname) {
+
+        return repository.findByNameAndSurname(name,surname);
+>>>>>>> 5e511ea (author's changed)
     }
 }
