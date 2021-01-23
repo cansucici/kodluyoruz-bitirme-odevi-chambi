@@ -24,7 +24,7 @@
 <div class="container">
     <div>
         <a class="btn btn-primary" href=" ">HOME </a>
-        <a th:href="@{/createBook}"><div class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Author </div></a>
+        <a th:href="@{/createAuthor}"><div class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Author </div></a>
 
         <h1>Author</h1>
         <table class="table table-striped table-responsive">
@@ -37,7 +37,7 @@
             </thead>
 
             <tbody>
-            <tr th:each="author : ${bookList}">
+            <tr th:each="author : ${authorList}">
                 <td th:text="${book.bookName}"></td>
                 <td th:text="${book.publisherName}"></td>
 
