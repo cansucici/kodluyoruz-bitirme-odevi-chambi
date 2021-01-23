@@ -2,11 +2,11 @@ package org.kodluyoruz.group1.library.control;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dao.MemberRepository;
-import org.kodluyoruz.group1.library.dto.AuthorDTO;
-import org.kodluyoruz.group1.library.model.entities.Authors;
 import org.kodluyoruz.group1.library.model.entities.Member;
-import org.kodluyoruz.group1.library.service.impl.AuthorServiceImpl;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,7 +14,6 @@ public class HomeResourceController {
 
    private final MemberRepository memberRepository;
   /*  private final AuthorServiceImpl service;
-
     @PostMapping("/authors")
     public Authors save(@ResponseBody AuthorDTO dto){
         Authors author=service.save(dto);
@@ -24,8 +23,7 @@ public class HomeResourceController {
 
     @PostMapping("/newrecord")
     public Member member (@RequestBody Member member){
-        Member newrecord = memberRepository.save(member);
-        return newrecord;
+        return memberRepository.save(member);
     }
 
     @GetMapping("/")

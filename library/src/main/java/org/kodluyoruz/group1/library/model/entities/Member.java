@@ -4,12 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 
+import java.util.Date;
 
 @Getter
 @Setter
@@ -21,63 +25,61 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "Fırst_Name",unique = false , length = 100 , nullable = false)
+    @Column( length = 100 , nullable = false)
     private String firstName;
 
-    @Column(name = "Last_Name",unique = false , length = 100 , nullable = false)
+    @Column(length = 100 , nullable = false)
     private String lastName;
 
-    @Column(name = "User_Name",unique = true , length = 100 , nullable = false)
+    @Column(unique = true , length = 100 , nullable = false)
     private String userName;
 
-    @Column(name = "Email",unique = true , length = 100 , nullable = false)
+    @Column(unique = true , length = 100 , nullable = false)
+    @Email(message = "Lütfen email adresinizi doğru giriniz.")
     private String email;
 
-
-    @Column(name = "Password",unique = false , length = 6 , nullable = false)
+    @Column(length = 6 , nullable = false)
     private String password;
 
-    @Column(name = "Phone_Number",unique = true , length = 100 , nullable = false)
-    private Long phoneNumber;
+    @Column(unique = true , length = 100 , nullable = false)
+    @Pattern(regexp ="[1-9]{11}",message = "Lütfen başında 0 olmadan telefon numarınızı giriniz.")
+    private String phoneNumber;
 
-    @Lob
     @Type(type = "text")
-    @Column(name = "Adress",unique = false, nullable = false)
+    @Column(nullable = false)
     private String adress;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "Birth_Date", nullable = false ,updatable = false)
-    private Date birthOfDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Created_Date", nullable = false ,updatable = false)
+    @Column(nullable = false ,updatable = false)
+    private Date birthDate;
+   
+    @Column( nullable = false ,updatable = false)
+    @CreationTimestamp
     private Date createDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Update_Date")
     private Date updateDate;
 
     @Enumerated(value = EnumType.STRING)
-    @Column (name = "User_Status", length = 7, nullable = false)
+    @Column(length = 7, nullable = false)
     private StatusEnum memberStatus;
 
 
     private String memberRole;
 
 
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "member_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
-
-    private Collection< Role > roles;
+//
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "users_roles",
+//            joinColumns = @JoinColumn(
+//                    name = "member_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(
+//                    name = "role_id", referencedColumnName = "id"))
+//
+//    private Collection< Role > roles;
 
 
 

@@ -1,5 +1,11 @@
 package org.kodluyoruz.group1.library.dto;
 
+import java.util.List;
+
+import javax.validation.constraints.NotEmpty;
+
+import org.kodluyoruz.group1.library.model.entities.Book;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,15 +15,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorDTO extends BaseDTO{
+public class AuthorDTO extends BaseDTO {
 
-    //private Long id;
+    @NotEmpty(message="isim soyisim alanı boş olamaz.")
     private String nameSurname;
+
+    
     private String about;
 
-    //private Collection<Books> books;
-
-//    private Date createDate;
-//    private Date updateDate;
-
+    private List<Book> books;
 }

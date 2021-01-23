@@ -3,35 +3,35 @@ package org.kodluyoruz.group1.library.converter;
 
 import org.kodluyoruz.group1.library.convert.LibraryAPIConverter;
 import org.kodluyoruz.group1.library.dto.BookDTO;
-import org.kodluyoruz.group1.library.model.entities.Books;
+import org.kodluyoruz.group1.library.model.entities.Book;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BookDTOToBooksConverter implements LibraryAPIConverter<BookDTO, Books> {
+public class BookDTOToBooksConverter implements LibraryAPIConverter<BookDTO, Book> {
 
     @Override
-    public Books convert(BookDTO input) {
+    public Book convert(BookDTO input) {
 
-        Books books = new Books();
+        Book book = new Book();
 
-        books.setId(input.getId());
-        books.setBookName(input.getBookName());
-        books.setPageNumber(input.getPageNumber());
-        books.setPublisherName(input.getPublisherName());
-        books.setEditionNumber(input.getEditionNumber());
-        books.setIsbn(input.getIsbn());
-        books.setLanguage(input.getLanguage());
-        books.setCategory(input.getCategory());
-        books.setStatus(input.getStatus());
-        books.setCreateDate(input.getCreateDate());
-        books.setUpdateDate(input.getUpdateDate());
-        books.setDeleted(input.isDeleted());
+        book.setId(input.getId());
+        book.setBookName(input.getBookName());
+        book.setPageNumber(input.getPageNumber());
+        book.setPublisherName(input.getPublisherName());
+        book.setEditionNumber(input.getEditionNumber());
+        book.setIsbn(input.getIsbn());
+        book.setLanguagesEnum(input.getLanguagesEnum());
+        book.setCategory(input.getCategory());
+        book.setStatus(input.getStatus());
+        book.setCreateDate(input.getCreateDate());
+        book.setUpdateDate(input.getUpdateDate());
+        book.setDeleted(input.isDeleted());
 
-        books.setAuthor(input.getAuthors());
-        books.setMember(input.getMember());
+        book.setAuthors(input.getAuthors());
+        book.setMember(input.getMember());
 
 
 
-        return books;
+        return book;
     }
 }
