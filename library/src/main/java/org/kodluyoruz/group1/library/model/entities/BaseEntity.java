@@ -19,17 +19,17 @@ public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Created_Date", nullable = false)
+    @Column(name = "create_date", nullable = false)
     @CreationTimestamp
     private Date createDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Update_Date")
+    @Column(name = "update_date")
     private Date updateDate;
 
-    @Column(name = "Deleted")
+    @Column(name = "deleted")
     private boolean deleted;
 }
