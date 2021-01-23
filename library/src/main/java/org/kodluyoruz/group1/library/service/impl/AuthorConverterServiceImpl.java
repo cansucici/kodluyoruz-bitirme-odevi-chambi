@@ -18,6 +18,7 @@ public class AuthorConverterServiceImpl implements AuthorConverterService {
         author.setUpdateDate(authorDTO.getUpdateDate());
         author.setDeleted(authorDTO.isDeleted());
         author.setCreateDate(authorDTO.getCreateDate());
+        author.setBooks(authorDTO.getBooks());
 
         return author;
 
@@ -32,7 +33,7 @@ public class AuthorConverterServiceImpl implements AuthorConverterService {
         authorDTO.setUpdateDate(author.getUpdateDate());
         authorDTO.setDeleted(author.isDeleted());
         authorDTO.setCreateDate(author.getCreateDate());
-
+        authorDTO.setBooks(author.getBooks());
         return authorDTO;
     }
 }
