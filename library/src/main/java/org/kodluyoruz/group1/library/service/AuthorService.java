@@ -6,15 +6,14 @@ import org.kodluyoruz.group1.library.model.entities.Author;
 import java.util.Collection;
 
 public interface AuthorService {
-
-    Author saveAuthor(AuthorDTO dto);
+    Author save(AuthorDTO dto);
 
     Collection<Author> getAllActive();
 
-    Collection<Author> findByNameSurname(String nameSurname); //can have same namesurname
+    Collection<Author> findByNameSurname(String nameSurname); 
 
     void deleteById(Long id);
 
-    Author updateAuthor(AuthorDTO dto);
+    Author update(AuthorDTO dto);
 
 }

@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
 import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.service.AuthorService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 
 
@@ -18,8 +18,9 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @PostMapping
-    public Author save(@RequestBody AuthorDTO dto) {
-        return authorService.saveAuthor(dto);
+    public Author save(@RequestBody @Validated AuthorDTO dto) {
+        return authorService.save(dto);
+
     }
 
     @GetMapping
@@ -27,19 +28,19 @@ public class AuthorController {
         return authorService.getAllActive();
     }
 
-    @GetMapping("/{name}")
-    public Collection<Author> getAllAuthorsByName(@PathVariable String nameSurname) {
-        return authorService.findByNameSurname(name, surname);
+    @GetMapping("/{nameSurname}")
+    public Collection<Author> getAuthorsByNameSurname(@PathVariable String nameSurname) {
+        return authorService.findByNameSurname(nameSurname);
+    }
+
+    @PutMapping
+    public Author updateAuthors(@RequestBody @Validated AuthorDTO dto) {
+        return authorService.update(dto);
     }
 
     @DeleteMapping("/{id}")
     public void deleteAuthor(@PathVariable Long id) {
-        service.deleteById(id);
+        authorService.deleteById(id);
     }
 
-    @PutMapping("/update")
-    public Author updateAuthors(@RequestBody AuthorDTO dto) {
-        Author author = service.updateAuthor(dto);
-        return author;
-    }
 }

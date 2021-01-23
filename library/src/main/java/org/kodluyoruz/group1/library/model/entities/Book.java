@@ -54,8 +54,6 @@ public class Book extends BaseEntity {
     private List<Author> authors;
 
 
-
-
     //TODO: Bu ilişkiyi bir daha kontrol edeceğim, muhammed
     @OneToOne
     @JoinTable(name = "book_member",
