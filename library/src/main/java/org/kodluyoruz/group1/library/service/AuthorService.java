@@ -1,17 +1,20 @@
 package org.kodluyoruz.group1.library.service;
 
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
-import org.kodluyoruz.group1.library.model.entities.Authors;
+import org.kodluyoruz.group1.library.model.entities.Author;
 
 import java.util.Collection;
-import java.util.Optional;
 
-public interface AuthorService{
+public interface AuthorService {
 
-    Authors saveAuthor(AuthorDTO dto);
-    Collection<Authors> getAllActive();
-  Collection<Authors> findByNameSurname(String name); //can have same namesurname
+    Author saveAuthor(AuthorDTO dto);
+
+    Collection<Author> getAllActive();
+
+    Collection<Author> findByNameSurname(String name); //can have same namesurname
+
     void deleteById(Long id);
-Authors updateAuthor(AuthorDTO dto);
+
+    Author updateAuthor(AuthorDTO dto);
 
 }
