@@ -17,17 +17,11 @@ import java.util.List;
 @Table(name = "author")
 public class Author extends BaseEntity {
 
-    @Column(unique = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String nameSurname;
 
-    @Lob
     @Type(type = "text")
-    @Column()
     private String about;
-
-    //Bu ilişki OK , muhammed
-    // @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    //private List<Book> books;
 
     @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
     private List<Book> books;

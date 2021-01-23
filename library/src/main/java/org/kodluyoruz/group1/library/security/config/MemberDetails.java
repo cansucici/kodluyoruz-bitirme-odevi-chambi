@@ -11,20 +11,18 @@ import java.util.stream.Collectors;
 
 public class MemberDetails implements UserDetails {
 
-
-    private String firstName;
-    private String lastName;
-    private String userName;
-    private String email;
-    private String password;
-    private Long phoneNumber;
-    private String adress;
-    private Date birthDate;
-    private Date createDate;
-    private Date updateDate;
-    private StatusEnum memberStatus;
-    private List<GrantedAuthority> authorities;
-
+    private final String firstName;
+    private final String lastName;
+    private final String userName;
+    private final String email;
+    private final String password;
+    private final String phoneNumber;
+    private final String adress;
+    private final Date birthDate;
+    private final Date createDate;
+    private final Date updateDate;
+    private final StatusEnum memberStatus;
+    private final List<GrantedAuthority> authorities;
 
     public MemberDetails(Member member) {
         this.firstName = member.getFirstName();
@@ -34,16 +32,14 @@ public class MemberDetails implements UserDetails {
         this.password = member.getPassword();
         this.phoneNumber = member.getPhoneNumber();
         this.adress = member.getAdress();
-        this.birthDate = member.getBirthOfDate();
+        this.birthDate = member.getBirthDate();
         this.createDate = member.getCreateDate();
         this.updateDate = member.getUpdateDate();
         this.memberStatus = member.getMemberStatus();
-        this.authorities = Arrays.stream(member.getMemberRole().split(","))
-                .map(SimpleGrantedAuthority::new)
+        this.authorities = Arrays.stream(member.getMemberRole().split(",")).map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -77,9 +73,9 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        if (memberStatus == StatusEnum.ACTIVE){
+        if (memberStatus == StatusEnum.ACTIVE) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

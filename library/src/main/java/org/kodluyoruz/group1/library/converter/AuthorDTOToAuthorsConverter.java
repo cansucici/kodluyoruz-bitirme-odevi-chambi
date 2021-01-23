@@ -20,19 +20,6 @@ public class AuthorDTOToAuthorsConverter implements LibraryAPIConverter<AuthorDT
         author.setDeleted(input.isDeleted());
 
         //authors.setBooks(input.getBooks());
-
-
-
-
-
-
-
-
-
-
-
-
-
         return author;
     }
 }

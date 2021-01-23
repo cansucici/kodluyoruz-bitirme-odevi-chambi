@@ -14,7 +14,6 @@ public class HomeResourceController {
 
    private final MemberRepository memberRepository;
   /*  private final AuthorServiceImpl service;
-
     @PostMapping("/authors")
     public Authors save(@ResponseBody AuthorDTO dto){
         Authors author=service.save(dto);
@@ -24,8 +23,7 @@ public class HomeResourceController {
 
     @PostMapping("/newrecord")
     public Member member (@RequestBody Member member){
-        Member newrecord = memberRepository.save(member);
-        return newrecord;
+        return memberRepository.save(member);
     }
 
     @GetMapping("/")
