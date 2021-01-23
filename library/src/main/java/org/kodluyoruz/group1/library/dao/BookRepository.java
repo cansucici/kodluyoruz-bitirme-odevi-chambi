@@ -13,6 +13,7 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
 //TODO :  Bazı Query ler silindi, jpaRepositorynin sorguları yazıldı.
 
+
     List<Book> findByBookNameLikeAndDeletedIsFalse(String bookName);
 
     @Transactional
