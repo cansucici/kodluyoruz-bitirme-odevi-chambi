@@ -1,17 +1,21 @@
 package org.kodluyoruz.group1.library.service.impl;
 
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookDTOToBooksConverter;
+import org.kodluyoruz.group1.library.converter.BooksToBookDTOConverter;
 import org.kodluyoruz.group1.library.dao.BookRepository;
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.BookService;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,15 +25,15 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     private final BookDTOToBooksConverter bookDTOToBooksConverter;
-
+ private final BooksToBookDTOConverter booksToBookDTOConverter;
 
 
     @Override
     public Collection<Book> getAllBooks() {
         Collection<Book> books = bookRepository.findBooksByDeletedIsFalse();
-        if (CollectionUtils.isEmpty(books)) {
-            throw new RuntimeException("Mevcutta henüz bir kitap bulunmamaktadır.");
-        }
+       // if (CollectionUtils.isEmpty(books)) {
+      //      throw new RuntimeException("Mevcutta henüz bir kitap bulunmamaktadır.");
+       // }
         return books;
     }
 
@@ -59,9 +63,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book update(BookDTO dto) {
+    public Book update(Long id, BookDTO dto) {
 
-        Book book = bookRepository.findById(dto.getId()).orElse(null);
+        Book book = bookRepository.findById(id).orElse(null);
 
         book.setUpdateDate(new Date());
         book.setDeleted(dto.isDeleted());
@@ -83,6 +87,10 @@ public class BookServiceImpl implements BookService {
         return bookRepository.save(book);
     }
 
+    @Override
+    public BookDTO getBookById(Long id) {
+     Book b=  bookRepository.findById(id).orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
+        return booksToBookDTOConverter.convert(b); }
 
 
     @Override
