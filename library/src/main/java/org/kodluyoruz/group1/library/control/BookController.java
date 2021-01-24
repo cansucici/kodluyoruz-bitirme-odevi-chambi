@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -39,11 +40,19 @@ public class BookController {
         return "redirect:/book_list";
     }
 
-    @PutMapping("/showBookFormForUpdate/{id}")
-    public String updateBook(@ModelAttribute @Validated BookDTO bookDTO) {
-        bookService.update(bookDTO);
-        return "redirect:/booklist";
+///
+    @GetMapping("/update/{id}")
+    public String getUpdateBook(@PathVariable Long id, Model model ) {
+        BookDTO bookDTO = (bookService.getBookById(id));
+        model.addAttribute("dtoUpdateToDo", bookDTO);
+        return "book_list";
     }
+
+    @PostMapping("/update/{id}")
+    public String postUpdateToDo(@PathVariable Long id, BookDTO bookDTO) {
+        bookService.update(id,bookDTO);
+        return "redirect:/book_list";
+
 
     @DeleteMapping("/delete/{id}")
     public void deleteBook(@PathVariable Long id) {
