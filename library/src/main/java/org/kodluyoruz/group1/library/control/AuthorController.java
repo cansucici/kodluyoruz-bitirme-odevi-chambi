@@ -9,40 +9,40 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
+import org.springframework.stereotype.Controller;
 
 
-@RestController
-@RequestMapping("/authors")
+@Controller
 @RequiredArgsConstructor
 public class AuthorController {
 
     private final AuthorService authorService;
 
-    @PostMapping
-    public String save(@ModelAttribute("author") @Validated AuthorDTO dto) {
+    @PostMapping("/authors/saveAuthor")
+    public String save(@ModelAttribute("authorDTO") @Validated AuthorDTO dto) {
         authorService.save(dto);
-        return  "redirect:/authorlist";
+        return  "redirect:/listAuthors";
     }
 
-    @GetMapping
+    @GetMapping("/authors")
     public String getAllActiveAuthors(Model model) {
-        model.addAttribute("author_list", authorService.getAllActive());
+        model.addAttribute("listAuthors", authorService.getAllActive());
         return "author_list";
         }
 
-    @GetMapping("/{nameSurname}")
+    @GetMapping("/authors/{nameSurname}")
     public Collection<Author> getAuthorsByNameSurname(@PathVariable String nameSurname) {
         return authorService.findByNameSurname(nameSurname);
     }
 
-    @PutMapping
+    @PutMapping("/authors")
     public String updateAuthors(@ModelAttribute @Validated AuthorDTO dto) {
         authorService.update(dto);
-      return "redirect:/authorlist";  
+      return "redirect:/listAuthors";  
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/authors/{id}")
     public void deleteAuthor(@PathVariable Long id) {
         authorService.deleteById(id);
     }
