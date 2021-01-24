@@ -24,7 +24,7 @@ public class AuthorController {
         return  "redirect:/listAuthors";
     }
 
-    @GetMapping("/authors")
+    @GetMapping("/listAuthors")
     public String getAllActiveAuthors(Model model) {
         model.addAttribute("listAuthors", authorService.getAllActive());
         return "author_list";
