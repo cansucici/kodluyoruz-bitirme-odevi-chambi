@@ -49,10 +49,11 @@
             <td th:text="${book.editionNumber}"></td>
             <td th:text="${book.languagesEnum}"></td>
             <td th:text="${book.isbn}"></td>
-            <td><a th:href="@{/showBookFormForUpdate/{id}(id=${book.id})}" class="btn btn-info">
+            <td><a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-info" th:method="GET">
                 <i class="fas fa-edit"></i> Update </a>
-                <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete </a>
-            </td>
+                <form action="#" th:action="@{/delete/{id}(id = ${book.id})}" th:method="POST">
+                    <button class="btn btn-danger" type="submit" id="deleteButton">DELETE</button>
+                </form>   </td>
         </tr>
         </tbody>
 

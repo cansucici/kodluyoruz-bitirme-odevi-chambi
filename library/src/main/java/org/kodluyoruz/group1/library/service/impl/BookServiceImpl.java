@@ -31,9 +31,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public Collection<Book> getAllBooks() {
         Collection<Book> books = bookRepository.findBooksByDeletedIsFalse();
-        if (CollectionUtils.isEmpty(books)) {
-            throw new RuntimeException("Mevcutta henüz bir kitap bulunmamaktadır.");
-        }
+       // if (CollectionUtils.isEmpty(books)) {
+      //      throw new RuntimeException("Mevcutta henüz bir kitap bulunmamaktadır.");
+       // }
         return books;
     }
 

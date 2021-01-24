@@ -40,23 +40,24 @@ public class BookController {
         return "redirect:/book_list";
     }
 
-///
     @GetMapping("/update/{id}")
-    public String getUpdateBook(@PathVariable Long id, Model model ) {
+    public String getUpdateBook(@PathVariable Long id, Model model) {
         BookDTO bookDTO = (bookService.getBookById(id));
-        model.addAttribute("dtoUpdateToDo", bookDTO);
-        return "book_list";
+        model.addAttribute("bookDTO", bookDTO);
+        return "update";
     }
 
     @PostMapping("/update/{id}")
     public String postUpdateToDo(@PathVariable Long id, BookDTO bookDTO) {
-        bookService.update(id,bookDTO);
-        return "redirect:/book_list";
+        bookService.update(id, bookDTO);
+        return "redirect:/booklist";
 
+    }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteBook(@PathVariable Long id) {
+    @PostMapping ("/delete/{id}")
+    public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
+        return "redirect:/booklist";
     }
 
 
@@ -66,4 +67,5 @@ public class BookController {
     }
 
 
-}
+    }
+
