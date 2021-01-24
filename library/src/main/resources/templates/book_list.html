@@ -23,8 +23,8 @@
 
 <div class="container">
 <div>
-    <a class="btn btn-primary" href=" ">HOME </a>
-    <a th:href="@{/createBook}"><div class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Book </div></a>
+    <a class="btn btn-primary" href="./">HOME </a>
+    <a th:href="@{/saveBook}"><div class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Book </div></a>
    <h1>Books</h1>
     <table class="table table-striped table-responsive">
         <thead>
@@ -41,13 +41,13 @@
         </thead>
 
         <tbody>
-        <tr th:each="book : ${booklist}">
+        <tr th:each="book : ${listbook}">
             <td th:text="${book.bookName}"></td>
             <td th:text="${book.publisherName}"></td>
             <td th:text="${book.category}"></td>
             <td th:text="${book.pageNumber}"></td>
             <td th:text="${book.editionNumber}"></td>
-            <td th:text="${book.language}"></td>
+            <td th:text="${book.languagesEnum}"></td>
             <td th:text="${book.isbn}"></td>
             <td><a th:href="@{/showBookFormForUpdate/{id}(id=${book.id})}" class="btn btn-info">
                 <i class="fas fa-edit"></i> Update </a>

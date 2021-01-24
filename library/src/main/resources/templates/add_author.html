@@ -21,49 +21,24 @@
 
 <div class="container">
     <div>
-        <a class="btn btn-primary" href=" ">HOME </a>
-        <h1>Add New Book</h1>
+        <a class="btn btn-primary" href="./ ">HOME </a>
+        <h2>Add New Author</h2>
         <div id="errors" class="alert alert-danger"
              th:if="${(param.error != null) and (param.error[0] == 'true')}">
             Lütfen Zorunlu Alanları Doldurunuz.
         </div>
-        <!-- SAVE METHODDD  BİZDE POST METHOD CREATE -->
+
         <form action="#" th:action="@{/createBook}" th:object="${bookDTO}"
               method="POST">
             <div class="form-group">
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="bookname">Book Name(*)</label> </br>
-                    <input type="text" id="bookname" name="bookname" th:field="*{Book_Name}">
+                    <label for="nameSurname">Name Surname(*)</label> </br>
+                    <input type="text" id="nameSurname" name="bookname" th:field="*{nameSurname}">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="publisher">Publisher(*)</label></br>
-                    <input type="text" class="Publisher" th:field="*{Publisher}">
-                </div>
-
-                <div class="form-group" style="margin-left: 30px;">
-                    <label for="category"> Category(*) </label></br>
-                    <input type="text" class="Category" th:field="*{Category}">
-                </div>
-
-                <div class="form-group" style="margin-left: 30px;">
-                    <label for="pageNumber"> Page Number(*) </label></br>
-                    <input type="text" class="PageNumber" th:field="*{Page_Number}">
-                </div>
-
-                <div class="form-group" style="margin-left: 30px;">
-                    <label for="editionNumber">Edition Number(*)</label></br>
-                    <input type="text" class="Edition Number" th:field="*{Edition_Number}">
-                </div>
-
-                <div class="form-group" style="margin-left: 30px;">
-                    <label for="language">Language(*)</label></br>
-                    <input type="text" class="Language" th:field="{Language}">
-                </div>
-
-                <div class="form-group" style="margin-left: 30px;">
-                    <label for="ISBN">ISBN(*)</label></br>
-                    <input type="text" class="ISBN" th:field="*{ISBN}">
+                    <label for="about">About</label></br>
+                    <input type="text" class="about" th:field="*{about}">
                 </div>
             </div>
             <label for=""  > (*) Obligatory Fields </label><br>
