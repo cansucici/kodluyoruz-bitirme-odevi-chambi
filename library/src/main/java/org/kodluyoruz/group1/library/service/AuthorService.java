@@ -10,10 +10,13 @@ public interface AuthorService {
 
     Collection<Author> getAllActive();
 
-    Collection<Author> findByNameSurname(String nameSurname); 
+    Collection<Author> findByNameSurname(String nameSurname);
 
     void deleteById(Long id);
 
-    Author update(AuthorDTO dto);
+    Author update(Long id, AuthorDTO dto);
+
+
+    AuthorDTO getAuthorById(Long id);
 
 }
