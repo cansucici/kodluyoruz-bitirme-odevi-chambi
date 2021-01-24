@@ -21,28 +21,28 @@ public class Book extends BaseEntity {
     @Column(  length = 200, nullable = false)
     private String bookName;
 
-    @Column(  length = 5, nullable = false)
+    @Column(  length = 5)
     private Long pageNumber;
 
-    @Column( length = 100, nullable = false)
+    @Column( length = 100)
     private String publisherName;
 
-    @Column(  length = 50, nullable = false)
+    @Column(  length = 50)
     private Integer editionNumber;
 
-    @Column( unique = true, length = 50, nullable = false)
+    @Column( unique = true, length = 50)
     private Long isbn;
 
     // TODO : dilleri Enum sınıfı olarak  ekledim.
     @Enumerated(value = EnumType.STRING)
-    @Column( length = 15, nullable = false)
+    @Column( length = 15)
     private LanguagesEnum languagesEnum= LanguagesEnum.Türkçe;
 
-    @Column(  length = 50, nullable = false)
+    @Column(  length = 50)
     private String category;
 
     @Enumerated(value = EnumType.STRING)
-    @Column( length = 7, nullable = false)
+    @Column( length = 7)
     private StatusEnum status = StatusEnum.ACTIVE;
 
     //TODO : bir kitabın birden çok yazarı olabilir ilişkisi
