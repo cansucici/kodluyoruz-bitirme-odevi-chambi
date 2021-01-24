@@ -7,20 +7,17 @@ import org.kodluyoruz.group1.library.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collection;
-import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
 public class BookController {
 
-    //endpointler düzenlendi.
-    //method isimleri düzenlendi.
-
     private final BookService bookService;
-
 
     @GetMapping("/booklist")
     public String getBookList(Model model) {
@@ -37,7 +34,7 @@ public class BookController {
     @PostMapping("/saveBook")
     public String postCreateBook(@Validated BookDTO bookDTO) {
         bookService.save(bookDTO);
-        return "redirect:/book_list";
+        return "redirect:/booklist";
     }
 
     @GetMapping("/update/{id}")
@@ -51,21 +48,17 @@ public class BookController {
     public String postUpdateToDo(@PathVariable Long id, BookDTO bookDTO) {
         bookService.update(id, bookDTO);
         return "redirect:/booklist";
-
     }
 
-    @PostMapping ("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return "redirect:/booklist";
     }
 
-
     @GetMapping("/books/{bookName}")
     public Collection<Book> showSearchResult(@PathVariable String bookName) {
         return bookService.getBooksByBookName(bookName);
     }
-
-
-    }
+}
 
