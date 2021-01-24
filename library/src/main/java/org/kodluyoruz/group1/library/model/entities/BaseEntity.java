@@ -15,11 +15,11 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     @CreationTimestamp
     private Date createDate;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date updateDate;
 
     private boolean deleted;
