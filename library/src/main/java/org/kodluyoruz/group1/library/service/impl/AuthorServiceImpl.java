@@ -38,19 +38,24 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author update(AuthorDTO dto) {
-        Author author = authorRepository.findById(dto.getId())
-                .orElseThrow(() -> new AuthorNotFoundException("Böyle bir yazar bilgisi mevcut değildir."));
+    public Author update(Long id, AuthorDTO dto) {
+        Author author = authorRepository.findById(id).orElse(null);
         author.setUpdateDate(new Date());
         author.setDeleted(dto.isDeleted());
         author.setAbout(dto.getAbout());
-      author.setNameSurname(dto.getNameSurname());
-      return authorRepository.save(author);
+        author.setNameSurname(dto.getNameSurname());
+        return authorRepository.save(author);
     }
 
     @Override
     public Collection<Author> findByNameSurname(String nameSurname) {
 
         return authorRepository.findByNameSurname(nameSurname);
+    }
+
+    @Override
+    public AuthorDTO getAuthorById(Long id) {
+        Author author = authorRepository.findById(id).orElseThrow(() -> new NullPointerException("Aradığınız yazar bulunamadı."));
+        return converterService.convertToAuthorDto(author);
     }
 }
