@@ -34,38 +34,45 @@
 
                 <div class="form-group" style="margin-left: 30px;">
                     <label for="publisherName">Publisher(*)</label></br>
-                    <input type="text" class="Publisher" th:field="*{publisherName}">
+                    <input type="text" id="publisherName" class="Publisher" th:field="*{publisherName}">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
                     <label for="category"> Category(*) </label></br>
-                    <input type="text" class="Category" th:field="*{category}">
+                    <input type="text" id="category" class="Category" th:field="*{category}">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
                     <label for="pageNumber"> Page Number(*) </label></br>
-                    <input type="text" class="PageNumber" th:field="*{pageNumber}">
+                    <input type="text" id="pageNumber"> class="PageNumber" th:field="*{pageNumber}">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
                     <label for="editionNumber">Edition Number(*)</label></br>
-                    <input type="text" class="Edition Number" th:field="*{editionNumber}">
+                    <input type="text" id="editionNumber" class="Edition Number" th:field="*{editionNumber}">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
                     <label for="languagesEnum">Language(*)</label></br>
-                    <input type="text" class="Language" th:field="*{languagesEnum}">
+                    <select name="languagesEnum" id="languagesEnum">
+                        <option th:each="language : ${T(org.kodluyoruz.group1.library.model.enums.LanguagesEnum).values()}"
+                                th:value="${language}" th:text="${language}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-left: 30px;">
+                    <label for="statusEnum">Language(*)</label></br>
+                    <select name="statusEnum" id="statusEnum">
+                        <option th:each="status: ${T(org.kodluyoruz.group1.library.model.enums.StatusEnum).values()}"
+                                th:value="${status}" th:text="${status}"></option>
+                    </select>
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
                     <label for="isbn">ISBN(*)</label></br>
-                    <input type="text" class="ISBN" th:field="*{isbn}">
+                    <input type="text" id="isbn" class="ISBN" th:field="*{isbn}">
                 </div>
 
-                <div class="form-group" style="margin-left: 30px;">
-                    <label for="status">Status(*)</label></br>
-                    <input type="text" class="status" th:field="*{status}">
-                </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Güncelle</button>

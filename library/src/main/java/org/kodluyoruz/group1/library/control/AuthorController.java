@@ -1,31 +1,32 @@
-
 package org.kodluyoruz.group1.library.control;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
 import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.service.AuthorService;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
+import org.springframework.stereotype.Controller;
 
 
-@RestController
-@RequestMapping("/authors")
+@Controller
 @RequiredArgsConstructor
 public class AuthorController {
 
     private final AuthorService authorService;
 
-    @PostMapping
-    public Author save(@RequestBody @Validated AuthorDTO dto) {
-        return authorService.save(dto);
-
+    @PostMapping("/saveAuthor")
+    public String save(@ModelAttribute("authorDTO") @Validated AuthorDTO dto) {
+        authorService.save(dto);
+        return  "redirect:/listAuthors";
     }
 
-    @GetMapping
-    public Collection<Author> getAllActiveAuthors() {
-        return authorService.getAllActive();
+    @GetMapping("/listAuthors")
+    public String getAllActiveAuthors(Model model) {
+        model.addAttribute("listAuthors", authorService.getAllActive());
+        return "author_list";
     }
 
     @GetMapping("/{nameSurname}")
@@ -33,14 +34,15 @@ public class AuthorController {
         return authorService.findByNameSurname(nameSurname);
     }
 
-    @PutMapping
-    public Author updateAuthors(@RequestBody @Validated AuthorDTO dto) {
-        return authorService.update(dto);
-    }
+//    @PutMapping("/authors")
+//    public String updateAuthors(@ModelAttribute @Validated AuthorDTO dto) {
+//        authorService.update(dto);
+//        return "redirect:/listAuthors";
+//
+//    }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/authors/{id}")
     public void deleteAuthor(@PathVariable Long id) {
         authorService.deleteById(id);
     }
-
 }
