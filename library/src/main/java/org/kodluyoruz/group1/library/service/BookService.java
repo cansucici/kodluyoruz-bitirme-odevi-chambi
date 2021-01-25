@@ -9,15 +9,17 @@ import java.util.List;
 
 public interface BookService {
 
-        Collection<Book> getAllBooks();
+    Collection<Book> getAllBooks();
 
-        Book save (BookDTO dto);
+    Book save(BookDTO dto);
 
-        Book update (BookDTO dto);
+    Book update(Long id, BookDTO dto);
+
+    BookDTO getBookById(Long id);
 
     void deleteBook(Long id); //deleted
 
-    List<Book> getBooksByBookName (String bookName);
+    List<Book> getBooksByBookName(String bookName);
 
 
 
@@ -27,8 +29,6 @@ public interface BookService {
     /*public void delete(BaseDTO id) {
          bookRepository.delete(id.getId());
     }*/
-
-
 
 
     //Collection<BookDTO> getOrderedBooks();

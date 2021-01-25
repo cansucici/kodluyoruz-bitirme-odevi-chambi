@@ -2,6 +2,7 @@ package org.kodluyoruz.group1.library.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookDTOToBooksConverter;
+import org.kodluyoruz.group1.library.converter.BooksToBookDTOConverter;
 import org.kodluyoruz.group1.library.dao.BookRepository;
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
@@ -21,15 +22,15 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     private final BookDTOToBooksConverter bookDTOToBooksConverter;
-
+    private final BooksToBookDTOConverter booksToBookDTOConverter;
 
 
     @Override
     public Collection<Book> getAllBooks() {
         Collection<Book> books = bookRepository.findBooksByDeletedIsFalse();
-        if (CollectionUtils.isEmpty(books)) {
-            throw new RuntimeException("Mevcutta henüz bir kitap bulunmamaktadır.");
-        }
+        // if (CollectionUtils.isEmpty(books)) {
+        //      throw new RuntimeException("Mevcutta henüz bir kitap bulunmamaktadır.");
+        // }
         return books;
     }
 
@@ -48,20 +49,14 @@ public class BookServiceImpl implements BookService {
         }
 
 
-        /*boolean isExist = booksOperationRepository.hasExistSameBookIsbn(dto.getIsbn());
-        if (isExist) {
-            throw new RuntimeException("Aynı barkod numarasına sahip kitap bulunmaktadır." +
-                    " Barkod numaranızı tekrar kontrol ediniz!");
-        }*/
-
         Book book = bookDTOToBooksConverter.convert(dto);
         return bookRepository.save(book);
     }
 
     @Override
-    public Book update(BookDTO dto) {
+    public Book update(Long id, BookDTO dto) {
 
-        Book book = bookRepository.findById(dto.getId()).orElse(null);
+        Book book = bookRepository.findById(id).orElse(null);
 
         book.setUpdateDate(new Date());
         book.setDeleted(dto.isDeleted());
@@ -74,15 +69,15 @@ public class BookServiceImpl implements BookService {
         book.setBookName(dto.getBookName());
         book.setStatus(dto.getStatus());
 
-        boolean isExist = bookRepository.existsBooksByIsbn(dto.getIsbn());
-        if (isExist) {
-            throw new RuntimeException("Aynı barkod numarasına sahip kitap bulunmaktadır." +
-                    " Barkod numaranızı tekrar kontrol ediniz!");
-        }
 
         return bookRepository.save(book);
     }
 
+    @Override
+    public BookDTO getBookById(Long id) {
+        Book b = bookRepository.findById(id).orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
+        return booksToBookDTOConverter.convert(b);
+    }
 
 
     @Override
@@ -97,7 +92,7 @@ public class BookServiceImpl implements BookService {
         Collection<Book> books = bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
         if (CollectionUtils.isEmpty(books)) {
             throw new RuntimeException("Bu isimde kitap bulunmamaktadır.");
-        }else {
+        } else {
             return bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
         }
     }
