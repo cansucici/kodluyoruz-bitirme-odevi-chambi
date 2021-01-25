@@ -25,18 +25,18 @@ public class MemberDetails implements UserDetails {
     private final List<GrantedAuthority> authorities;
 
     public MemberDetails(Member member) {
-        this.firstName = member.getFirstName();
-        this.lastName = member.getLastName();
-        this.userName = member.getUserName();
-        this.email = member.getEmail();
-        this.password = member.getPassword();
-        this.phoneNumber = member.getPhoneNumber();
-        this.adress = member.getAdress();
-        this.birthDate = member.getBirthDate();
-        this.createDate = member.getCreateDate();
-        this.updateDate = member.getUpdateDate();
-        this.memberStatus = member.getMemberStatus();
-        this.authorities = Arrays.stream(member.getMemberRole().split(",")).map(SimpleGrantedAuthority::new)
+        firstName = member.getFirstName();
+        lastName = member.getLastName();
+        userName = member.getUserName();
+        email = member.getEmail();
+        password = member.getPassword();
+        phoneNumber = member.getPhoneNumber();
+        adress = member.getAdress();
+        birthDate = member.getBirthDate();
+        createDate = member.getCreateDate();
+        updateDate = member.getUpdateDate();
+        memberStatus = member.getMemberStatus();
+        authorities = Arrays.stream(member.getMemberRole().split(",")).map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
     }
