@@ -10,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.util.Collection;
 
 @Controller
@@ -41,11 +40,11 @@ public class BookController {
     public String getUpdateBook(@PathVariable Long id, Model model) {
         BookDTO bookDTO = (bookService.getBookById(id));
         model.addAttribute("bookDTO", bookDTO);
-        return "update";
+        return "update_book";
     }
 
     @PostMapping("/update/{id}")
-    public String postUpdateToDo(@PathVariable Long id, BookDTO bookDTO) {
+    public String postUpdateBook(@PathVariable Long id, BookDTO bookDTO) {
         bookService.update(id, bookDTO);
         return "redirect:/booklist";
     }
