@@ -2,7 +2,7 @@ package org.kodluyoruz.group1.library.control;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
-import org.kodluyoruz.group1.library.service.AuthorService;
+import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class AuthorController {
 
-    private final AuthorService authorService;
+    private final IAuthorService authorService;
 
     @GetMapping("/authorslist")
     public String getAllActiveAuthors(Model model) {
