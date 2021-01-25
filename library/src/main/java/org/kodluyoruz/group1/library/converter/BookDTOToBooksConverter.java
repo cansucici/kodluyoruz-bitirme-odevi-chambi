@@ -1,13 +1,12 @@
 package org.kodluyoruz.group1.library.converter;
 
 
-import org.kodluyoruz.group1.library.convert.LibraryAPIConverter;
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BookDTOToBooksConverter implements LibraryAPIConverter<BookDTO, Book> {
+public class BookDTOToBooksConverter implements BaseConverter<BookDTO, Book> {
 
     @Override
     public Book convert(BookDTO input) {
