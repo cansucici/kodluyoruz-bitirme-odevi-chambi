@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dao.AuthorRepository;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
 import org.kodluyoruz.group1.library.model.entities.Author;
-import org.kodluyoruz.group1.library.service.AuthorConverterService;
+import org.kodluyoruz.group1.library.converter.IAuthorConverter;
 import org.kodluyoruz.group1.library.service.AuthorService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
-    private final AuthorConverterService converterService;
+    private final IAuthorConverter converterService;
 
     @Override
     public Author save(AuthorDTO dto) {

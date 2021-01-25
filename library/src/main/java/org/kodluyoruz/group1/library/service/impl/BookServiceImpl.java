@@ -2,7 +2,7 @@ package org.kodluyoruz.group1.library.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookDTOToBooksConverter;
-import org.kodluyoruz.group1.library.converter.BooksToBookDTOConverter;
+import org.kodluyoruz.group1.library.converter.BookToDTOConverter;
 import org.kodluyoruz.group1.library.dao.BookRepository;
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
@@ -22,7 +22,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     private final BookDTOToBooksConverter bookDTOToBooksConverter;
-    private final BooksToBookDTOConverter booksToBookDTOConverter;
+    private final BookToDTOConverter bookToDTOConverter;
 
 
     @Override
@@ -76,7 +76,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDTO getBookById(Long id) {
         Book b = bookRepository.findById(id).orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
-        return booksToBookDTOConverter.convert(b);
+        return bookToDTOConverter.convert(b);
     }
 
 
