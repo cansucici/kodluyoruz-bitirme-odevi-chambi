@@ -16,23 +16,23 @@
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
           crossorigin="anonymous"/>
 
-    <title>Book-List</title>
+    <title>Yazar-Listesi</title>
 
 </head>
 <body>
 
 <div class="container">
     <div>
-        <a class="btn btn-primary" href="./">HOME </a>
+        <a class="btn btn-primary" href="./">ANASAYFA </a>
         <a th:href="@{/saveAuthor}">
-            <div class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Author</div>
+            <div class="btn btn-info"><i class="fas fa-plus-circle"></i> Yazar Ekle</div>
         </a>
-        <h1>Authors</h1>
+        <h1>YAZARLAR</h1>
         <table class="table table-striped table-responsive">
             <thead>
             <tr>
-                <th width="12%">Author Name Surname</th>
-                <th width="10%">About</th>
+                <th width="12%">Yazar Adı Soyadı</th>
+                <th width="10%">Yazar Hakkında</th>
 
             </tr>
             </thead>
@@ -42,11 +42,10 @@
                 <td th:text="${authorDTO.nameSurname}"></td>
                 <td th:text="${authorDTO.about}"></td>
 
-
                 <td><a th:href="@{/updateAuthor/{id}(id=${authorDTO.id})}" class="btn btn-info" th:method="GET">
-                    <i class="fas fa-edit"></i> Update </a>
+                    <i class="fas fa-edit"></i> GÜNCELLE </a>
                     <form action="#" th:action="@{/deleteAuthor/{id}(id = ${authorDTO.id})}" th:method="POST">
-                        <button class="btn btn-danger" type="submit" id="deleteButton">DELETE</button>
+                        <button class="btn btn-danger" type="submit" id="deleteButton">SİL</button>
                     </form>
                 </td>
             </tr>

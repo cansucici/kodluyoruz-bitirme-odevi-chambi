@@ -3,7 +3,6 @@ package org.kodluyoruz.group1.library.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dao.AuthorRepository;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
-import org.kodluyoruz.group1.library.exceptions.AuthorNotFoundException;
 import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.service.AuthorConverterService;
 import org.kodluyoruz.group1.library.service.AuthorService;

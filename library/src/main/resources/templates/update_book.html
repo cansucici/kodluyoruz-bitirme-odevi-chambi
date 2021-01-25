@@ -21,39 +21,39 @@
 
 <div class="container">
     <div>
-        <a class="btn btn-primary" href="./ ">HOME </a>
-        <h1>Update Book</h1>
+        <a class="btn btn-primary" href="./ ">ANASAYFA </a>
+        <h1>Kitap Güncelle</h1>
 
         <form action="#" th:action="@{/update/{id}(id = ${bookDTO.id})}" th:object="${bookDTO}"
               th:method="POST">
             <div class="form-group">
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="bookname">Book Name(*)</label> </br>
-                    <input type="text" id="bookname" name="bookname" th:field="*{bookName}">
+                    <label for="bookname">Kitap Adı(*)</label> </br>
+                    <input type="text" id="bookname" name="bookname" th:field="*{bookName}" th:required="required">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="publisherName">Publisher(*)</label></br>
-                    <input type="text" id="publisherName" class="Publisher" th:field="*{publisherName}">
+                    <label for="publisherName">Basımevi(*)</label></br>
+                    <input type="text" id="publisherName" class="Publisher" th:field="*{publisherName}" th:required="required">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="category"> Category(*) </label></br>
-                    <input type="text" id="category" class="Category" th:field="*{category}">
+                    <label for="category"> Türü(*) </label></br>
+                    <input type="text" id="category" class="Category" th:field="*{category}" th:required="required">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="pageNumber"> Page Number(*) </label></br>
-                    <input type="text" id="pageNumber"> class="PageNumber" th:field="*{pageNumber}">
+                    <label for="pageNumber"> Sayfa Sayısı(*) </label></br>
+                    <input type="text" id="pageNumber"class="PageNumber" th:field="*{pageNumber}"  th:required="required">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="editionNumber">Edition Number(*)</label></br>
-                    <input type="text" id="editionNumber" class="Edition Number" th:field="*{editionNumber}">
+                    <label for="editionNumber">Baskı Sayısı(*)</label></br>
+                    <input type="text" id="editionNumber" class="Edition Number" th:field="*{editionNumber}" th:required="required">
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="languagesEnum">Language(*)</label></br>
+                    <label for="languagesEnum">Dil(*)</label></br>
                     <select name="languagesEnum" id="languagesEnum">
                         <option th:each="language : ${T(org.kodluyoruz.group1.library.model.enums.LanguagesEnum).values()}"
                                 th:value="${language}" th:text="${language}"></option>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="statusEnum">Language(*)</label></br>
+                    <label for="statusEnum">Durumu(*)</label></br>
                     <select name="statusEnum" id="statusEnum">
                         <option th:each="status: ${T(org.kodluyoruz.group1.library.model.enums.StatusEnum).values()}"
                                 th:value="${status}" th:text="${status}"></option>
@@ -69,13 +69,13 @@
                 </div>
 
                 <div class="form-group" style="margin-left: 30px;">
-                    <label for="isbn">ISBN(*)</label></br>
-                    <input type="text" id="isbn" class="ISBN" th:field="*{isbn}">
+                    <label for="isbn">Barkod No(*)</label></br>
+                    <input type="text" id="isbn" class="ISBN" th:field="*{isbn}"  th:required="required">
                 </div>
 
             </div>
 
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">GÜNCELLE</button>
 
             <!--  <td><a th:href="@{/update/{id}(id=${bookDTO})}" class="btn btn-info" value="UPDATE">
                   <i class="fas fa-edit"></i> Update </a>  -->
