@@ -33,10 +33,9 @@ public class Book extends BaseEntity {
     @Column(unique = true, length = 50)
     private Long isbn;
 
-    // TODO : dilleri Enum sınıfı olarak  ekledim.
     @Enumerated(value = EnumType.STRING)
     @Column(length = 15)
-    private LanguagesEnum languagesEnum = LanguagesEnum.Türkçe;
+    private LanguagesEnum languagesEnum = LanguagesEnum.TURKISH;
 
     @Column(length = 50)
     private String category;
@@ -44,8 +43,6 @@ public class Book extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     @Column(length = 7)
     private StatusEnum status = StatusEnum.ACTIVE;
-
-    //TODO : bir kitabın birden çok yazarı olabilir ilişkisi
 
     @ManyToMany
     @JoinTable(name = "book_author",
