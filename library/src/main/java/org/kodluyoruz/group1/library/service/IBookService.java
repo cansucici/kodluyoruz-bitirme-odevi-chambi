@@ -7,7 +7,7 @@ import org.kodluyoruz.group1.library.model.entities.Book;
 import java.util.Collection;
 import java.util.List;
 
-public interface BookService {
+public interface IBookService {
 
     Collection<Book> getAllBooks();
 
@@ -20,17 +20,4 @@ public interface BookService {
     void deleteBook(Long id); //deleted
 
     List<Book> getBooksByBookName(String bookName);
-
-
-
-
-
-
-    /*public void delete(BaseDTO id) {
-         bookRepository.delete(id.getId());
-    }*/
-
-
-    //Collection<BookDTO> getOrderedBooks();
-
 }

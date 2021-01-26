@@ -1,34 +1,32 @@
 package org.kodluyoruz.group1.library.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.kodluyoruz.group1.library.converter.AuthorConverter;
 import org.kodluyoruz.group1.library.dao.AuthorRepository;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
 import org.kodluyoruz.group1.library.model.entities.Author;
-import org.kodluyoruz.group1.library.service.AuthorConverterService;
-import org.kodluyoruz.group1.library.service.AuthorService;
+import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AuthorServiceImpl implements AuthorService {
+public class AuthorService implements IAuthorService {
 
     private final AuthorRepository authorRepository;
-    private final AuthorConverterService converterService;
+    private final AuthorConverter authorConverter;
 
     @Override
     public Author save(AuthorDTO dto) {
-        Author author = converterService.convertToAuthor(dto);
+        Author author = authorConverter.convertToEntity(dto);
         return authorRepository.save(author);
     }
 
     @Override
     public Collection<Author> getAllActive() {
-        List<Author> authors = authorRepository.findAllByDeletedIsFalse();
-        return authors;
+        return authorRepository.findAllByDeletedIsFalse();
     }
 
     @Override
@@ -38,7 +36,9 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author update(Long id, AuthorDTO dto) {
+
         Author author = authorRepository.findById(id).orElse(null);
+
         author.setUpdateDate(new Date());
         author.setDeleted(dto.isDeleted());
         author.setAbout(dto.getAbout());
@@ -54,7 +54,8 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public AuthorDTO getAuthorById(Long id) {
+
         Author author = authorRepository.findById(id).orElseThrow(() -> new NullPointerException("Aradığınız yazar bulunamadı."));
-        return converterService.convertToAuthorDto(author);
+        return authorConverter.convertToDto(author);
     }
 }
