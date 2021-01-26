@@ -1,15 +1,15 @@
 package org.kodluyoruz.group1.library.control;
 
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
+
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
 import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,7 +32,7 @@ public class AuthorController {
     }
 
     @PostMapping("/saveAuthor")
-    public String postCreateBook(@Validated AuthorDTO authorDTO) {
+    public String postCreateBook(@Valid AuthorDTO authorDTO) {
 
         authorService.save(authorDTO);
         return "redirect:/authorslist";
@@ -60,8 +60,9 @@ public class AuthorController {
         return "redirect:/authorslist";
     }
 
-//    @GetMapping("/{nameSurname}")
-//    public Collection<Author> getAuthorsByNameSurname(@PathVariable String nameSurname) {
-//        return authorService.findByNameSurname(nameSurname);
-//    }
+    // @GetMapping("/{nameSurname}")
+    // public Collection<Author> getAuthorsByNameSurname(@PathVariable String
+    // nameSurname) {
+    // return authorService.findByNameSurname(nameSurname);
+    // }
 }

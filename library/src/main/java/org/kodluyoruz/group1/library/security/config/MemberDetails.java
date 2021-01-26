@@ -3,14 +3,10 @@ package org.kodluyoruz.group1.library.security.config;
 import org.kodluyoruz.group1.library.model.entities.Member;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MemberDetails implements UserDetails {
-
 
     private String firstName;
     private String lastName;
@@ -25,7 +21,6 @@ public class MemberDetails implements UserDetails {
     private StatusEnum memberStatus;
     private List<GrantedAuthority> authorities;
 
-
     public MemberDetails(Member member) {
         this.firstName = member.getFirstName();
         this.lastName = member.getLastName();
@@ -38,12 +33,11 @@ public class MemberDetails implements UserDetails {
         this.createDate = member.getCreateDate();
         this.updateDate = member.getUpdateDate();
         this.memberStatus = member.getMemberStatus();
-//        this.authorities = Arrays.stream(member.getMemberRole().split(","))
-//                .map(SimpleGrantedAuthority::new)
-//                .collect(Collectors.toList());
+        // this.authorities = Arrays.stream(member.getMemberRole().split(","))
+        // .map(SimpleGrantedAuthority::new)
+        // .collect(Collectors.toList());
 
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

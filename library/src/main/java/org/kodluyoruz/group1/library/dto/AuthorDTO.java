@@ -18,8 +18,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AuthorDTO extends BaseDTO {
 
-    @NotEmpty(message="isim soyisim alanı boş olamaz.")
-    @NotNull(message="isim soyisim alanı boş olamaz. ")
+    @NotEmpty(message = "isim soyisim alanı boş olamaz.")
+    @NotNull(message = "isim soyisim alanı boş olamaz. ")
     private String nameSurname;
 
     private String about;

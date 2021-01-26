@@ -5,10 +5,7 @@ import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.model.entities.Member;
 import org.kodluyoruz.group1.library.model.enums.LanguagesEnum;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
-
 import javax.validation.constraints.NotEmpty;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -32,7 +29,7 @@ public class BookDTO extends BaseDTO {
     @NotEmpty(message = "Kitap türü boş bırakılamaz.")
     private String category;
     private StatusEnum status;
-    private  List<Author> authors;
+    private List<Author> authors;
     private Member member;
 
 }
