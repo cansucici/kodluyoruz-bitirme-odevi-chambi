@@ -18,7 +18,7 @@ public class MemberController {
 
     private final IMemberService memberService;
 
-    @GetMapping
+    @GetMapping("/member")
     public List<Member> getAll() {
         return memberService.getAll();
     }
@@ -29,14 +29,14 @@ public class MemberController {
     }
 
     @PutMapping
-    public Member update(Long id, @RequestBody @Valid Member member) throws Exception {
-        return memberService.update(id, member);
+    public Member update(Long id, @RequestBody @Valid MemberDTO memberDTO) throws Exception {
+        return memberService.update(id, memberDTO);
     }
 
     @PutMapping("/new-password/{id}")
-    ResponseEntity<Member> password(@RequestBody @Valid Member member, @PathVariable Long id) {
+    ResponseEntity<Member> password(@RequestBody @Valid MemberDTO memberDTO, @PathVariable Long id) {
         // Assert.notNull(member, "boş gönderemezsin");
-        Member m = memberService.updatePassword(id, member);
+        Member m = memberService.updatePassword(id, memberDTO);
         return ResponseEntity.status(HttpStatus.OK).body(m);
     }
 
@@ -51,13 +51,13 @@ public class MemberController {
     }
 
     @PutMapping("/member-status/{id}")
-    public Member updateMemberStatus(@PathVariable Long id, @RequestBody @Valid Member member) throws Exception {
-        return memberService.updateMemberStatus(id, member);
+    public Member updateMemberStatus(@PathVariable Long id, @RequestBody @Valid MemberDTO memberDTO) throws Exception {
+        return memberService.updateMemberStatus(id, memberDTO);
     }
 
     @PutMapping("/take-book/{id}")
-    public Member takeBook(@PathVariable Long bookid) throws Exception {
-        return memberService.takeBook(bookid);
+    public Member takeBook(@PathVariable Long id) throws Exception {
+        return memberService.takeBook(id);
     }
 
 }

@@ -6,6 +6,7 @@ import org.kodluyoruz.group1.library.model.entities.Author;
 import java.util.Collection;
 
 public interface IAuthorService {
+
     Author save(AuthorDTO dto);
 
     Collection<Author> getAllActive();
@@ -15,7 +16,6 @@ public interface IAuthorService {
     void deleteById(Long id);
 
     Author update(Long id, AuthorDTO dto);
-
 
     AuthorDTO getAuthorById(Long id);
 
