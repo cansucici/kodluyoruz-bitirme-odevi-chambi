@@ -20,17 +20,4 @@ public interface IBookService {
     void deleteBook(Long id); //deleted
 
     List<Book> getBooksByBookName(String bookName);
-
-
-
-
-
-
-    /*public void delete(BaseDTO id) {
-         bookRepository.delete(id.getId());
-    }*/
-
-
-    //Collection<BookDTO> getOrderedBooks();
-
 }
