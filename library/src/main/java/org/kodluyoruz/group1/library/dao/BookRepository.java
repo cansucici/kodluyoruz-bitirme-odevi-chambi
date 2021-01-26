@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Component
-public interface BookRepository extends JpaRepository<Book, Long> {
+public interface BookRepository extends JpaRepository<Book,Long> {
 
     List<Book> findByBookNameLikeAndDeletedIsFalse(String bookName);
 

@@ -28,13 +28,8 @@ public class BookService implements IBookService {
 
     @Override
     public Book save(BookDTO dto) {
-//        String bookName = dto.getBookName();
-//        if (bookName.isEmpty()) {
-//            throw new RuntimeException("Kitap ismi boş bırakılamaz.");
-//        }
 
-        boolean isExist = bookRepository.existsBooksByIsbn(dto.getIsbn());
-        if (isExist) {
+        if (bookRepository.existsBooksByIsbn(dto.getIsbn())){
             throw new RuntimeException("Aynı barkod numarasına sahip kitap bulunmaktadır." +
                     " Barkod numaranızı tekrar kontrol ediniz!");
         }
