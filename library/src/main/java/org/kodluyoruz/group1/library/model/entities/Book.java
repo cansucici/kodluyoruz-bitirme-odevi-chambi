@@ -52,7 +52,7 @@ public class Book extends BaseEntity {
 
 
     //TODO: Bu ilişkiyi bir daha kontrol edeceğim, muhammed
-    @OneToOne
+    @ManyToOne
     @JoinTable(name = "book_member",
             joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "id")})
