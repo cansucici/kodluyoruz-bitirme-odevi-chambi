@@ -3,7 +3,7 @@ package org.kodluyoruz.group1.library.control;
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
-import org.kodluyoruz.group1.library.service.BookService;
+import org.kodluyoruz.group1.library.service.IBookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -17,7 +17,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class BookController {
 
-    private final BookService bookService;
+    private final IBookService bookService;
 
     @GetMapping("/booklist")
     public String getBookList(Model model) {
@@ -41,11 +41,11 @@ public class BookController {
     public String getUpdateBook(@PathVariable Long id, Model model) {
         BookDTO bookDTO = (bookService.getBookById(id));
         model.addAttribute("bookDTO", bookDTO);
-        return "update";
+        return "update_book";
     }
 
     @PostMapping("/update/{id}")
-    public String postUpdateToDo(@PathVariable Long id, BookDTO bookDTO) {
+    public String postUpdateBook(@PathVariable Long id, BookDTO bookDTO) {
         bookService.update(id, bookDTO);
         return "redirect:/booklist";
     }

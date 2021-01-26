@@ -5,15 +5,18 @@ import org.kodluyoruz.group1.library.model.entities.Author;
 
 import java.util.Collection;
 
-public interface AuthorService {
+public interface IAuthorService {
+
     Author save(AuthorDTO dto);
 
     Collection<Author> getAllActive();
 
-    Collection<Author> findByNameSurname(String nameSurname); 
+    Collection<Author> findByNameSurname(String nameSurname);
 
     void deleteById(Long id);
 
-    Author update(AuthorDTO dto);
+    Author update(Long id, AuthorDTO dto);
+
+    AuthorDTO getAuthorById(Long id);
 
 }

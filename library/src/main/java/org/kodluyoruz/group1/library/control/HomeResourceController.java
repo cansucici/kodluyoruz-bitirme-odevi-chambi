@@ -7,29 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+
 
 @Controller
 @RequiredArgsConstructor
 public class HomeResourceController {
 
-   private final MemberRepository memberRepository;
-  /*  private final AuthorServiceImpl service;
-    @PostMapping("/authors")
-    public Authors save(@ResponseBody AuthorDTO dto){
-        Authors author=service.save(dto);
-        return author;
-    }
-*/
-
-    @PostMapping("/newrecord")
-    public Member member (@RequestBody Member member){
-        return memberRepository.save(member);
-    }
 
     @GetMapping("/")
     public String home(){
-
         return "header";
     }
 

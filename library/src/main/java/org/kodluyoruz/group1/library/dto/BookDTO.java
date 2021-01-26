@@ -16,9 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class BookDTO extends BaseDTO {
 
-    //TODO : long enum ve ınteger için @validationu uygualayamadım Notempty, notnull, notblank hata verdi
-    //Stringler için okey
-
     @NotEmpty(message = "Kitap ismi boş bırakılamaz.")
     private String bookName;
 
