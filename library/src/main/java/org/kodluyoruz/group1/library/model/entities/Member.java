@@ -60,6 +60,6 @@ public class Member extends BaseEntity {
     private List<Role> roles = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "member")
-    private List<Book> books = new ArrayList<Book>();
+    private List<Book> books = new ArrayList<>();
 
 }

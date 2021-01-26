@@ -29,12 +29,12 @@ public class MemberDTO extends BaseDTO {
 
     private String phoneNumber;
 
-    private String adress;
+    private String address;
 
-    private Date birthOfDate;
+    private Date birthDate;
 
     private StatusEnum memberStatus;
 
-    private List<String> roles= new ArrayList<String>();
+    private List<Role> roles = new ArrayList<>();
 
 }

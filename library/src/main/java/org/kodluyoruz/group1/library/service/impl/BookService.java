@@ -1,10 +1,11 @@
-package org.kodluyoruz.group1.library.service;
+package org.kodluyoruz.group1.library.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookConverter;
 import org.kodluyoruz.group1.library.dao.BookRepository;
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
+import org.kodluyoruz.group1.library.service.IBookService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -22,12 +23,8 @@ public class BookService implements IBookService {
     @Override
     public Collection<Book> getAllBooks() {
 
-//         if (CollectionUtils.isEmpty(books)) {
-//              throw new RuntimeException("Mevcutta henüz bir kitap bulunmamaktadır.");
-//         }
         return bookRepository.findBooksByDeletedIsFalse();
     }
-
 
     @Override
     public Book save(BookDTO dto) {
@@ -49,7 +46,7 @@ public class BookService implements IBookService {
     @Override
     public Book update(Long id, BookDTO dto) {
 
-        Book book = bookRepository.findById(id).orElse(null);
+        Book book = bookRepository.findById(id).orElse(new Book());
 
         book.setUpdateDate(new Date());
         book.setDeleted(dto.isDeleted());
