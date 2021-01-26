@@ -13,7 +13,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -54,34 +56,18 @@ public class Member {
     @Temporal(TemporalType.DATE)
     @Column(nullable = false ,updatable = false)
     private Date birthDate;
-   
-    @Column( nullable = false ,updatable = false)
-    @CreationTimestamp
-    private Date createDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateDate;
 
     @Enumerated(value = EnumType.STRING)
     @Column(length = 7, nullable = false)
     private StatusEnum memberStatus;
 
+    @ManyToMany()
+    @JoinTable(name = "member_role",joinColumns = @JoinColumn(name = "memberid"),
+            inverseJoinColumns = @JoinColumn(name = "roleid") )
+    private List<Role> roles= new ArrayList<>();
 
-    private String memberRole;
-
-
-//
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "users_roles",
-//            joinColumns = @JoinColumn(
-//                    name = "member_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(
-//                    name = "role_id", referencedColumnName = "id"))
-//
-//    private Collection< Role > roles;
-
-
+    @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "member")
+    private List<Book> books =new ArrayList<Book>();
 
 
 }
