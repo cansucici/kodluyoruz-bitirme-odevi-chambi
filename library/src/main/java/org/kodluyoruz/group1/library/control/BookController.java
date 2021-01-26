@@ -33,6 +33,7 @@ public class BookController {
     @PostMapping("/saveBook")
     public String postCreateBook(@Validated BookDTO bookDTO) {
         bookService.save(bookDTO);
+
         return "redirect:/booklist";
     }
 
