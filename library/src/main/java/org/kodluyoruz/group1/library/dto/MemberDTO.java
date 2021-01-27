@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kodluyoruz.group1.library.model.entities.Role;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

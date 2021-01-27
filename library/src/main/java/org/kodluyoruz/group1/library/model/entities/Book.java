@@ -1,17 +1,15 @@
 package org.kodluyoruz.group1.library.model.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.kodluyoruz.group1.library.model.enums.LanguagesEnum;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -33,6 +31,7 @@ public class Book extends BaseEntity {
     @Column(unique = true, length = 50)
     private Long isbn;
 
+    // TODO : dilleri Enum sınıfı olarak ekledim.
     @Enumerated(value = EnumType.STRING)
     @Column(length = 15)
     private LanguagesEnum languagesEnum = LanguagesEnum.TURKISH;
@@ -44,19 +43,19 @@ public class Book extends BaseEntity {
     @Column(length = 7)
     private StatusEnum status = StatusEnum.ACTIVE;
 
+    // TODO : bir kitabın birden çok yazarı olabilir ilişkisi
+
     @ManyToMany
-    @JoinTable(name = "book_author",
-            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "id")})
-    private List<Author> authors;
+    @JoinTable(name = "book_author", joinColumns = {
+            @JoinColumn(name = "book_id", referencedColumnName = "id") }, inverseJoinColumns = {
+                    @JoinColumn(name = "author_id", referencedColumnName = "id") })
+    private List<Author> authors = new ArrayList<>();
 
-
-    //TODO: Bu ilişkiyi bir daha kontrol edeceğim, muhammed
-    @ManyToOne
-    @JoinTable(name = "book_member",
-            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "id")})
+    // TODO: Bu ilişkiyi bir daha kontrol edeceğim, muhammed
+    @OneToOne
+    @JoinTable(name = "book_member", joinColumns = {
+            @JoinColumn(name = "book_id", referencedColumnName = "id") }, inverseJoinColumns = {
+                    @JoinColumn(name = "member_id", referencedColumnName = "id") })
     private Member member;
-
 
 }
