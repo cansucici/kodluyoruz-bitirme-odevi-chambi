@@ -10,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.util.Collection;
 
 @Controller
@@ -34,6 +33,7 @@ public class BookController {
     @PostMapping("/saveBook")
     public String postCreateBook(@Validated BookDTO bookDTO) {
         bookService.save(bookDTO);
+
         return "redirect:/booklist";
     }
 
@@ -61,4 +61,3 @@ public class BookController {
         return bookService.getBooksByBookName(bookName);
     }
 }
-

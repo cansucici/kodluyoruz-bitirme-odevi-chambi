@@ -1,9 +1,8 @@
 package org.kodluyoruz.group1.library.model.entities;
 
-import lombok.*;
 
+import lombok.Data;
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -15,7 +14,7 @@ public class Role extends BaseEntity {
 
     private boolean deleted;
 
-    @ManyToMany(mappedBy = "roles") //ilişkinin sahibi
+    @ManyToMany(mappedBy = "roles") // ilişkinin sahibi
     private List<Member> members;
 
 }

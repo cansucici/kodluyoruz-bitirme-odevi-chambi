@@ -8,7 +8,6 @@ import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.IBookService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -28,15 +27,15 @@ public class BookService implements IBookService {
 
     @Override
     public Book save(BookDTO dto) {
-//        String bookName = dto.getBookName();
-//        if (bookName.isEmpty()) {
-//            throw new RuntimeException("Kitap ismi boş bırakılamaz.");
-//        }
+        // String bookName = dto.getBookName();
+        // if (bookName.isEmpty()) {
+        // throw new RuntimeException("Kitap ismi boş bırakılamaz.");
+        // }
 
         boolean isExist = bookRepository.existsBooksByIsbn(dto.getIsbn());
         if (isExist) {
-            throw new RuntimeException("Aynı barkod numarasına sahip kitap bulunmaktadır." +
-                    " Barkod numaranızı tekrar kontrol ediniz!");
+            throw new RuntimeException(
+                    "Aynı barkod numarasına sahip kitap bulunmaktadır." + " Barkod numaranızı tekrar kontrol ediniz!");
         }
 
         Book book = bookConverter.convertToEntity(dto);
@@ -65,15 +64,26 @@ public class BookService implements IBookService {
     @Override
     public BookDTO getBookById(Long id) {
 
-        Book book = bookRepository.findById(id).orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
         return bookConverter.convertToDto(book);
     }
 
-
     @Override
     public void deleteBook(Long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
+        if (book != null) {
+            try {
+                book.getAuthors().forEach(author -> {
+                    author.getBooks().remove(book);
+                    bookRepository.deleteBook(id);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-        bookRepository.deleteBook(id);
     }
 
     @Override

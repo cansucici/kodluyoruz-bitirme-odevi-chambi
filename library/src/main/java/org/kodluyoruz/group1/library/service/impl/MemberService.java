@@ -9,14 +9,11 @@ import org.kodluyoruz.group1.library.dto.MemberDTO;
 import org.kodluyoruz.group1.library.exceptions.AlreadyExistException;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.model.entities.Member;
-import org.kodluyoruz.group1.library.model.entities.Role;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 import org.kodluyoruz.group1.library.service.IMemberService;
 import org.kodluyoruz.group1.library.utils.SecurityUtil;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
 import java.util.Date;
@@ -81,7 +78,8 @@ public class MemberService implements IMemberService {
         if (prevMember == null) {
             throw new EntityNotFoundException("Kullanıcı bulunamadı!!");
         }
-        if (memberRepository.existsByUserNameAndDeleted(memberDTO.getUserName(), false) && !id.equals(prevMember.getId())) {
+        if (memberRepository.existsByUserNameAndDeleted(memberDTO.getUserName(), false)
+                && !id.equals(prevMember.getId())) {
             throw new Exception("Bu userName kullanılmakta Lütfen başka bir userName giriniz");
         }
         if (memberRepository.existsByEmail(memberDTO.getEmail()) && !id.equals(prevMember.getId())) {

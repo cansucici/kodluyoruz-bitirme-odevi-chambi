@@ -1,20 +1,13 @@
 package org.kodluyoruz.group1.library.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import org.kodluyoruz.group1.library.model.entities.Role;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class MemberDTO extends BaseDTO {
 
     private String firstName;
