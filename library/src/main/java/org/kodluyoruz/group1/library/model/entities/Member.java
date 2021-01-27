@@ -1,9 +1,6 @@
 package org.kodluyoruz.group1.library.model.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Type;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
@@ -14,10 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "member")
 public class Member extends BaseEntity {
@@ -54,7 +48,7 @@ public class Member extends BaseEntity {
     @Column(length = 7, nullable = false)
     private StatusEnum memberStatus;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name = "member_role", joinColumns = @JoinColumn(name = "member_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();

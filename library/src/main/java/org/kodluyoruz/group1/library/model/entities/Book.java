@@ -1,19 +1,13 @@
 package org.kodluyoruz.group1.library.model.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.kodluyoruz.group1.library.model.enums.LanguagesEnum;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "book")
 public class Book extends BaseEntity {

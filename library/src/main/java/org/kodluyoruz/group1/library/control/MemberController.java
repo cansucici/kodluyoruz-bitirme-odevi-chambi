@@ -24,7 +24,7 @@ public class MemberController {
     }
 
     @PostMapping("/new-record")
-    public Member create(@RequestBody @Valid MemberDTO memberDTO) throws Exception {
+    public Member create(@RequestBody @Valid MemberDTO memberDTO) {
         return memberService.create(memberDTO);
     }
 

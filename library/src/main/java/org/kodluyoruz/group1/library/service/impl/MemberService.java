@@ -6,8 +6,10 @@ import org.kodluyoruz.group1.library.converter.BookConverter;
 import org.kodluyoruz.group1.library.converter.MemberConverter;
 import org.kodluyoruz.group1.library.dao.MemberRepository;
 import org.kodluyoruz.group1.library.dto.MemberDTO;
+import org.kodluyoruz.group1.library.exceptions.AlreadyExistException;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.model.entities.Member;
+import org.kodluyoruz.group1.library.model.entities.Role;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 import org.kodluyoruz.group1.library.service.IMemberService;
 import org.kodluyoruz.group1.library.utils.SecurityUtil;
@@ -28,12 +30,7 @@ public class MemberService implements IMemberService {
     private final MemberConverter memberConverter;
     private final BookService bookService;
     private final BookConverter bookConverter;
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<Member> getAll() {
@@ -41,15 +38,14 @@ public class MemberService implements IMemberService {
     }
 
     @Override
-    public Member create(MemberDTO memberDTO) throws Exception {
-
+    public Member create(MemberDTO memberDTO)   {
         String encodedPassword = bCryptPasswordEncoder.encode(memberDTO.getPassword());
         memberDTO.setPassword(encodedPassword);
         if (memberRepository.existsByUserNameAndDeleted(memberDTO.getUserName(), false)) {
-            throw new RuntimeException("Bu username kullanılmakta!");
+            throw new AlreadyExistException("Bu username kullanılmakta!");
         }
         if (memberRepository.existsByEmail(memberDTO.getEmail())) {
-            throw new Exception("Bu email kullanılmakta, Lütfen başka bir email ile kayıt olunuz!!");
+            throw new AlreadyExistException("Bu email kullanılmakta, Lütfen başka bir email ile kayıt olunuz!!");
         }
 
         Member member = memberConverter.convertToEntity(memberDTO);

@@ -9,7 +9,7 @@ public interface IMemberService {
 
     List<Member> getAll();
 
-    Member create(MemberDTO memberDTO) throws Exception;
+    Member create(MemberDTO memberDTO) ;
 
     Member updatePassword(Long id, MemberDTO memberDTO);
 
