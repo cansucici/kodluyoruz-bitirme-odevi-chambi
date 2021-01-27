@@ -76,6 +76,17 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label for="authors">Yazar Seçiniz</label>
+                    <select class="form-control selectpicker" th:field="*{authors}" id="authors" multiple>
+
+                        <option th:each="author : ${T(org.kodluyoruz.group1.library.model.entities.Author).getNameSurname()}"
+                                th:value="${author}"
+                                th:text="${author}">Seçim Yapınız
+                        </option>
+
+                    </select>
+                </div>
 
                 <div class="form-group row">
                     <label class="col-sm-2" for="isbn">Barkod No(*)</label>

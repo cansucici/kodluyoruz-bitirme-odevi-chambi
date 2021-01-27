@@ -28,6 +28,6 @@ public class MemberDTO extends BaseDTO {
 
     private StatusEnum memberStatus;
 
-    private List<Role> roles = new ArrayList<>();
+    private List<String> roles = new ArrayList<>();
 
 }

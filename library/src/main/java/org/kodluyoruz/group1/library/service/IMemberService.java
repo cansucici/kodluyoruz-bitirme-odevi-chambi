@@ -12,15 +12,15 @@ public interface IMemberService {
 
     Member updatePassword(Long id, MemberDTO memberDTO);
 
-    Member update(Long id, MemberDTO memberDTO) throws Exception;
+    Member update(Long id, MemberDTO memberDTO);
 
-    Member getById(Long id) throws Exception;
+    Member getById(Long id);
 
-    Member delete(Long id) throws Exception;
+    Member delete(Long id);
 
-    Member updateMemberStatus(Long id, MemberDTO memberDTO) throws Exception;
+    Member updateMemberStatus(Long id, MemberDTO memberDTO);
 
-    Member takeBook(Long bookId) throws Exception;
+    Member takeBook(Long bookId);
 
     Member findByUserName(String userName);
 }
