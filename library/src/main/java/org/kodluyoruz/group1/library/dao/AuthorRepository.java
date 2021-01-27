@@ -14,7 +14,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     List<Author> findAllByDeletedIsFalse();
 
     @Query("select a from Author a where a.nameSurname like %:nameSurname% and a.deleted = false")
-    Collection<Author> findByNameSurname(String nameSurname);
+    Author findByNameSurname(String nameSurname);
 
     @Modifying
     @Transactional

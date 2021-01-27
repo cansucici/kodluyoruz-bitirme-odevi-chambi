@@ -46,7 +46,7 @@ public class AuthorService implements IAuthorService {
     }
 
     @Override
-    public Collection<Author> findByNameSurname(String nameSurname) {
+    public Author findByNameSurname(String nameSurname) {
 
         return authorRepository.findByNameSurname(nameSurname);
     }

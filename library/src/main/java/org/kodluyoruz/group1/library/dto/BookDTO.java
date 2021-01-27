@@ -28,7 +28,7 @@ public class BookDTO extends BaseDTO {
     @NotEmpty(message = "Kitap türü boş bırakılamaz.")
     private String category;
     private StatusEnum status;
-    private List<Author> authors;
+    private List<String> authors;
     private Member member;
 
 }

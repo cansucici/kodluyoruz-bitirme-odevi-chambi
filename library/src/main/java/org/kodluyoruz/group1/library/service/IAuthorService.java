@@ -10,7 +10,7 @@ public interface IAuthorService {
 
     Collection<Author> getAllActive();
 
-    Collection<Author> findByNameSurname(String nameSurname);
+    Author findByNameSurname(String nameSurname);
 
     void deleteById(Long id);
 

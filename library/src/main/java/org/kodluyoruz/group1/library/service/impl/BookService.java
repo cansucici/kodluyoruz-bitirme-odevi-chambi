@@ -2,12 +2,17 @@ package org.kodluyoruz.group1.library.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookConverter;
+import org.kodluyoruz.group1.library.dao.AuthorRepository;
 import org.kodluyoruz.group1.library.dao.BookRepository;
 import org.kodluyoruz.group1.library.dto.BookDTO;
+import org.kodluyoruz.group1.library.exceptions.AlreadyExistException;
+import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.IBookService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +23,7 @@ public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
     private final BookConverter bookConverter;
+    private final AuthorRepository authorRepository;
 
     @Override
     public Collection<Book> getAllBooks() {
@@ -26,19 +32,24 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Book save(BookDTO dto) {
+    public Book save(BookDTO bookDTO) {
         // String bookName = dto.getBookName();
         // if (bookName.isEmpty()) {
         // throw new RuntimeException("Kitap ismi boş bırakılamaz.");
         // }
 
-        boolean isExist = bookRepository.existsBooksByIsbn(dto.getIsbn());
+        boolean isExist = bookRepository.existsBooksByIsbn(bookDTO.getIsbn());
         if (isExist) {
-            throw new RuntimeException(
+            throw new AlreadyExistException(
                     "Aynı barkod numarasına sahip kitap bulunmaktadır." + " Barkod numaranızı tekrar kontrol ediniz!");
         }
 
-        Book book = bookConverter.convertToEntity(dto);
+        List<Author> authors = new ArrayList<>();
+        for (String author : bookDTO.getAuthors()) {
+            authors.add(authorRepository.findByNameSurname(author));
+        }
+
+        Book book = bookConverter.convert(bookDTO, authors);
         return bookRepository.save(book);
     }
 
