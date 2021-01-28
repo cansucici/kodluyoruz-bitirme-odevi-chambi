@@ -15,26 +15,35 @@
             <table class="table table-striped table-responsive">
                 <thead>
                     <tr>
-                        <th width="12%">Kitap Adı</th>
+                        <th width="10%">Kitap Adı</th>  
                         <th width="10%">Basımevi</th>
+                        <th width="12%">Yazar Adı Soyadı</th>
                         <th width="10%">Türü</th>
-                        <th width="12%">Sayfa Sayısı</th>
-                        <th width="15%">Baskı Sayısı </th>
+                        <th width="10%">Sayfa Sayısı</th>
+                        <th width="10%">Baskı Sayısı </th>
                         <th width="10%">Dil</th>
                         <th width="10%">Barkod No</th>
+                      
 
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr th:each="book : ${listbook}">
+                    <tr th:each="book, stat : ${listbook}" th:object="${book}">
                         <td th:text="${book.bookName}"></td>
                         <td th:text="${book.publisherName}"></td>
+                        <td>
+                            <span th:each="author, iterator1: ${book.authors}" th:remove="tag">
+                                <span th:utext="${iterator1.index+1+'. ' + author.nameSurname+' <br/>'}" />
+                           </span>
+                        </td>
                         <td th:text="${book.category}"></td>
                         <td th:text="${book.pageNumber}"></td>
                         <td th:text="${book.editionNumber}"></td>
                         <td th:text="${book.languagesEnum}"></td>
                         <td th:text="${book.isbn}"></td>
+                        
+
                         <td><a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-info" th:method="GET">
                                 <i class="fas fa-edit"></i> GÜNCELLE </a>
                             <form action="#" th:action="@{/delete/{id}(id = ${book.id})}" th:method="POST">
