@@ -73,11 +73,16 @@ public class BookService implements IBookService {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
         if (book != null) {
+            // ToDo: Aşağıdaki yorum içindeki işlemler database'de hiç bir etkisi olmuyor,
+            //  yani "book_author" tablosundan hiç bir kayıt silmiyor, nedenini bilemedim,
+            //  şimdilik kalsın zamanımız kalırsa bir daha bakarız,
+            //  foreach'in içine şunu da ekledim:
+            //  authorRepository.save(author)
+            //  yine olmadı.
+
             try {
-                book.getAuthors().forEach(author -> {
-                    author.getBooks().remove(book);
-                    bookRepository.deleteBook(id);
-                });
+                //book.getAuthors().forEach(author -> author.getBooks().remove(book));
+                bookRepository.deleteBook(id);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -87,10 +92,10 @@ public class BookService implements IBookService {
 
     /*
      * @Override public List<Book> getBooksByBookName(String bookName) {
-     * 
+     *
      * Collection<Book> books =
      * bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
-     * 
+     *
      * if (CollectionUtils.isEmpty(books)) { throw new
      * RuntimeException("Bu isimde kitap bulunmamaktadır."); } else { return
      * bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName); } }
