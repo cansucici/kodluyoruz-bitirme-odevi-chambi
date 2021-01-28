@@ -1,18 +1,11 @@
 package org.kodluyoruz.group1.library.model.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import lombok.Data;
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "role")
 public class Role extends BaseEntity {
@@ -21,7 +14,7 @@ public class Role extends BaseEntity {
 
     private boolean deleted;
 
-    @ManyToMany(mappedBy = "roles") //ilişkinin sahibi
+    @ManyToMany(mappedBy = "roles") // ilişkinin sahibi
     private List<Member> members;
 
 }

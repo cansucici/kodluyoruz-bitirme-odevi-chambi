@@ -1,19 +1,14 @@
 package org.kodluyoruz.group1.library.model.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import org.kodluyoruz.group1.library.model.enums.LanguagesEnum;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "book")
 public class Book extends BaseEntity {
@@ -33,6 +28,7 @@ public class Book extends BaseEntity {
     @Column(unique = true, length = 50)
     private Long isbn;
 
+    // TODO : dilleri Enum sınıfı olarak ekledim.
     @Enumerated(value = EnumType.STRING)
     @Column(length = 15)
     private LanguagesEnum languagesEnum = LanguagesEnum.TURKISH;
@@ -46,17 +42,12 @@ public class Book extends BaseEntity {
 
     @ManyToMany
     @JoinTable(name = "book_author",
-            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "id")})
-    private List<Author> authors;
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private List<Author> authors = new ArrayList<>();
 
-
-    //TODO: Bu ilişkiyi bir daha kontrol edeceğim, muhammed
     @ManyToOne
-    @JoinTable(name = "book_member",
-            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "id")})
+    @JoinColumn(name = "member_id")
     private Member member;
-
-
 }

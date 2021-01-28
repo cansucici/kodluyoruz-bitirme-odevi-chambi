@@ -1,6 +1,5 @@
 //package org.kodluyoruz.group1.library.converter;
 //
-//import org.kodluyoruz.group1.library.convert.LibraryAPIConverter;
 //import org.kodluyoruz.group1.library.dto.MemberDTO;
 //import org.kodluyoruz.group1.library.model.entities.Member;
 //import org.kodluyoruz.group1.library.model.entities.Role;
@@ -16,8 +15,8 @@
 //        Member member = new Member();
 //        member.setFirstName(memberDTO.getFirstName());
 //        member.setLastName(memberDTO.getLastName());
-//        member.setAdress(memberDTO.getAdress());
-//        member.setBirthDate(memberDTO.getBirthOfDate());
+//        member.setAdress(memberDTO.getAddress());
+//        member.setBirthDate(memberDTO.getBirthDate());
 //        member.setEmail(memberDTO.getEmail());
 //        member.setPassword(memberDTO.getPassword());
 //        member.setMemberStatus(memberDTO.getMemberStatus());

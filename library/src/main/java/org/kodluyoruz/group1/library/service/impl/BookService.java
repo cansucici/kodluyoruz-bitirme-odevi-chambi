@@ -2,8 +2,10 @@ package org.kodluyoruz.group1.library.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookConverter;
+import org.kodluyoruz.group1.library.dao.AuthorRepository;
 import org.kodluyoruz.group1.library.dao.BookRepository;
 import org.kodluyoruz.group1.library.dto.BookDTO;
+import org.kodluyoruz.group1.library.exceptions.AlreadyExistException;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.IBookService;
 import org.springframework.stereotype.Service;
@@ -19,22 +21,23 @@ public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
     private final BookConverter bookConverter;
+    private final AuthorRepository authorRepository;
 
     @Override
-    public Collection<Book> getAllBooks() {
-
+    public List<Book> getAllBooks() {
         return bookRepository.findBooksByDeletedIsFalse();
     }
 
     @Override
-    public Book save(BookDTO dto) {
+    public Book save(BookDTO bookDTO) {
 
-        if (bookRepository.existsBooksByIsbn(dto.getIsbn())){
-            throw new RuntimeException("Aynı barkod numarasına sahip kitap bulunmaktadır." +
-                    " Barkod numaranızı tekrar kontrol ediniz!");
+        boolean isExist = bookRepository.existsBooksByIsbn(bookDTO.getIsbn());
+        if (isExist) {
+            throw new AlreadyExistException("Aynı barkod numarasına sahip kitap bulunmaktadır. " +
+                    "Barkod numaranızı tekrar kontrol ediniz!");
         }
 
-        Book book = bookConverter.convertToEntity(dto);
+        Book book = bookConverter.convertToEntity(bookDTO);
         return bookRepository.save(book);
     }
 
@@ -60,15 +63,26 @@ public class BookService implements IBookService {
     @Override
     public BookDTO getBookById(Long id) {
 
-        Book book = bookRepository.findById(id).orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
         return bookConverter.convertToDto(book);
     }
 
-
     @Override
     public void deleteBook(Long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
+        if (book != null) {
+            try {
+                book.getAuthors().forEach(author -> {
+                    author.getBooks().remove(book);
+                    bookRepository.deleteBook(id);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-        bookRepository.deleteBook(id);
     }
 
     @Override

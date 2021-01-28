@@ -5,10 +5,11 @@ import org.kodluyoruz.group1.library.dto.AuthorDTO;
 import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import javax.validation.Valid;
 
 
 @Controller
@@ -32,18 +33,19 @@ public class AuthorController {
     }
 
     @PostMapping("/saveAuthor")
-    public String postCreateBook(@Validated AuthorDTO authorDTO) {
+    public String postCreateBook(@Valid AuthorDTO authorDTO) {
 
         authorService.save(authorDTO);
         return "redirect:/authorslist";
     }
 
     @GetMapping("/updateAuthor/{id}")
-    public String getUpdateAuthor(@PathVariable Long id, Model model) {
-
+    public ModelAndView getUpdateAuthor(@PathVariable Long id) {
         AuthorDTO authorDTO = (authorService.getAuthorById(id));
-        model.addAttribute("authorDTO", authorDTO);
-        return "update_author";
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("update_author");
+        modelAndView.addObject("authorDTO", authorDTO);
+        return modelAndView;
     }
 
     @PostMapping("/updateAuthor/{id}")
@@ -53,7 +55,7 @@ public class AuthorController {
         return "redirect:/authorslist";
     }
 
-    @PostMapping("/deleteAuthor/{id}")
+    @PostMapping("/delete-author/{id}")
     public String deleteAuthor(@PathVariable Long id) {
 
         authorService.deleteById(id);
