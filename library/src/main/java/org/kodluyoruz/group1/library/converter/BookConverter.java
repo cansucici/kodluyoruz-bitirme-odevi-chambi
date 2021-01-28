@@ -2,17 +2,12 @@ package org.kodluyoruz.group1.library.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.BookDTO;
-import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
-import org.modelmapper.config.Configuration;
 import org.springframework.stereotype.Component;
 
-import javax.print.attribute.standard.Destination;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
