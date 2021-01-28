@@ -15,15 +15,17 @@ public class BookConverter implements IBaseConverter<Book, BookDTO> {
 
     private final ModelMapper modelMapper;
     private final IAuthorService authorService;
+    TypeMap<Book, BookDTO> typeMap;
 
     @Override
     public BookDTO convertToDto(Book entity) {
 
-        TypeMap<Book, BookDTO> typeMap = modelMapper
-                .createTypeMap(Book.class, BookDTO.class);
+        if (typeMap == null) {
+            typeMap = modelMapper.createTypeMap(Book.class, BookDTO.class);
 
-        typeMap.addMappings(mapping -> mapping.using(new AuthorsListConverter())
-                .map(Book::getAuthors, BookDTO::setAuthors));
+            typeMap.addMappings(mapping -> mapping.using(new AuthorsListConverter())
+                    .map(Book::getAuthors, BookDTO::setAuthors));
+        }
 
         return modelMapper.map(entity, BookDTO.class);
     }

@@ -22,7 +22,7 @@ public class AuthorService implements IAuthorService {
     @Override
     public Author save(AuthorDTO dto) {
         
-        boolean isExist = authorRepository.findByNameSurname(dto.getNameSurname().toUpperCase());
+        boolean isExist = authorRepository.existsAuthorsByNameSurname(dto.getNameSurname());
         if (isExist) {
             throw new AlreadyExistException("Zaten böyle bir yazar var.");
         }
