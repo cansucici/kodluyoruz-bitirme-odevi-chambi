@@ -1,8 +1,10 @@
 package org.kodluyoruz.group1.library.model.entities;
 
-import lombok.*;
+import lombok.Data;
 import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,5 +19,5 @@ public class Author extends BaseEntity {
     private String about;
 
     @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
 }
