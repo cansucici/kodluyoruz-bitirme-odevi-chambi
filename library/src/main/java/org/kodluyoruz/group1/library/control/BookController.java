@@ -23,8 +23,6 @@ public class BookController {
 
     private final IBookService bookService;
     private final IAuthorService authorService;
-    private final BookConverter bookConverter;
-
 
     @GetMapping("/booklist")
     public String getBookList(Model model) {
