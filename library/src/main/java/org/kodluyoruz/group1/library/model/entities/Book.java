@@ -28,7 +28,6 @@ public class Book extends BaseEntity {
     @Column(unique = true, length = 50)
     private Long isbn;
 
-    // TODO : dilleri Enum sınıfı olarak ekledim.
     @Enumerated(value = EnumType.STRING)
     @Column(length = 15)
     private LanguagesEnum languagesEnum = LanguagesEnum.TURKISH;
