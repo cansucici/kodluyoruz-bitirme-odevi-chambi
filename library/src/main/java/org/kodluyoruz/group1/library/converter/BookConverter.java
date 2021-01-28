@@ -5,7 +5,9 @@ import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Component;
+
 
 @Component
 @RequiredArgsConstructor
@@ -13,9 +15,18 @@ public class BookConverter implements IBaseConverter<Book, BookDTO> {
 
     private final ModelMapper modelMapper;
     private final IAuthorService authorService;
+    TypeMap<Book, BookDTO> typeMap;
 
     @Override
     public BookDTO convertToDto(Book entity) {
+
+        if (typeMap == null) {
+            typeMap = modelMapper.createTypeMap(Book.class, BookDTO.class);
+
+            typeMap.addMappings(mapping -> mapping.using(new AuthorsListConverter())
+                    .map(Book::getAuthors, BookDTO::setAuthors));
+        }
+
         return modelMapper.map(entity, BookDTO.class);
     }
 
@@ -26,20 +37,4 @@ public class BookConverter implements IBaseConverter<Book, BookDTO> {
         return book;
     }
 
-//    public Book convert(BookDTO bookDTO, List<Author> authors) {
-//        Book book = new Book();
-//
-//        book.setDeleted(bookDTO.isDeleted());
-//        book.setPublisherName(bookDTO.getPublisherName());
-//        book.setCategory(bookDTO.getCategory());
-//        book.setLanguagesEnum(bookDTO.getLanguagesEnum());
-//        book.setEditionNumber(bookDTO.getEditionNumber());
-//        book.setPageNumber(bookDTO.getPageNumber());
-//        book.setIsbn(bookDTO.getIsbn());
-//        book.setBookName(bookDTO.getBookName());
-//        book.setStatus(bookDTO.getStatus());
-//        book.setAuthors(authors);
-//
-//        return book;
-//    }
 }
