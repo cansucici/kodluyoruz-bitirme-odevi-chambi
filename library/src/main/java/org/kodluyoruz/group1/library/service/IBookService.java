@@ -2,7 +2,6 @@ package org.kodluyoruz.group1.library.service;
 
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
-
 import java.util.List;
 
 public interface IBookService {
@@ -17,5 +16,10 @@ public interface IBookService {
 
     void deleteBook(Long id); // deleted
 
-    List<Book> getBooksByBookName(String bookName);
+  //  List<Book> getBooksByBookName(String );
+
+  List<Book> getSearchBooks(String searchWord);
+
+
+
 }
