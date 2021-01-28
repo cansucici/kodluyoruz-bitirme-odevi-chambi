@@ -33,8 +33,8 @@ public class BookService implements IBookService {
 
         boolean isExist = bookRepository.existsBooksByIsbn(bookDTO.getIsbn());
         if (isExist) {
-            throw new AlreadyExistException("Aynı barkod numarasına sahip kitap bulunmaktadır. " +
-                    "Barkod numaranızı tekrar kontrol ediniz!");
+            throw new AlreadyExistException(
+                    "Aynı barkod numarasına sahip kitap bulunmaktadır. " + "Barkod numaranızı tekrar kontrol ediniz!");
         }
 
         Book book = bookConverter.convertToEntity(bookDTO);
@@ -85,15 +85,21 @@ public class BookService implements IBookService {
 
     }
 
+    /*
+     * @Override public List<Book> getBooksByBookName(String bookName) {
+     * 
+     * Collection<Book> books =
+     * bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
+     * 
+     * if (CollectionUtils.isEmpty(books)) { throw new
+     * RuntimeException("Bu isimde kitap bulunmamaktadır."); } else { return
+     * bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName); } }
+     */
     @Override
-    public List<Book> getBooksByBookName(String bookName) {
+    public List<Book> getSearchBooks(String searchWord) {
+        List<Book> foundedBooks = bookRepository.findBooksByKeyword(searchWord);
+        return foundedBooks;
 
-        Collection<Book> books = bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
-
-        if (CollectionUtils.isEmpty(books)) {
-            throw new RuntimeException("Bu isimde kitap bulunmamaktadır.");
-        } else {
-            return bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
-        }
     }
+
 }

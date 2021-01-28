@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.AuthorConverter;
 import org.kodluyoruz.group1.library.dao.AuthorRepository;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
+import org.kodluyoruz.group1.library.exceptions.AlreadyExistException;
+import org.kodluyoruz.group1.library.exceptions.AuthorNotFoundException;
 import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,12 @@ public class AuthorService implements IAuthorService {
 
     @Override
     public Author save(AuthorDTO dto) {
+        
+        boolean isExist = authorRepository.findByNameSurname(dto.getNameSurname().toUpperCase());
+        if (isExist) {
+            throw new AlreadyExistException("Zaten böyle bir yazar var.");
+        }
+
         Author author = authorConverter.convertToEntity(dto);
         return authorRepository.save(author);
     }
@@ -31,13 +38,19 @@ public class AuthorService implements IAuthorService {
 
     @Override
     public void deleteById(Long id) {
-        authorRepository.deleteAuthor(id);
+        if(authorRepository.findById(id).isPresent()){
+              authorRepository.deleteAuthor(id);
+        }
+        else{
+            throw new AuthorNotFoundException("Böyle bir yazar yok.");
+        }
+      
     }
 
     @Override
     public Author update(Long id, AuthorDTO dto) {
 
-        Author author = authorRepository.findById(id).orElse(null);
+        Author author = authorRepository.findById(id).orElseThrow(() -> new AuthorNotFoundException("Böyle bir yazar yok."));
 
         author.setUpdateDate(new Date());
         author.setDeleted(dto.isDeleted());

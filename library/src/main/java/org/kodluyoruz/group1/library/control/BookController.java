@@ -69,9 +69,18 @@ public class BookController {
         return "redirect:/booklist";
     }
 
-
+/*
     @GetMapping("/books/{bookName}")
     public Collection<Book> showSearchResult(@PathVariable String bookName) {
         return bookService.getBooksByBookName(bookName);
     }
+*/
+    @PostMapping("/showSearchResult")
+	public String showSearchResult(@ModelAttribute("searchWord") String searchWord, Model model) {
+		List<Book> foundedBooks = bookService.getSearchBooks(searchWord);
+		model.addAttribute("foundedBooks", foundedBooks);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("foundedBooksSize", foundedBooks.size());
+		return "search_result";
+	}
 }
