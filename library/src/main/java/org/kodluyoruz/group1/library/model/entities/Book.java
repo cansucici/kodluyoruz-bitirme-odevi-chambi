@@ -29,14 +29,14 @@ public class Book extends BaseEntity {
     private Long isbn;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(length = 15)
+    @Column(length = 25)
     private LanguagesEnum languagesEnum = LanguagesEnum.TURKISH;
 
     @Column(length = 50)
     private String category;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(length = 7)
+    @Column(length = 10)
     private StatusEnum status = StatusEnum.ACTIVE;
 
     @ManyToMany
