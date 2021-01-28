@@ -9,6 +9,7 @@ import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class AuthorService implements IAuthorService {
     }
 
     @Override
-    public Collection<Author> getAllActive() {
+    public List<Author> getAllActive() {
         return authorRepository.findAllByDeletedIsFalse();
     }
 
@@ -46,9 +47,9 @@ public class AuthorService implements IAuthorService {
     }
 
     @Override
-    public Author findByNameSurname(String nameSurname) {
+    public List<Author> getAllByNameSurname(List<String> nameSurname) {
 
-        return authorRepository.findByNameSurname(nameSurname);
+        return authorRepository.findAllByNameSurname(nameSurname);
     }
 
     @Override

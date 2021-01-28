@@ -6,15 +6,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     List<Author> findAllByDeletedIsFalse();
 
-    @Query("select a from Author a where a.nameSurname like %:nameSurname% and a.deleted = false")
-    Author findByNameSurname(String nameSurname);
+    @Query("select a from Author a where a.nameSurname in (:nameSurname) and a.deleted = false")
+    List<Author> findAllByNameSurname(List<String> nameSurname);
 
     @Modifying
     @Transactional

@@ -2,12 +2,12 @@ package org.kodluyoruz.group1.library.service;
 
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
-import java.util.Collection;
+
 import java.util.List;
 
 public interface IBookService {
 
-    Collection<Book> getAllBooks();
+    List<Book> getAllBooks();
 
     Book save(BookDTO dto);
 

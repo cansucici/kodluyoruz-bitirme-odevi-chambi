@@ -3,6 +3,7 @@ package org.kodluyoruz.group1.library.model.entities;
 import lombok.Data;
 import org.kodluyoruz.group1.library.model.enums.LanguagesEnum;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,20 +40,14 @@ public class Book extends BaseEntity {
     @Column(length = 7)
     private StatusEnum status = StatusEnum.ACTIVE;
 
-    // TODO : bir kitabın birden çok yazarı olabilir ilişkisi
-
     @ManyToMany
-    @JoinTable(name = "book_author", joinColumns = {
-            @JoinColumn(name = "book_id", referencedColumnName = "id") }, inverseJoinColumns = {
-                    @JoinColumn(name = "author_id", referencedColumnName = "id") })
+    @JoinTable(name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
     private List<Author> authors = new ArrayList<>();
 
-    // TODO: Bu ilişkiyi bir daha kontrol edeceğim, muhammed
-    @OneToOne
-    @JoinTable(name = "book_member", joinColumns = {
-            @JoinColumn(name = "book_id", referencedColumnName = "id") }, inverseJoinColumns = {
-                    @JoinColumn(name = "member_id", referencedColumnName = "id") })
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
-
-
 }

@@ -54,5 +54,4 @@ public class Member extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "member")
     private List<Book> books = new ArrayList<>();
-
 }
