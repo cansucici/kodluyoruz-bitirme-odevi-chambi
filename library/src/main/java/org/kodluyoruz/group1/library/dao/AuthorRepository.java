@@ -20,4 +20,8 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query("update Author a set a.deleted=true where a.id=:id")
     void deleteAuthor(Long id);
 
+//	boolean findByNameSurname(String nameSurname);
+
+boolean existsAuthorsByNameSurname(String nameSurname);
+
 }

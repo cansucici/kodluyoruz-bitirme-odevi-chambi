@@ -18,8 +18,6 @@
         #buttonDesign {
             background-color: lightGray;
             border-radius: 10px;
-            padding-left: 8px;
-            padding-right: 8px;
             margin-left: 4px;
         }
 
@@ -51,39 +49,42 @@
 </head>
 
 <body>
-    <nav th:fragment="navigation" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/" style="padding-right: 10px; color: #17A1B7;">
+    <nav th:fragment="navigation" class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 20px;">
+        <a class="navbar-brand" href="/" style="padding-right: 1px; color: #17A1B7;">
             <h2>CHAMBI KÜTÜPHANESİ</h2>
         </a>
+        <ul class="nav">
 
-        <div class="headerList" id="headerList">
-            <ul class="navleft">
+            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/booklist"><i class="fas fa-book"></i>
+                    Kitap Listesi </a>
+            </li>
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/booklist"><i class="fas fa-book"></i>
-                        Kitap Listesi </a>
-                </li>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/authorslist"><i class="fas fa-pen"></i>
+                    Yazar Listesi
+                </a></li>
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/authorslist"><i
-                            class="fas fa-pen"></i> Yazar Listesi
-                    </a></li>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/saveBook"><i class="plus-circle"></i>
+                    Yeni Kitap Ekle </a>
+            </li>
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/saveBook"><i class="plus-circle"></i>
-                        Yeni Kitap Ekle </a>
-                </li>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/saveAuthor"><i class="user-edit"></i>Yeni
+                    Yazar Ekle</a>
+            </li>
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/saveAuthor"><i
-                            class="user-edit"></i>Yeni Yazar Ekle</a>
-                </li>
+            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/registration"><i
+                        class="sign-in-alt"></i>Kayıt</a>
+            </li>
+
+            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/login"><i class="fas fa-pen"></i>
+                    Giriş </a></li>
+        </ul>
+        <form class="form-inline " th:action="@{/showSearchResult}" method="POST">
+            <input class="form-inline" name="searchWord" id="searchWord" th:value="*{searchWord}"
+                style="margin-left: 10px;" type="text" placeholder="Kitap Adı" aria-label="Search" size="15px" required>
+            <button class="btn btn-outline-info" style="margin-left: 10px;" type="submit">Ara</button>
+        </form>
 
 
-                <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/registration"><i
-                            class="sign-in-alt"></i>Kayıt</a>
-                </li>
-
-                <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/login"><i class="fas fa-pen"></i>
-                        Giriş </a></li>
-            </ul>
-        </div>
     </nav>
     </div>
 
