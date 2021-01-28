@@ -2,10 +2,17 @@ package org.kodluyoruz.group1.library.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.BookDTO;
+import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
+import org.modelmapper.config.Configuration;
 import org.springframework.stereotype.Component;
+
+import javax.print.attribute.standard.Destination;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -16,6 +23,13 @@ public class BookConverter implements IBaseConverter<Book, BookDTO> {
 
     @Override
     public BookDTO convertToDto(Book entity) {
+
+        TypeMap<Book, BookDTO> typeMap = modelMapper
+                .createTypeMap(Book.class, BookDTO.class);
+
+        typeMap.addMappings(mapping -> mapping.using(new AuthorsListConverter())
+                .map(Book::getAuthors, BookDTO::setAuthors));
+
         return modelMapper.map(entity, BookDTO.class);
     }
 
@@ -26,20 +40,4 @@ public class BookConverter implements IBaseConverter<Book, BookDTO> {
         return book;
     }
 
-//    public Book convert(BookDTO bookDTO, List<Author> authors) {
-//        Book book = new Book();
-//
-//        book.setDeleted(bookDTO.isDeleted());
-//        book.setPublisherName(bookDTO.getPublisherName());
-//        book.setCategory(bookDTO.getCategory());
-//        book.setLanguagesEnum(bookDTO.getLanguagesEnum());
-//        book.setEditionNumber(bookDTO.getEditionNumber());
-//        book.setPageNumber(bookDTO.getPageNumber());
-//        book.setIsbn(bookDTO.getIsbn());
-//        book.setBookName(bookDTO.getBookName());
-//        book.setStatus(bookDTO.getStatus());
-//        book.setAuthors(authors);
-//
-//        return book;
-//    }
 }
