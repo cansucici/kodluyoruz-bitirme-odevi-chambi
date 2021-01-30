@@ -4,7 +4,9 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
 >
-  <head th:replace="fragments/header :: header"></head>
+  <head th:replace="fragments/header :: header">
+    <title>Yazar Listesi</title>
+</head>
 
   <body>
     <nav th:replace="fragments/header :: navigation"></nav>
@@ -52,7 +54,7 @@
                           type="submit"
                           id="deleteButton"
                         >
-                        <i class="fas fa-trash"></i>
+                          <i class="fas fa-trash"></i>
                           SİL
                         </button>
                       </form>
