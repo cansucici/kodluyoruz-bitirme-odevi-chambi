@@ -51,13 +51,15 @@ public class BookController {
 
     @GetMapping("/update/{id}")
     public String getUpdateBook(@PathVariable Long id, Model model) {
-        BookDTO bookDTO = (bookService.getBookById(id));
-        model.addAttribute("bookDTO", bookDTO);
+
+        model.addAttribute("bookDTO", bookService.getBookById(id));
+        model.addAttribute("authorsList", authorService.getAllActive());
         return "update_book";
     }
 
     @PostMapping("/update/{id}")
     public String postUpdateBook(@PathVariable Long id, BookDTO bookDTO) {
+
         bookService.update(id, bookDTO);
         return "redirect:/booklist";
     }
@@ -69,18 +71,18 @@ public class BookController {
         return "redirect:/booklist";
     }
 
-/*
-    @GetMapping("/books/{bookName}")
-    public Collection<Book> showSearchResult(@PathVariable String bookName) {
-        return bookService.getBooksByBookName(bookName);
-    }
-*/
+    /*
+        @GetMapping("/books/{bookName}")
+        public Collection<Book> showSearchResult(@PathVariable String bookName) {
+            return bookService.getBooksByBookName(bookName);
+        }
+    */
     @PostMapping("/showSearchResult")
-	public String showSearchResult(@ModelAttribute("searchWord") String searchWord, Model model) {
-		List<Book> foundedBooks = bookService.getSearchBooks(searchWord);
-		model.addAttribute("foundedBooks", foundedBooks);
-		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("foundedBooksSize", foundedBooks.size());
-		return "search_result";
-	}
+    public String showSearchResult(@ModelAttribute("searchWord") String searchWord, Model model) {
+        List<Book> foundedBooks = bookService.getSearchBooks(searchWord);
+        model.addAttribute("foundedBooks", foundedBooks);
+        model.addAttribute("searchWord", searchWord);
+        model.addAttribute("foundedBooksSize", foundedBooks.size());
+        return "search_result";
+    }
 }

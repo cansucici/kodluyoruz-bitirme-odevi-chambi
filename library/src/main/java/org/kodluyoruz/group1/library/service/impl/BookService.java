@@ -21,7 +21,7 @@ public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
     private final BookConverter bookConverter;
-    private final AuthorRepository authorRepository;
+    private final AuthorService authorService;
 
     @Override
     public List<Book> getAllBooks() {
@@ -56,6 +56,7 @@ public class BookService implements IBookService {
         book.setIsbn(dto.getIsbn());
         book.setBookName(dto.getBookName());
         book.setStatus(dto.getStatus());
+        book.setAuthors(authorService.getAllByNameSurname(dto.getAuthors()));
 
         return bookRepository.save(book);
     }
