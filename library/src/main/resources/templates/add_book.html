@@ -1,79 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: header"></head>
+<head th:replace="fragments/header :: header">
+    <title>Kitap Ekle</title>
+</head>
 
 <body>
 <nav th:replace="fragments/header :: navigation"></nav>
 <div class="container">
     <div>
         <nav class="navbar navbar-light bg-light mb-4">
-            <span class="navbar-brand mb-0 h1">Yeni Kitap Ekle</span>
+            <span class="navbar-brand mb-0 h1">
+                <h2>Yeni Kitap Ekle</h2>
+            </span>
         </nav>
-        <div id="errors" class="alert alert-danger" th:if="${(param.error != null) and (param.error[0] == 'true')}">
+        <div class="alert alert-danger" id="errors" th:if="${(param.error != null) and (param.error[0] == 'true')}">
             Lütfen Zorunlu Alanları Doldurunuz.
         </div>
 
-        <form action="#" th:action="@{/saveBook}" th:object="${bookDTO}" method="POST">
+        <form action="#" method="POST" th:action="@{/saveBook}" th:object="${bookDTO}">
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="bookname">Kitap Adı(*)</label>
                 <div class="col-sm-10">
-                    <input type="text" id="bookname" class="w-25 form-control" th:field="*{bookName}"
-                           th:required="required" placeholder="Kitap Adı">
+                    <input class="w-25 form-control" id="bookname" placeholder="Kitap Adı" th:field="*{bookName}"
+                           th:required="required" type="text">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="publisherName">Yayınevi(*)</label>
                 <div class="col-sm-10">
-                    <input type="text" id="publisherName" class="w-25 form-control" th:field="*{publisherName}"
-                           th:required="required">
+                    <input class="w-25 form-control" id="publisherName" th:field="*{publisherName}"
+                           th:required="required"
+                           type="text">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="category"> Türü(*) </label>
                 <div class="col-sm-10">
-                    <input type="text" id="category" class="w-25 form-control" th:field="*{category}"
-                           th:required="required">
+                    <input class="w-25 form-control" id="category" th:field="*{category}" th:required="required"
+                           type="text">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="pageNumber"> Sayfa Sayısı(*) </label>
                 <div class="col-sm-10">
-                    <input type="text" id="pageNumber" class="w-25 form-control" th:field="*{pageNumber}"
-                           th:required="required">
+                    <input class="w-25 form-control" id="pageNumber" th:field="*{pageNumber}" th:required="required"
+                           type="text">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="editionNumber">Baskı Sayısı(*)</label>
                 <div class="col-sm-10">
-                    <input type="text" id="editionNumber" class="w-25 form-control" th:field="*{editionNumber}"
-                           th:required="required">
+                    <input class="w-25 form-control" id="editionNumber" th:field="*{editionNumber}"
+                           th:required="required"
+                           type="text">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="languagesEnum">Dil(*)</label>
                 <div class="col-sm-10">
-                    <select class="w-25 form-control" name="languagesEnum" id="languagesEnum">
+                    <select class="w-25 form-control" id="languagesEnum" name="languagesEnum"
+                            th:field="*{languagesEnum}">
                         <option
                                 th:each="language : ${T(org.kodluyoruz.group1.library.model.enums.LanguagesEnum).values()}"
-                                th:value="${language}" th:text="${language.getValue()}"></option>
+                                th:text="${language.getValue()}" th:value="${language}"></option>
                     </select>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="statusEnum">Durumu(*)</label>
+                <label class="col-sm-2 col-form-label" for="status">Durumu(*)</label>
                 <div class="col-sm-10">
-                    <select class="w-25 form-control" name="statusEnum" id="statusEnum">
+                    <select class="w-25 form-control" id="status" name="status" th:field="*{status}">
                         <option
                                 th:each="status : ${T(org.kodluyoruz.group1.library.model.enums.StatusEnum).values()}"
-                                th:value="${status}" th:text="${status.getValue()}"></option>
+                                th:text="${status.getValue()}" th:value="${status}"></option>
                     </select>
                 </div>
             </div>
@@ -82,11 +89,10 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="authors">Yazar Seçiniz</label>
                 <div class="col-sm-10">
-                    <select class="w-25 form-control" name="authors" id="authors" multiple>
-                        <option th:object="${authorsList}"
-                                th:each="author : ${authorsList}"
-                                th:value="${author.getNameSurname()}"
-                                th:text="${author.getNameSurname()}">
+                    <select class="w-25 form-control" id="authors" multiple name="authors" th:field="*{authors}">
+                        <option th:each="author : ${authorsList}"
+                                th:text="${author.getNameSurname()}"
+                                th:value="${author.getNameSurname()}">
                         </option>
                     </select>
                 </div>
@@ -96,20 +102,20 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="isbn">Barkod No(*)</label>
                 <div class="col-sm-10">
-                    <input type="text" id="isbn" class="w-25 form-control" th:field="*{isbn}" th:required="required">
+                    <input class="w-25 form-control" id="isbn" th:field="*{isbn}" th:required="required" type="text">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">(*) Zorunlu Alan</label><br>
                 <div class="col-sm-2">
-                    <button type="submit" id="button" class="btn btn-primary">KAYDET</button>
+                    <button class="btn btn-primary" id="button" type="submit">KAYDET</button>
                 </div>
             </div>
+
         </form>
     </div>
 </div>
 <div style="width:100%; height:100px;"></div>
 </body>
-
 </html>
