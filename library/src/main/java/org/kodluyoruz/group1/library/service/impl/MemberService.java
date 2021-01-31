@@ -1,6 +1,5 @@
 package org.kodluyoruz.group1.library.service.impl;
 
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookConverter;
 import org.kodluyoruz.group1.library.converter.MemberConverter;
