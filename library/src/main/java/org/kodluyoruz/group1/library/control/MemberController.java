@@ -39,25 +39,30 @@ public class MemberController {
     }
 
 
-    @GetMapping("/member/update/{id}")
-    public String getupdateMember(@PathVariable Long id, Model model) {
-        model.addAttribute("memberDTO", memberService.getById(id));
+    @GetMapping("/member/update/{userName}")
+    public String getupdateMember(@PathVariable String userName, Model model) {
+        model.addAttribute("memberDTO", memberService.findByUserName(userName));
 
         return "update_member";
     }
 
-    @PostMapping("/member/update/{id}")
-    public String postUpdateMember(@PathVariable Long id, MemberDTO memberDTO){
-        memberService.update(id,memberDTO);
+    @PostMapping("/member/update/{userName}")
+    public String postUpdateMember(@PathVariable String userName, MemberDTO memberDTO){
+        memberService.update(userName,memberDTO);
         return "redirect:/update_member";
     }
 
 
+    @GetMapping("/new-password")
+    public String getUpdatePassword( Model model) {
+        model.addAttribute("memberDTO", new MemberDTO());
+        return "update_password";
+    }
 
-    @PutMapping("/new-password/{id}")
-    ResponseEntity<Member> password(@RequestBody @Valid MemberDTO memberDTO, @PathVariable Long id) {
-        Member m = memberService.updatePassword(id, memberDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(m);
+    @PostMapping("/new-password")
+    public String postUpdatePassword( MemberDTO memberDTO) {
+        Member m = memberService.updatePassword(memberDTO);
+        return "redirect:/login";
     }
 
     @GetMapping("/member/{id}")

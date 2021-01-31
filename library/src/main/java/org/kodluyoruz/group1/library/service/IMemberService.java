@@ -10,9 +10,9 @@ public interface IMemberService {
 
     Member create(MemberDTO memberDTO) ;
 
-    Member updatePassword(Long id, MemberDTO memberDTO);
+    Member updatePassword(MemberDTO memberDTO);
 
-    Member update(Long id, MemberDTO memberDTO);
+    Member update(String userName, MemberDTO memberDTO);
 
     Member getById(Long id);
 

@@ -57,8 +57,8 @@ public class MemberService implements IMemberService {
     }
 
     @Override
-    public Member updatePassword(Long id, MemberDTO memberDTO) {
-        Member prevMember = memberRepository.findById(id).orElseThrow(null);
+    public Member updatePassword(MemberDTO memberDTO) {
+        Member prevMember = memberRepository.findByUserName(memberDTO.getUserName()).orElseThrow(null);
         if (prevMember == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!");
         }
@@ -91,28 +91,25 @@ public class MemberService implements IMemberService {
         return member;
     }
 
-    public Member update(Long id, MemberDTO memberDTO) {
+    public Member update(String userName, MemberDTO memberDTO) {
 
-        Member prevMember = memberRepository.findById(id).orElse(null);
+        Member prevMember = memberRepository.findByUserName(userName).orElse(null);
         if (prevMember == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!!");
         }
         if (memberRepository.existsByUserNameAndDeleted(memberDTO.getUserName(), false)
-                && !id.equals(prevMember.getId())) {
+                && !userName.equals(prevMember.getUserName())) {
             throw new AlreadyExistException("Bu userName kullanılmakta Lütfen başka bir userName giriniz");
         }
-        if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(),false) && !id.equals(prevMember.getId())) {
+        if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(),false) && !userName.equals(prevMember.getUserName())) {
             throw new AlreadyExistException("Bu email zaten var!");
         }
 
         prevMember.setEmail(memberDTO.getEmail());
-        prevMember.setUserName(memberDTO.getUserName());
         prevMember.setPhoneNumber(memberDTO.getPhoneNumber());
-        prevMember.setMemberStatus(memberDTO.getMemberStatus());
         prevMember.setAdress(memberDTO.getAddress());
         prevMember.setFirstName(memberDTO.getFirstName());
         prevMember.setLastName(memberDTO.getLastName());
-        prevMember.setDeleted(memberDTO.isDeleted());
 
         return memberRepository.save(prevMember);
     }
