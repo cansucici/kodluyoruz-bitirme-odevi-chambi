@@ -18,7 +18,7 @@ public interface IMemberService {
 
     Member delete(Long id);
 
-    Member updateMemberStatus(Long id, MemberDTO memberDTO);
+    Member updateMemberStatus(Long id);
 
     Member takeBook(Long bookId);
 
