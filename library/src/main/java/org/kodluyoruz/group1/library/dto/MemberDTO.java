@@ -24,8 +24,6 @@ public class MemberDTO extends BaseDTO {
 
     private String address;
 
-    private Date birthDate;
-
     private StatusEnum memberStatus;
 
     private List<String> roles = new ArrayList<>();
