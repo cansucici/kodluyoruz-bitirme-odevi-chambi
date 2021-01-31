@@ -107,7 +107,7 @@ public class MemberService implements IMemberService {
 
         prevMember.setEmail(memberDTO.getEmail());
         prevMember.setPhoneNumber(memberDTO.getPhoneNumber());
-        prevMember.setAdress(memberDTO.getAddress());
+        prevMember.setAdress(memberDTO.getAdress());
         prevMember.setFirstName(memberDTO.getFirstName());
         prevMember.setLastName(memberDTO.getLastName());
 

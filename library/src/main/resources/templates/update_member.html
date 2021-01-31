@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 
 <head th:replace="fragments/header :: header">
     <title>ÜYE GÜNCELLE</title>
@@ -16,8 +16,8 @@
             </span>
         </nav>
 
-        <form action="#" th:action="@{/member/update/{userName}" th:method="POST" th:object="${memberDTO}">
-
+        <form action="#" th:action="@{/member/update/{userName}(userName = ${memberDTO.getUserName()})}"
+              th:method="POST" th:object="${memberDTO}">
 
 
             <div class="form-group row">
