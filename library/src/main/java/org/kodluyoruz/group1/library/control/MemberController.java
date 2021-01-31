@@ -49,7 +49,7 @@ public class MemberController {
     @PostMapping("/member/update/{userName}")
     public String postUpdateMember(@PathVariable String userName, MemberDTO memberDTO){
         memberService.update(userName,memberDTO);
-        return "redirect:/update_member";
+        return "redirect:/";
     }
 
 
