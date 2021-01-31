@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -18,6 +19,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     private final UserDetailsService userDetailsService;
+
+    private AccessDeniedHandler accessDeniedHandler;
+
 
 
     @Override
@@ -28,14 +32,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasRole("USER")
-                .antMatchers("/").permitAll()
-                .antMatchers("/newrecord").permitAll()
-                .antMatchers("/authors").permitAll()
-                .and().formLogin();
+                .antMatchers("/","/newrecord","/authorslist","/booklist","/showSearchResult")
+                .permitAll()
+                .antMatchers("/member","/member/delete/","/member-status/","/memberlist").hasRole("ADMIN")
+                .antMatchers("/member/update/","/new-password/","/take-book/").hasRole("USER")
+                .antMatchers("/saveAuthor","/updateAuthor/","/deleteAuthor/").hasRole("ADMIN")
+                .antMatchers("/saveBook","/update/","/delete/").hasRole("ADMIN")
+                .and().formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

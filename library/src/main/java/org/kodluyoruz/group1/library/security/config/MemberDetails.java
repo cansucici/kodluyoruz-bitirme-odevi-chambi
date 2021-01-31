@@ -29,7 +29,6 @@ public class MemberDetails implements UserDetails {
         this.password = member.getPassword();
         this.phoneNumber = member.getPhoneNumber();
         this.adress = member.getAdress();
-        this.birthDate = member.getBirthDate();
         this.createDate = member.getCreateDate();
         this.updateDate = member.getUpdateDate();
         this.memberStatus = member.getMemberStatus();

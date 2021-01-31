@@ -22,4 +22,9 @@ public class HomeResourceController {
     public String admin() {
         return ("Welcome Admin ");
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "/login";
+    }
 }

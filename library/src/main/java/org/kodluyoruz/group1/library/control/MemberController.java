@@ -7,6 +7,7 @@ import org.kodluyoruz.group1.library.service.IMemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,20 +19,40 @@ public class MemberController {
 
     private final IMemberService memberService;
 
-    @GetMapping("/member")
-    public List<Member> getAll() {
-        return memberService.getAll();
+    @GetMapping("/memberlist")
+    public String  getAll(Model model) {
+        List<Member> memberList = memberService.getAll();
+        model.addAttribute("listmember", memberList);
+        return "member_list";
+    }
+
+    @GetMapping("/new-record")
+    public String getCreateMember(Model model) {
+        model.addAttribute("memberDTO", new MemberDTO());
+        return "register";
     }
 
     @PostMapping("/new-record")
-    public Member create(@RequestBody @Valid MemberDTO memberDTO) {
-        return memberService.create(memberDTO);
+    public String postCreateMember(@ModelAttribute("memberDTO")  MemberDTO memberDTO){
+        memberService.create(memberDTO);
+        return "redirect:/login";
     }
 
-    @PutMapping
-    public Member update(Long id, @RequestBody @Valid MemberDTO memberDTO) {
-        return memberService.update(id, memberDTO);
+
+    @GetMapping("/member/update/{id}")
+    public String getupdateMember(@PathVariable Long id, Model model) {
+        model.addAttribute("memberDTO", memberService.getById(id));
+
+        return "update_member";
     }
+
+    @PostMapping("/member/update/{id}")
+    public String postUpdateMember(@PathVariable Long id, MemberDTO memberDTO){
+        memberService.update(id,memberDTO);
+        return "redirect:/update_member";
+    }
+
+
 
     @PutMapping("/new-password/{id}")
     ResponseEntity<Member> password(@RequestBody @Valid MemberDTO memberDTO, @PathVariable Long id) {
@@ -39,24 +60,27 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.OK).body(m);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/member/{id}")
     public Member getById(@PathVariable Long id)  {
         return memberService.getById(id);
     }
 
-    @PutMapping("/delete/{id}")
-    public Member delete(@PathVariable Long id)  {
-        return memberService.delete(id);
+    @PostMapping("/member/delete/{id}")
+    public String deleteMember(@PathVariable Long id)  {
+        memberService.delete(id);
+        return "redirect:/memberlist";
     }
 
-    @PutMapping("/member-status/{id}")
-    public Member updateMemberStatus(@PathVariable Long id, @RequestBody @Valid MemberDTO memberDTO)  {
-        return memberService.updateMemberStatus(id, memberDTO);
+    @PostMapping("/member-status/{id}")
+    public String updateMemberStatus(@PathVariable Long id)  {
+        memberService.updateMemberStatus(id);
+        return "redirect:/memberlist";
     }
 
-    @PutMapping("/take-book/{id}")
-    public Member takeBook(@PathVariable Long id)  {
-        return memberService.takeBook(id);
+    @PostMapping("/take-book/{id}")
+    public String takeBook(@PathVariable Long id)  {
+         memberService.takeBook(id);
+         return "redirect:/booklist";
     }
 
 }

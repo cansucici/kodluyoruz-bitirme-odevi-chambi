@@ -1,6 +1,5 @@
 package org.kodluyoruz.group1.library.service.impl;
 
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookConverter;
 import org.kodluyoruz.group1.library.converter.MemberConverter;
@@ -34,7 +33,7 @@ public class MemberService implements IMemberService {
 
     @Override
     public List<Member> getAll() {
-        return memberRepository.findAll();
+        return memberRepository.findAllByDeletedIsFalse();
     }
 
     @Override
@@ -48,7 +47,7 @@ public class MemberService implements IMemberService {
         if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(), false)) {
             throw new AlreadyExistException("Bu email kullanılmakta, Lütfen başka bir email ile kayıt olunuz!!");
         }
-
+        memberDTO.setMemberStatus(StatusEnum.ACTIVE);
         List<Role> roles = new ArrayList<>();
         for (String role : memberDTO.getRoles()) {
             roles.add(roleRepository.findByRoleName(role));
@@ -70,7 +69,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
-    public Member updateMemberStatus(Long id, MemberDTO memberDTO) {
+    public Member updateMemberStatus(Long id) {
         Member prevMember = memberRepository.findById(id).orElse(null);
         if (prevMember == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!!");
@@ -78,6 +77,18 @@ public class MemberService implements IMemberService {
         prevMember.setMemberStatus(StatusEnum.PASSIVE);
         memberRepository.save(prevMember);
         return prevMember;
+    }
+
+    @Override
+    public Member delete(Long id)  {
+
+        Member member = memberRepository.findById(id).orElse(null);
+        if (member == null) {
+            throw new MemberNotFoundException("Kullanıcı bulunamadı!");
+        }
+        member.setDeleted(true);
+        memberRepository.save(member);
+        return member;
     }
 
     public Member update(Long id, MemberDTO memberDTO) {
@@ -96,9 +107,7 @@ public class MemberService implements IMemberService {
 
         prevMember.setEmail(memberDTO.getEmail());
         prevMember.setUserName(memberDTO.getUserName());
-        prevMember.setPassword(memberDTO.getPassword());
         prevMember.setPhoneNumber(memberDTO.getPhoneNumber());
-        prevMember.setBirthDate(memberDTO.getBirthDate());
         prevMember.setMemberStatus(memberDTO.getMemberStatus());
         prevMember.setAdress(memberDTO.getAddress());
         prevMember.setFirstName(memberDTO.getFirstName());
@@ -118,16 +127,6 @@ public class MemberService implements IMemberService {
         return member;
     }
 
-    @Override
-    public Member delete(Long id)  {
-
-        Member member = memberRepository.findById(id).orElse(null);
-        if (member == null) {
-            throw new MemberNotFoundException("Kullanıcı bulunamadı!");
-        }
-        member.setDeleted(true);
-        return member;
-    }
 
     @Override
     public Member takeBook(Long bookId) {
