@@ -38,7 +38,7 @@
         }
 
         body {
-            background-image: url(templates/images/arkaplan.jpg);
+            background-image: url("templates/arkaplan_kucuk.jpg");
             background-size: cover;
             width: 100%;
             height: 100%;
@@ -48,6 +48,7 @@
 
         }
     </style>
+    <title></title>
 </head>
 
 <body>
@@ -57,52 +58,50 @@
     </a>
     <ul class="nav">
 
-        <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/booklist"><i class="fas fa-book"></i>
+        <li class="nav-item" id="booklist"><a class="nav-link" href="/booklist"><i class="fas fa-book"></i>
             Kitap Listesi </a>
         </li>
 
-        <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/authorslist"><i class="fas fa-pen"></i>
+        <li class="nav-item" id="authorslist"><a class="nav-link" href="/authorslist"><i class="fas fa-pen"></i>
             Yazar Listesi
         </a></li>
 
-        <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/saveBook"><i class="plus-circle"></i>
+        <li class="nav-item" id="saveBook"><a class="nav-link" href="/saveBook"><i class="plus-circle"></i>
             Yeni Kitap Ekle </a>
         </li>
 
-        <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/saveAuthor"><i class="user-edit"></i>Yeni
+        <li class="nav-item" id="saveAuthor"><a class="nav-link" href="/saveAuthor"><i class="user-edit"></i>Yeni
             Yazar Ekle</a>
         </li>
 
-        <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/new-record    "><i
+        <li class="nav-item" id="new-record"><a class="nav-link" href="/new-record    "><i
                 class="sign-in-alt"></i>Kayıt</a>
         </li>
 
-        <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/login"><i class="fas fa-pen"></i>
+        <li class="nav-item" id="login"><a class="nav-link" href="/login"><i class="fas fa-pen"></i>
             Giriş </a></li>
 
-        <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/memberlist"><i class="fas fa-book"></i>
-            Üye Listesi </a>
+        <li class="nav-item" id="memberlist">
+            <a class="nav-link" href="/memberlist">
+                <i class="fas fa-book"></i>
+                Üye Listesi
+            </a>
         </li>
-        <!--        @{/update/{id}(id=${book.id})}-->
-        <!--        /member/update/${#authentication.getDetails()}-->
         <li class="nav-item" id="buttonDesign">
             <a class="nav-link" th:href="@{/member/update/{userNamee}(userNamee=${#request.userPrincipal.getName()})}">
                 <i class="fas fa-edit"></i>
                 Bilgilerimi Güncelle
             </a>
         </li>
-
-
     </ul>
     <form class="form-inline " th:action="@{/showSearchResult}" method="POST">
-        <input class="form-inline" name="searchWord" id="searchWord" th:value="*{searchWord}"
+        <input class="form-inline" name="searchWord" id="searchWord"
                style="margin-left: 10px;" type="text" placeholder="Kitap Adı" aria-label="Search" size="15px" required>
         <button class="btn btn-outline-info" style="margin-left: 10px;" type="submit">Ara</button>
     </form>
 
 
 </nav>
-</div>
 
 </body>
 
