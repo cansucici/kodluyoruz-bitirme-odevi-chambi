@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.MemberDTO;
 import org.kodluyoruz.group1.library.model.entities.Member;
 import org.kodluyoruz.group1.library.service.IMemberService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller

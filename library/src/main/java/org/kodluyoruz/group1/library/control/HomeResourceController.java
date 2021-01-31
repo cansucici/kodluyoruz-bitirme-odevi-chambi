@@ -1,15 +1,20 @@
 package org.kodluyoruz.group1.library.control;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import lombok.RequiredArgsConstructor;
+
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
 public class HomeResourceController {
 
     @GetMapping("/")
-    public String home() {
+    public String home(final Principal principal) {
+        if (principal == null) {
+            return "/login";
+        }
         return "fragments/header";
     }
 
