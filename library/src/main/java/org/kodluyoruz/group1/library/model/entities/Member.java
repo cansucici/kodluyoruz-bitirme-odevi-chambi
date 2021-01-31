@@ -32,7 +32,7 @@ public class Member extends BaseEntity {
     @Column(length = 6, nullable = false)
     private String password;
 
-    @Column(unique = true, length = 100, nullable = false)
+    @Column(length = 100, nullable = false)
     private String phoneNumber;
 
     @Type(type = "text")
