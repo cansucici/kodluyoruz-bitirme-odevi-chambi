@@ -30,7 +30,7 @@ public class MemberConverter implements IBaseConverter<Member, MemberDTO> {
         Member member = new Member();
         member.setFirstName(memberDTO.getFirstName());
         member.setLastName(memberDTO.getLastName());
-        member.setAdress(memberDTO.getAddress());
+        member.setAdress(memberDTO.getAdress());
         member.setEmail(memberDTO.getEmail());
         member.setPassword(memberDTO.getPassword());
         member.setMemberStatus(memberDTO.getMemberStatus());
