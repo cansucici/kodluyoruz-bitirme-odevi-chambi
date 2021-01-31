@@ -17,7 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    private final AccessDeniedHandler accessDeniedHandler;
+ //   private final AccessDeniedHandler accessDeniedHandler;
 
 
 
