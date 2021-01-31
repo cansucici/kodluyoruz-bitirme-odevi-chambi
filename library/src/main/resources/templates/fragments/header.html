@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="header">
     <meta charset="UTF-8">
@@ -71,12 +72,16 @@
                     Yazar Ekle</a>
             </li>
 
-            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/registration"><i
+            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/new-record    "><i
                         class="sign-in-alt"></i>Kayıt</a>
             </li>
 
             <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/login"><i class="fas fa-pen"></i>
                     Giriş </a></li>
+
+            <li class="nav-item" id="buttonDesign"><a class="nav-link" href="/memberlist"><i class="fas fa-book"></i>
+                Üye Listesi </a>
+            </li>
         </ul>
         <form class="form-inline " th:action="@{/showSearchResult}" method="POST">
             <input class="form-inline" name="searchWord" id="searchWord" th:value="*{searchWord}"
