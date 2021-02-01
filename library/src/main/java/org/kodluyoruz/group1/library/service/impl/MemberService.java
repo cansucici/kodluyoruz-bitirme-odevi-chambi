@@ -16,6 +16,7 @@ import org.kodluyoruz.group1.library.service.IMemberService;
 import org.kodluyoruz.group1.library.utils.SecurityUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +38,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
-    public Member create(MemberDTO memberDTO)   {
+    public Member create(MemberDTO memberDTO) {
         String encodedPassword = bCryptPasswordEncoder.encode(memberDTO.getPassword());
         memberDTO.setPassword(encodedPassword);
 
@@ -52,7 +53,7 @@ public class MemberService implements IMemberService {
         for (String role : memberDTO.getRoles()) {
             roles.add(roleRepository.findByRoleName(role));
         }
-        Member member= memberConverter.convert(memberDTO, roles);
+        Member member = memberConverter.convert(memberDTO, roles);
         return memberRepository.save(member);
     }
 
@@ -74,13 +75,17 @@ public class MemberService implements IMemberService {
         if (prevMember == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!!");
         }
-        prevMember.setMemberStatus(StatusEnum.PASSIVE);
+        if (prevMember.getMemberStatus() == StatusEnum.ACTIVE) {
+            prevMember.setMemberStatus(StatusEnum.PASSIVE);
+        } else {
+            prevMember.setMemberStatus(StatusEnum.ACTIVE);
+        }
         memberRepository.save(prevMember);
         return prevMember;
     }
 
     @Override
-    public Member delete(Long id)  {
+    public Member delete(Long id) {
 
         Member member = memberRepository.findById(id).orElse(null);
         if (member == null) {
@@ -101,7 +106,7 @@ public class MemberService implements IMemberService {
                 && !userName.equals(prevMember.getUserName())) {
             throw new AlreadyExistException("Bu userName kullanılmakta Lütfen başka bir userName giriniz");
         }
-        if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(),false) && !userName.equals(prevMember.getUserName())) {
+        if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(), false) && !userName.equals(prevMember.getUserName())) {
             throw new AlreadyExistException("Bu email zaten var!");
         }
 

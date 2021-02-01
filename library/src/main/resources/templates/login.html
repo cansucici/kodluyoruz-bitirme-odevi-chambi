@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-    <title> CHAMBI  LIBRARY </title>
+    <title> CHAMBI LIBRARY </title>
     <head th:replace="fragments/header :: header"></head>
 </head>
 <body>
@@ -46,24 +45,18 @@
                         </div>
                     </div>
 
-
                 </fieldset>
-<!--            </form>-->
-<!--            <form th:action="@{}" method="get">-->
-<!--            <div class="row">-->
-<!--                <div class="col-xs-6 col-sm-6 col-md-6">-->
-<!--                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="ŞİFREMİ UNUTTUM"/>-->
-<!--                </div>-->
-<!--                <div class="col-xs-6 col-sm-6 col-md-6">-->
-<!--                </div>-->
-<!--            </div>-->
             </form>
 
             <a class="btn btn-info"
-               th:href="@{/new-password}"
-               th:method="GET">
+               th:href="@{/new-password}" th:method="GET">
                 <i class="fas fa-edit"></i>
                 Şifremi Unuttum
+            </a>
+
+            <a class="btn btn-info" th:href="@{/new-record}" th:method="GET">
+                <i class="sign-in-alt"></i>
+                Yeni Kayıt
             </a>
         </div>
     </div>

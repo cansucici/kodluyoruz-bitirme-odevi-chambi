@@ -6,9 +6,7 @@ import org.hibernate.annotations.Type;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -29,7 +27,7 @@ public class Member extends BaseEntity {
     @Email(message = "Lütfen email adresinizi doğru giriniz.")
     private String email;
 
-    @Column(length = 6, nullable = false)
+    @Column(length = 100, nullable = false)
     private String password;
 
     @Column(length = 100, nullable = false)
