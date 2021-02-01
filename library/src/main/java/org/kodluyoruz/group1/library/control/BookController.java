@@ -1,7 +1,6 @@
 package org.kodluyoruz.group1.library.control;
 
 import lombok.RequiredArgsConstructor;
-import org.kodluyoruz.group1.library.converter.BookConverter;
 import org.kodluyoruz.group1.library.dto.BookDTO;
 import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.service.IAuthorService;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.Collection;
 import java.util.List;
 
 @Controller

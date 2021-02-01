@@ -129,7 +129,6 @@ public class MemberService implements IMemberService {
         return member;
     }
 
-
     @Override
     public Member takeBook(Long bookId) {
         Member currentUser = SecurityUtil.getCurrentUser();
