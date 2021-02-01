@@ -29,15 +29,15 @@ public class Book extends BaseEntity {
     private Long isbn;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(length = 15)
-    private LanguagesEnum languagesEnum = LanguagesEnum.TURKISH;
+    @Column(length = 25)
+    private LanguagesEnum languagesEnum;
 
     @Column(length = 50)
     private String category;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(length = 7)
-    private StatusEnum status = StatusEnum.ACTIVE;
+    @Column(length = 10)
+    private StatusEnum status;
 
     @ManyToMany
     @JoinTable(name = "book_author",

@@ -3,7 +3,7 @@ package org.kodluyoruz.group1.library.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.BAD_REQUEST)
+@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 public class AlreadyExistException extends RuntimeException {
     public AlreadyExistException() {
     }

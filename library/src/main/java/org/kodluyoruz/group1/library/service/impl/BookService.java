@@ -21,7 +21,7 @@ public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
     private final BookConverter bookConverter;
-    private final AuthorRepository authorRepository;
+    private final AuthorService authorService;
 
     @Override
     public List<Book> getAllBooks() {
@@ -33,8 +33,8 @@ public class BookService implements IBookService {
 
         boolean isExist = bookRepository.existsBooksByIsbn(bookDTO.getIsbn());
         if (isExist) {
-            throw new AlreadyExistException("Aynı barkod numarasına sahip kitap bulunmaktadır. " +
-                    "Barkod numaranızı tekrar kontrol ediniz!");
+            throw new AlreadyExistException(
+                    "Aynı barkod numarasına sahip kitap bulunmaktadır. " + "Barkod numaranızı tekrar kontrol ediniz!");
         }
 
         Book book = bookConverter.convertToEntity(bookDTO);
@@ -56,6 +56,7 @@ public class BookService implements IBookService {
         book.setIsbn(dto.getIsbn());
         book.setBookName(dto.getBookName());
         book.setStatus(dto.getStatus());
+        book.setAuthors(authorService.getAllByNameSurname(dto.getAuthors()));
 
         return bookRepository.save(book);
     }
@@ -73,11 +74,16 @@ public class BookService implements IBookService {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("Aradığınız kitap bulunamadı."));
         if (book != null) {
+            // ToDo: Aşağıdaki yorum içindeki işlemler database'de hiç bir etkisi olmuyor,
+            //  yani "book_author" tablosundan hiç bir kayıt silmiyor, nedenini bilemedim,
+            //  şimdilik kalsın zamanımız kalırsa bir daha bakarız,
+            //  foreach'in içine şunu da ekledim:
+            //  authorRepository.save(author)
+            //  yine olmadı.
+
             try {
-                book.getAuthors().forEach(author -> {
-                    author.getBooks().remove(book);
-                    bookRepository.deleteBook(id);
-                });
+                //book.getAuthors().forEach(author -> author.getBooks().remove(book));
+                bookRepository.deleteBook(id);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -85,15 +91,21 @@ public class BookService implements IBookService {
 
     }
 
+    /*
+     * @Override public List<Book> getBooksByBookName(String bookName) {
+     *
+     * Collection<Book> books =
+     * bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
+     *
+     * if (CollectionUtils.isEmpty(books)) { throw new
+     * RuntimeException("Bu isimde kitap bulunmamaktadır."); } else { return
+     * bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName); } }
+     */
     @Override
-    public List<Book> getBooksByBookName(String bookName) {
+    public List<Book> getSearchBooks(String searchWord) {
+        List<Book> foundedBooks = bookRepository.findBooksByKeyword(searchWord);
+        return foundedBooks;
 
-        Collection<Book> books = bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
-
-        if (CollectionUtils.isEmpty(books)) {
-            throw new RuntimeException("Bu isimde kitap bulunmamaktadır.");
-        } else {
-            return bookRepository.findByBookNameLikeAndDeletedIsFalse(bookName);
-        }
     }
+
 }

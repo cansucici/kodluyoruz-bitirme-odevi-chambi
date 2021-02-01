@@ -1,6 +1,5 @@
 package org.kodluyoruz.group1.library.service.impl;
 
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookConverter;
 import org.kodluyoruz.group1.library.converter.MemberConverter;
@@ -17,6 +16,7 @@ import org.kodluyoruz.group1.library.service.IMemberService;
 import org.kodluyoruz.group1.library.utils.SecurityUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,11 +34,11 @@ public class MemberService implements IMemberService {
 
     @Override
     public List<Member> getAll() {
-        return memberRepository.findAll();
+        return memberRepository.findAllByDeletedIsFalse();
     }
 
     @Override
-    public Member create(MemberDTO memberDTO)   {
+    public Member create(MemberDTO memberDTO) {
         String encodedPassword = bCryptPasswordEncoder.encode(memberDTO.getPassword());
         memberDTO.setPassword(encodedPassword);
 
@@ -48,18 +48,18 @@ public class MemberService implements IMemberService {
         if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(), false)) {
             throw new AlreadyExistException("Bu email kullanılmakta, Lütfen başka bir email ile kayıt olunuz!!");
         }
-
+        memberDTO.setMemberStatus(StatusEnum.ACTIVE);
         List<Role> roles = new ArrayList<>();
         for (String role : memberDTO.getRoles()) {
             roles.add(roleRepository.findByRoleName(role));
         }
-        Member member= memberConverter.convert(memberDTO, roles);
+        Member member = memberConverter.convert(memberDTO, roles);
         return memberRepository.save(member);
     }
 
     @Override
-    public Member updatePassword(Long id, MemberDTO memberDTO) {
-        Member prevMember = memberRepository.findById(id).orElseThrow(null);
+    public Member updatePassword(MemberDTO memberDTO) {
+        Member prevMember = memberRepository.findByUserName(memberDTO.getUserName()).orElseThrow(null);
         if (prevMember == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!");
         }
@@ -70,40 +70,51 @@ public class MemberService implements IMemberService {
     }
 
     @Override
-    public Member updateMemberStatus(Long id, MemberDTO memberDTO) {
+    public Member updateMemberStatus(Long id) {
         Member prevMember = memberRepository.findById(id).orElse(null);
         if (prevMember == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!!");
         }
-        prevMember.setMemberStatus(StatusEnum.PASSIVE);
+        if (prevMember.getMemberStatus() == StatusEnum.ACTIVE) {
+            prevMember.setMemberStatus(StatusEnum.PASSIVE);
+        } else {
+            prevMember.setMemberStatus(StatusEnum.ACTIVE);
+        }
         memberRepository.save(prevMember);
         return prevMember;
     }
 
-    public Member update(Long id, MemberDTO memberDTO) {
+    @Override
+    public Member delete(Long id) {
 
-        Member prevMember = memberRepository.findById(id).orElse(null);
+        Member member = memberRepository.findById(id).orElse(null);
+        if (member == null) {
+            throw new MemberNotFoundException("Kullanıcı bulunamadı!");
+        }
+        member.setDeleted(true);
+        memberRepository.save(member);
+        return member;
+    }
+
+    public Member update(String userName, MemberDTO memberDTO) {
+
+        Member prevMember = memberRepository.findByUserName(userName).orElse(null);
         if (prevMember == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!!");
         }
         if (memberRepository.existsByUserNameAndDeleted(memberDTO.getUserName(), false)
-                && !id.equals(prevMember.getId())) {
+                && !userName.equals(prevMember.getUserName())) {
             throw new AlreadyExistException("Bu userName kullanılmakta Lütfen başka bir userName giriniz");
         }
-        if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(),false) && !id.equals(prevMember.getId())) {
+        if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(), false) && !userName.equals(prevMember.getUserName())) {
             throw new AlreadyExistException("Bu email zaten var!");
         }
 
         prevMember.setEmail(memberDTO.getEmail());
-        prevMember.setUserName(memberDTO.getUserName());
-        prevMember.setPassword(memberDTO.getPassword());
         prevMember.setPhoneNumber(memberDTO.getPhoneNumber());
-        prevMember.setBirthDate(memberDTO.getBirthDate());
-        prevMember.setMemberStatus(memberDTO.getMemberStatus());
-        prevMember.setAdress(memberDTO.getAddress());
+        prevMember.setAdress(memberDTO.getAdress());
         prevMember.setFirstName(memberDTO.getFirstName());
         prevMember.setLastName(memberDTO.getLastName());
-        prevMember.setDeleted(memberDTO.isDeleted());
 
         return memberRepository.save(prevMember);
     }
@@ -118,16 +129,6 @@ public class MemberService implements IMemberService {
         return member;
     }
 
-    @Override
-    public Member delete(Long id)  {
-
-        Member member = memberRepository.findById(id).orElse(null);
-        if (member == null) {
-            throw new MemberNotFoundException("Kullanıcı bulunamadı!");
-        }
-        member.setDeleted(true);
-        return member;
-    }
 
     @Override
     public Member takeBook(Long bookId) {

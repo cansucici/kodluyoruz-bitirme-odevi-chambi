@@ -55,15 +55,11 @@ public class AuthorController {
         return "redirect:/authorslist";
     }
 
-    @PostMapping("/delete-author/{id}")
+    @PostMapping("/deleteAuthor/{id}")
     public String deleteAuthor(@PathVariable Long id) {
 
         authorService.deleteById(id);
         return "redirect:/authorslist";
     }
 
-//    @GetMapping("/{nameSurname}")
-//    public Collection<Author> getAuthorsByNameSurname(@PathVariable String nameSurname) {
-//        return authorService.findByNameSurname(nameSurname);
-//    }
 }

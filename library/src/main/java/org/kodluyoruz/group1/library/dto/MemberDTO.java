@@ -22,9 +22,7 @@ public class MemberDTO extends BaseDTO {
 
     private String phoneNumber;
 
-    private String address;
-
-    private Date birthDate;
+    private String adress;
 
     private StatusEnum memberStatus;
 

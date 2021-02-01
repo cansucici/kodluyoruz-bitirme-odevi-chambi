@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -18,6 +19,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     private final UserDetailsService userDetailsService;
+
+    private AccessDeniedHandler accessDeniedHandler;
+
 
 
     @Override
@@ -28,13 +32,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasRole("USER")
-                .antMatchers("/").permitAll()
-                .antMatchers("/newrecord").permitAll()
-                .antMatchers("/authors").permitAll()
-                .and().formLogin();
+                .anyRequest().permitAll()
+                .and().formLogin()
+                 .loginPage("/login").permitAll();
+//                .antMatchers("/","/newrecord","/authorslist","/booklist","/showSearchResult")
+//                .permitAll()
+//           //     .antMatchers().hasAnyRole("ADMIN")
+//                .antMatchers("/member/update/","/new-password","/take-book/").hasAnyRole("USER")
+//              //     .antMatchers().hasAnyRole("ADMIN")
+//                .antMatchers("/saveBook","/update/","/delete/","/member","/member/delete/","/member-status/","/saveAuthor/","/updateAuthor/","/deleteAuthor/","/memberlist").hasAnyRole("ADMIN")
+//                .anyRequest().authenticated()
+//                .and().formLogin()
+//                .loginPage("/login").permitAll()
+//                .and()
+//                .logout().permitAll()
+//                .and()
+//                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
