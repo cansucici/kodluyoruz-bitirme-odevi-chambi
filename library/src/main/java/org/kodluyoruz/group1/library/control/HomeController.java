@@ -8,13 +8,13 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
-public class HomeResourceController {
+public class HomeController {
 
     @GetMapping("/")
-    public String home(final Principal principal) {
-        if (principal == null) {
+    public String home() {
+     /*    if (principal == null) {
             return "/login";
-        }
+        }*/
         return "fragments/header";
     }
 
