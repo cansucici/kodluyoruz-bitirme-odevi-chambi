@@ -138,6 +138,22 @@ public class MemberService implements IMemberService {
         }
         Book book = bookConverter.convertToEntity(bookService.getBookById(bookId));
         currentUser.setBooks(Collections.singletonList(book));
+        book.setStatus(StatusEnum.PASSIVE);
+        return currentUser;
+    }
+
+    public Member giveBook(Long bookId){
+        Member currentUser = SecurityUtil.getCurrentUser();
+        if (currentUser == null) {
+            throw new MemberNotFoundException("Kullanıcı bulunamadı!");
+        }
+
+        Book book = bookConverter.convertToEntity(bookService.getBookById(bookId));
+
+        if(currentUser.getBooks().contains(book)){
+            currentUser.getBooks().remove(book);
+            book.setStatus(StatusEnum.ACTIVE);
+        }
         return currentUser;
     }
 

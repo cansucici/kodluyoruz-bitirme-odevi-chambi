@@ -22,5 +22,7 @@ public interface IMemberService {
 
     Member takeBook(Long bookId);
 
+    Member giveBook(Long bookId);
+
     Member findByUserName(String userName);
 }
