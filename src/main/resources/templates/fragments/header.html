@@ -38,11 +38,12 @@
         }
 
         body {
-            background-image: url("https://i2.wp.com/girisimturkiye.com/wp-content/uploads/2016/04/books.jpg?fit=700%2C466&ssl=1");
+            /*background-image: url("https://i2.wp.com/girisimturkiye.com/wp-content/uploads/2016/04/books.jpg?fit=700%2C466&ssl=1");*/
+            background-image: url("https://alexandriacapital.com/january2017/wp-content/uploads/2018/05/OAYT5G0-1.jpg");
             background-size: cover;
-            height: 45vw;
             background-repeat: no-repeat;
-            background-attachment: scroll;
+            background-attachment: fixed;
+            background-position-y: bottom;
         }
 
 
@@ -65,12 +66,18 @@
             Yazar Listesi
         </a></li>
 
-        <li class="nav-item" id="saveBook"><a class="nav-link" href="/saveBook"><i class="fas fa-plus"></i>
-            Yeni Kitap Ekle </a>
+        <li class="nav-item" id="saveBook" th:if="${#request.userPrincipal != null}">
+            <a class="nav-link" href="/saveBook">
+                <i class="fas fa-plus"></i>
+                Yeni Kitap Ekle
+            </a>
         </li>
 
-        <li class="nav-item" id="saveAuthor"><a class="nav-link" href="/saveAuthor"><i class="fas fa-plus"></i>Yeni
-            Yazar Ekle</a>
+        <li class="nav-item" id="saveAuthor" th:if="${#request.userPrincipal != null}">
+            <a class="nav-link" href="/saveAuthor">
+                <i class="fas fa-plus"></i>
+                Yeni Yazar Ekle
+            </a>
         </li>
 
         <li class="nav-item" id="new-record">
@@ -80,10 +87,21 @@
             </a>
         </li>
 
-        <li class="nav-item" id="login"><a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i>
-            Giriş </a></li>
+        <li class="nav-item" id="login" th:if="${#request.userPrincipal == null}">
+            <a class="nav-link" href="/login">
+                <i class="fas fa-sign-in-alt"></i>
+                Giriş
+            </a>
+        </li>
 
-        <li class="nav-item" id="memberlist">
+        <li class="nav-item" id="sign_out" th:if="${#request.userPrincipal != null}">
+            <a class="nav-link" th:href="@{/logout}">
+                <i class="fas fa-sign-in-alt"></i>
+                Sign Out
+            </a>
+        </li>
+
+        <li class="nav-item" id="memberlist" th:if="${#request.userPrincipal != null}">
             <a class="nav-link" href="/memberlist">
                 <i class="fas fa-users"></i>
                 Üye Listesi

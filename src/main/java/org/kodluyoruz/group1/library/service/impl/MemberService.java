@@ -60,6 +60,7 @@ public class MemberService implements IMemberService {
 
     @Override
     public Member updatePassword(MemberDTO memberDTO) {
+
         Member prevMember = memberRepository.findByUserName(memberDTO.getUserName()).orElseThrow(null);
         if (prevMember == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!");
