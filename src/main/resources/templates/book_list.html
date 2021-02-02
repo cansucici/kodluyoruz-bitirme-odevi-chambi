@@ -2,8 +2,9 @@
 <html
         lang="en"
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
->
+        xmlns:th="http://www.thymeleaf.org">
+<!--        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"-->
+
 <head th:replace="fragments/header :: header">
 
     <title>Kitap Listesi</title>
@@ -30,6 +31,7 @@
                 <th>Baskı Sayısı</th>
                 <th>Dil</th>
                 <th>Barkod No</th>
+                <th>Durumu</th>
                 <th></th>
             </tr>
             </thead>
@@ -48,8 +50,22 @@
                 <td th:text="${book.editionNumber}"></td>
                 <td th:text="${book.languagesEnum.getValue()}"></td>
                 <td th:text="${book.isbn}"></td>
+                <td th:text="${book.status}"></td>
 
                 <td>
+
+
+                    <!--                            -->
+                    <!--                            <div class="form-group" th:if="${'ADMIN'.equals(isAdmin) and myObjct.name!=null}">-->
+                    <!--                                -->
+                    <!--                            </div>-->
+
+
+                    <!--                    <sec:authorize access="hasRole('ADMIN')" var="isAdmin">-->
+                    <!--                    </sec:authorize>-->
+
+                    <!--                    th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"-->
+
                     <table>
                         <tr>
                             <td>
@@ -61,6 +77,7 @@
                                 </a>
                             </td>
                             <td>
+
                                 <form action="#"
                                       th:action="@{/delete/{id}(id = ${book.id})}"
                                       th:method="POST">
@@ -72,6 +89,33 @@
                                     </button>
                                 </form>
                             </td>
+
+                            <td>
+                                <form action="#"
+                                      th:action="@{/take-book/{id}(id=${book.id})}"
+                                      th:method="POST">
+                                    <button class="btn btn-primary"
+                                            id="odunc_al"
+                                            type="submit">
+                                        <i class="fab fa-get-pocket"></i>
+                                        ÖDÜNÇ AL
+                                    </button>
+                                </form>
+                            </td>
+
+                            <td>
+                                <form action="#"
+                                      th:action="@{/give-book/{id}(id=${book.id})}"
+                                      th:method="POST">
+                                    <button class="btn btn-primary"
+                                            id="iade"
+                                            type="submit">
+                                        <i class="fab fa-get-pocket"></i>
+                                        İADE
+                                    </button>
+                                </form>
+                            </td>
+
                         </tr>
                     </table>
                 </td>

@@ -3,6 +3,7 @@ package org.kodluyoruz.group1.library.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.converter.BookConverter;
 import org.kodluyoruz.group1.library.converter.MemberConverter;
+import org.kodluyoruz.group1.library.dao.BookRepository;
 import org.kodluyoruz.group1.library.dao.MemberRepository;
 import org.kodluyoruz.group1.library.dao.RoleRepository;
 import org.kodluyoruz.group1.library.dto.MemberDTO;
@@ -17,10 +18,8 @@ import org.kodluyoruz.group1.library.utils.SecurityUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +31,7 @@ public class MemberService implements IMemberService {
     private final BookConverter bookConverter;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final RoleRepository roleRepository;
+    private final BookRepository bookRepository;
 
     @Override
     public List<Member> getAll() {
@@ -131,30 +131,35 @@ public class MemberService implements IMemberService {
     }
 
     @Override
-    public Member takeBook(Long bookId) {
-        Member currentUser = SecurityUtil.getCurrentUser();
+    public Book takeBook(Long bookId) {
+//        Member currentUser = SecurityUtil.getCurrentUser();
+        Member currentUser = findByUserName(SecurityUtil.getCurrentUsername());
+
         if (currentUser == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!");
         }
         Book book = bookConverter.convertToEntity(bookService.getBookById(bookId));
         currentUser.setBooks(Collections.singletonList(book));
         book.setStatus(StatusEnum.PASSIVE);
-        return currentUser;
+        return bookRepository.save(book);
     }
 
-    public Member giveBook(Long bookId){
-        Member currentUser = SecurityUtil.getCurrentUser();
+    public Book giveBook(Long bookId) {
+//        Member currentUser = SecurityUtil.getCurrentUser();
+        Member currentUser = findByUserName(SecurityUtil.getCurrentUsername());
+
         if (currentUser == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!");
         }
 
         Book book = bookConverter.convertToEntity(bookService.getBookById(bookId));
 
-        if(currentUser.getBooks().contains(book)){
+        if (currentUser.getBooks().contains(book)) {
             currentUser.getBooks().remove(book);
             book.setStatus(StatusEnum.ACTIVE);
+            return bookRepository.save(book);
         }
-        return currentUser;
+        return book;
     }
 
 

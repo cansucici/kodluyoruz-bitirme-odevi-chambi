@@ -1,6 +1,7 @@
 package org.kodluyoruz.group1.library.service;
 
 import org.kodluyoruz.group1.library.dto.MemberDTO;
+import org.kodluyoruz.group1.library.model.entities.Book;
 import org.kodluyoruz.group1.library.model.entities.Member;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public interface IMemberService {
 
     Member updateMemberStatus(Long id);
 
-    Member takeBook(Long bookId);
+    Book takeBook(Long bookId);
 
-    Member giveBook(Long bookId);
+    Book giveBook(Long bookId);
 
     Member findByUserName(String userName);
 }

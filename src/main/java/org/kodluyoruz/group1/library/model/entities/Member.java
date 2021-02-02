@@ -48,6 +48,6 @@ public class Member extends BaseEntity {
     private List<Role> roles = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "member")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
     private List<Book> books = new ArrayList<>();
 }
