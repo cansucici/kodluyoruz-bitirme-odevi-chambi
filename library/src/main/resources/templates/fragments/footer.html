@@ -1,29 +1,24 @@
 <!DOCTYPE html>
-<html lang="en"   xmlns="http://www.w3.org/1999/xhtml"
-                  xmlns:th="http://www.thymeleaf.org"
-                  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
 <body>
 <div th:fragment="footer">
-
     <div class="container">
-
+        <div style="width: 100%; height: 100px"></div>
         <footer>
             <!-- this is footer -->
-            &copy 2021 CHAMBI LİBRARY
-            <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
+            &copy 2021 CHAMBI LIBRARY
+            <span th:if="${#request.userPrincipal != null}">
+                | Logged In User: <span th:text="${#request.userPrincipal.getName()}"></span> |
 
                 <a th:href="@{/logout}">Sign Out</a>
             </span>
 
-            <script type="text/javascript"
-                    src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         </footer>
+        <div style="width: 100%; height: 100px"></div>
     </div>
-
 </div>
 </body>
 </html>
