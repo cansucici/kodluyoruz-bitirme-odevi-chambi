@@ -24,7 +24,7 @@ public final class SecurityUtil {
         if (authentication == null || authentication.getPrincipal() == null) {
             return null;
         } else {
-            return ((Member) authentication.getPrincipal()).getUserName();
+            return ((MemberDetails) authentication.getPrincipal()).getUsername();
         }
     }
 

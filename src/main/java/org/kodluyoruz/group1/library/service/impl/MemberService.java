@@ -25,13 +25,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService implements IMemberService {
 
-    private final MemberRepository memberRepository;
-    private final MemberConverter memberConverter;
     private final BookService bookService;
-    private final BookConverter bookConverter;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final MemberRepository memberRepository;
     private final RoleRepository roleRepository;
     private final BookRepository bookRepository;
+    private final MemberConverter memberConverter;
+    private final BookConverter bookConverter;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<Member> getAll() {
@@ -132,34 +132,31 @@ public class MemberService implements IMemberService {
 
     @Override
     public Book takeBook(Long bookId) {
-//        Member currentUser = SecurityUtil.getCurrentUser();
-        Member currentUser = findByUserName(SecurityUtil.getCurrentUsername());
 
+        Member currentUser = findByUserName(SecurityUtil.getCurrentUsername());
         if (currentUser == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!");
         }
+
         Book book = bookConverter.convertToEntity(bookService.getBookById(bookId));
-        currentUser.setBooks(Collections.singletonList(book));
         book.setStatus(StatusEnum.PASSIVE);
+        book.setMember(currentUser);
         return bookRepository.save(book);
     }
 
     public Book giveBook(Long bookId) {
-//        Member currentUser = SecurityUtil.getCurrentUser();
-        Member currentUser = findByUserName(SecurityUtil.getCurrentUsername());
 
+        Member currentUser = findByUserName(SecurityUtil.getCurrentUsername());
         if (currentUser == null) {
             throw new MemberNotFoundException("Kullanıcı bulunamadı!");
         }
 
         Book book = bookConverter.convertToEntity(bookService.getBookById(bookId));
-
         if (currentUser.getBooks().contains(book)) {
-            currentUser.getBooks().remove(book);
             book.setStatus(StatusEnum.ACTIVE);
-            return bookRepository.save(book);
+            book.setMember(null);
         }
-        return book;
+        return bookRepository.save(book);
     }
 
 

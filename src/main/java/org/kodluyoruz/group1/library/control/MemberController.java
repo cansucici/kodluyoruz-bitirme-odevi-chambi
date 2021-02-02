@@ -20,7 +20,7 @@ public class MemberController {
     private final IMemberService memberService;
 
     @GetMapping("/memberlist")
-    public String  getAll(Model model) {
+    public String getAll(Model model) {
         List<Member> memberList = memberService.getAll();
         model.addAttribute("listmember", memberList);
         return "member_list";
@@ -33,7 +33,7 @@ public class MemberController {
     }
 
     @PostMapping("/new-record")
-    public String postCreateMember(@ModelAttribute("memberDTO")  MemberDTO memberDTO){
+    public String postCreateMember(@ModelAttribute("memberDTO") MemberDTO memberDTO) {
         memberService.create(memberDTO);
         return "redirect:/login";
     }
@@ -47,46 +47,44 @@ public class MemberController {
     }
 
     @PostMapping("/member/update/{userName}")
-    public String postUpdateMember(@PathVariable String userName, MemberDTO memberDTO){
-        memberService.update(userName,memberDTO);
+    public String postUpdateMember(@PathVariable String userName, MemberDTO memberDTO) {
+        memberService.update(userName, memberDTO);
         return "redirect:/";
     }
 
     @PostMapping("/new-password")
-    public String postUpdatePassword( MemberDTO memberDTO) {
+    public String postUpdatePassword(MemberDTO memberDTO) {
         Member m = memberService.updatePassword(memberDTO);
         return "redirect:/login";
     }
 
     @GetMapping("/member/{id}")
-    public Member getById(@PathVariable Long id)  {
+    public Member getById(@PathVariable Long id) {
         return memberService.getById(id);
     }
 
     @PostMapping("/member/delete/{id}")
-    public String deleteMember(@PathVariable Long id)  {
+    public String deleteMember(@PathVariable Long id) {
         memberService.delete(id);
         return "redirect:/memberlist";
     }
 
     @PostMapping("/member-status/{id}")
-    public String updateMemberStatus(@PathVariable Long id)  {
+    public String updateMemberStatus(@PathVariable Long id) {
         memberService.updateMemberStatus(id);
         return "redirect:/memberlist";
     }
 
     @PostMapping("/take-book/{id}")
-    public String takeBook(@PathVariable Long id)  {
-         memberService.takeBook(id);
-         return "redirect:/booklist";
-    }
-
-
-    @PostMapping("/give-book/{id}")
-    public String giveBook(@PathVariable Long id)  {
-        memberService.giveBook(id);
+    public String takeBook(@PathVariable Long id) {
+        memberService.takeBook(id);
         return "redirect:/booklist";
     }
 
+    @PostMapping("/give-book/{id}")
+    public String giveBook(@PathVariable Long id) {
+        memberService.giveBook(id);
+        return "redirect:/booklist";
+    }
 
 }

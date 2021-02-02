@@ -1,5 +1,6 @@
 package org.kodluyoruz.group1.library.security.config;
 
+import lombok.Getter;
 import org.kodluyoruz.group1.library.model.entities.Member;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Getter
 public class MemberDetails implements UserDetails {
 
     private String firstName;
