@@ -52,13 +52,6 @@ public class MemberController {
         return "redirect:/";
     }
 
-
-    @GetMapping("/new-password")
-    public String getUpdatePassword( Model model) {
-        model.addAttribute("memberDTO", new MemberDTO());
-        return "update_password";
-    }
-
     @PostMapping("/new-password")
     public String postUpdatePassword( MemberDTO memberDTO) {
         Member m = memberService.updatePassword(memberDTO);

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,10 +50,10 @@ public class MemberService implements IMemberService {
             throw new AlreadyExistException("Bu email kullanılmakta, Lütfen başka bir email ile kayıt olunuz!!");
         }
         memberDTO.setMemberStatus(StatusEnum.ACTIVE);
-        List<Role> roles = new ArrayList<>();
-        for (String role : memberDTO.getRoles()) {
-            roles.add(roleRepository.findByRoleName(role));
-        }
+
+        Role roleUser = roleRepository.findByRoleName("ROLE_USER");
+        List<Role> roles = Collections.singletonList(roleUser);
+
         Member member = memberConverter.convert(memberDTO, roles);
         return memberRepository.save(member);
     }
@@ -128,7 +129,6 @@ public class MemberService implements IMemberService {
         }
         return member;
     }
-
 
     @Override
     public Member takeBook(Long bookId) {
