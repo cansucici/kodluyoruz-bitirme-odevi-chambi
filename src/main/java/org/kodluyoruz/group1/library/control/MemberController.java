@@ -81,4 +81,12 @@ public class MemberController {
          return "redirect:/booklist";
     }
 
+
+    @PostMapping("/give-book/{id}")
+    public String giveBook(@PathVariable Long id)  {
+        memberService.giveBook(id);
+        return "redirect:/booklist";
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package org.kodluyoruz.group1.library.model.entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.kodluyoruz.group1.library.model.enums.LanguagesEnum;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Data
 @Entity
+@EqualsAndHashCode
 @Table(name = "book")
 public class Book extends BaseEntity {
 
