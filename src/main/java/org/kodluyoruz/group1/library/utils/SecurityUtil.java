@@ -2,6 +2,7 @@ package org.kodluyoruz.group1.library.utils;
 
 import lombok.Data;
 import org.kodluyoruz.group1.library.model.entities.Member;
+import org.kodluyoruz.group1.library.security.config.MemberDetails;
 import org.kodluyoruz.group1.library.service.IMemberService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -38,5 +39,6 @@ public final class SecurityUtil {
             return memberService.findByUserName(currentUsername);
         }
     }
+
 }
 
