@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @RequiredArgsConstructor
@@ -28,11 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/","/newrecord","/authorslist","/booklist","/showSearchResult").permitAll()
-                .antMatchers("/member/update/","/new-password","/take-book/").hasRole("USER")
-                .antMatchers("/saveBook","/update/","/delete/","/member",
-                        "/member/delete/","/member-status/","/saveAuthor","/updateAuthor/"
-                        ,"/deleteAuthor/","/memberlist").hasRole("ADMIN")
+                .antMatchers("/", "/newrecord", "/authorslist", "/booklist", "/showSearchResult", "/new-password").permitAll()
+                .antMatchers("/member/update/", "/take-book/").hasRole("USER")
+                .antMatchers("/saveBook", "/update/", "/delete/", "/member",
+                        "/member/delete/", "/member-status/", "/saveAuthor", "/updateAuthor/"
+                        , "/deleteAuthor/", "/memberlist").hasRole("ADMIN")
                 .and().formLogin()
                 .loginPage("/login").permitAll()
                 .and()

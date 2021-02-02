@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.security.Principal;
-
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
@@ -18,18 +16,14 @@ public class HomeController {
         return "fragments/header";
     }
 
-    @GetMapping("/user")
-    public String user() {
-        return ("Welcome User ");
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return ("Welcome Admin ");
-    }
-
     @GetMapping("/login")
     public String login() {
         return "/login";
     }
+
+    @GetMapping("/error")
+    public String error() {
+        return "error/error_page";
+    }
+
 }
