@@ -17,8 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
- //   private final AccessDeniedHandler accessDeniedHandler;
-
+    private final MyAccessDeniedHandler myAccessDeniedHandler;
 
 
     @Override
@@ -29,22 +28,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .anyRequest().permitAll()
+                .antMatchers("/","/newrecord","/authorslist","/booklist","/showSearchResult").permitAll()
+                .antMatchers("/member/update/","/new-password","/take-book/").hasRole("USER")
+                .antMatchers("/saveBook","/update/","/delete/","/member",
+                        "/member/delete/","/member-status/","/saveAuthor","/updateAuthor/"
+                        ,"/deleteAuthor/","/memberlist").hasRole("ADMIN")
                 .and().formLogin()
-                 .loginPage("/login").permitAll();
-//                .antMatchers("/","/newrecord","/authorslist","/booklist","/showSearchResult")
-//                .permitAll()
-//           //     .antMatchers().hasAnyRole("ADMIN")
-//                .antMatchers("/member/update/","/new-password","/take-book/").hasAnyRole("USER")
-//              //     .antMatchers().hasAnyRole("ADMIN")
-//                .antMatchers("/saveBook","/update/","/delete/","/member","/member/delete/","/member-status/","/saveAuthor/","/updateAuthor/","/deleteAuthor/","/memberlist").hasAnyRole("ADMIN")
-//                .anyRequest().authenticated()
-//                .and().formLogin()
-//                .loginPage("/login").permitAll()
-//                .and()
-//                .logout().permitAll()
-//                .and()
-//                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                .loginPage("/login").permitAll()
+                .and()
+                .logout().permitAll()
+                .and()
+                .exceptionHandling().accessDeniedHandler(myAccessDeniedHandler);
     }
 
 
