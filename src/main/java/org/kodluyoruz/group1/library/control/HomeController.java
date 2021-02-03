@@ -10,9 +10,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-     /*    if (principal == null) {
-            return "/login";
-        }*/
         return "fragments/header";
     }
 

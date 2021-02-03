@@ -26,13 +26,13 @@ public class MemberController {
         return "member_list";
     }
 
-    @GetMapping("/new-record")
+    @GetMapping("/new-member")
     public String getCreateMember(Model model) {
         model.addAttribute("memberDTO", new MemberDTO());
         return "register";
     }
 
-    @PostMapping("/new-record")
+    @PostMapping("/new-member")
     public String postCreateMember(@ModelAttribute("memberDTO") MemberDTO memberDTO) {
         memberService.create(memberDTO);
         return "redirect:/login";
