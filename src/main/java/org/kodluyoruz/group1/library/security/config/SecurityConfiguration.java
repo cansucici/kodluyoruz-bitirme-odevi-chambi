@@ -13,11 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
     private final UserDetailsService userDetailsService;
 
     private final MyAccessDeniedHandler myAccessDeniedHandler;
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -27,20 +25,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/", "/new-member", "/authorslist", "/booklist",
-                        "/showSearchResult", "/new-password").permitAll()
-                .antMatchers("/member/update/**", "/take-book/**").hasRole("USER")
+                .antMatchers("/", "/new-member", "/authorslist", "/booklist", "/showSearchResult", "/new-password")
+                .permitAll().antMatchers("/member/update/**", "/take-book/**").hasRole("USER")
                 .antMatchers("/member/update/**", "/saveBook", "/update/**", "/delete/**", "/member",
-                        "/member/delete/**", "/member-status/", "/saveAuthor", "/updateAuthor",
-                        "/updateAuthor/**", "/deleteAuthor/**", "/memberlist").hasRole("ADMIN")
-                .and().formLogin()
-                .loginPage("/login").permitAll()
-                .and()
-                .logout().permitAll()
-                .and()
+                        "/member/delete/**", "/member-status/", "/saveAuthor", "/updateAuthor", "/updateAuthor/**",
+                        "/deleteAuthor/**", "/memberlist")
+                .hasRole("ADMIN").and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and()
                 .exceptionHandling().accessDeniedHandler(myAccessDeniedHandler);
     }
-
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

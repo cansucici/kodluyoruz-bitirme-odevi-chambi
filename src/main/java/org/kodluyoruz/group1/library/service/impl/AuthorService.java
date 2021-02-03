@@ -9,7 +9,6 @@ import org.kodluyoruz.group1.library.exceptions.AuthorNotFoundException;
 import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class AuthorService implements IAuthorService {
 
     @Override
     public Author save(AuthorDTO dto) {
-        
+
         boolean isExist = authorRepository.existsAuthorsByNameSurnameAndDeletedIsFalse(dto.getNameSurname());
         if (isExist) {
             throw new AlreadyExistException("Zaten böyle bir yazar var.");
@@ -39,19 +38,19 @@ public class AuthorService implements IAuthorService {
 
     @Override
     public void deleteById(Long id) {
-        if(authorRepository.findById(id).isPresent()){
-              authorRepository.deleteAuthor(id);
-        }
-        else{
+        if (authorRepository.findById(id).isPresent()) {
+            authorRepository.deleteAuthor(id);
+        } else {
             throw new AuthorNotFoundException("Böyle bir yazar yok.");
         }
-      
+
     }
 
     @Override
     public Author update(Long id, AuthorDTO dto) {
 
-        Author author = authorRepository.findById(id).orElseThrow(() -> new AuthorNotFoundException("Böyle bir yazar yok."));
+        Author author = authorRepository.findById(id)
+                .orElseThrow(() -> new AuthorNotFoundException("Böyle bir yazar yok."));
 
         author.setUpdateDate(new Date());
         author.setDeleted(dto.isDeleted());

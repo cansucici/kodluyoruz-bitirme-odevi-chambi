@@ -13,8 +13,4 @@ public class LibraryConfig {
         return new ModelMapper();
     }
 
-//    @Bean
-//    public SpringSecurityDialect springSecurityDialect(){
-//        return new SpringSecurityDialect();
-//    }
 }

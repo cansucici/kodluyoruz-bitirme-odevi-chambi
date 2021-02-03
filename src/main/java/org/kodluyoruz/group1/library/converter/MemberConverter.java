@@ -38,7 +38,6 @@ public class MemberConverter implements IBaseConverter<Member, MemberDTO> {
         member.setUserName(memberDTO.getUserName());
         member.setRoles(roles);
 
-
         return member;
     }
 }

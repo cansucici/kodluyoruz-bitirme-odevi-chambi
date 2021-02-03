@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.util.List;
 
 @Controller
@@ -28,7 +27,6 @@ public class BookController {
         model.addAttribute("listbook", bookList);
         return "book_list";
     }
-
 
     @GetMapping("/saveBook")
     public String getCreateBook(Model model) {
@@ -46,7 +44,6 @@ public class BookController {
         return "redirect:/booklist";
     }
 
-
     @GetMapping("/update/{id}")
     public String getUpdateBook(@PathVariable Long id, Model model) {
 
@@ -62,19 +59,12 @@ public class BookController {
         return "redirect:/booklist";
     }
 
-
     @PostMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return "redirect:/booklist";
     }
 
-    /*
-        @GetMapping("/books/{bookName}")
-        public Collection<Book> showSearchResult(@PathVariable String bookName) {
-            return bookService.getBooksByBookName(bookName);
-        }
-    */
     @PostMapping("/showSearchResult")
     public String showSearchResult(@ModelAttribute("searchWord") String searchWord, Model model) {
         List<Book> foundedBooks = bookService.getSearchBooks(searchWord);

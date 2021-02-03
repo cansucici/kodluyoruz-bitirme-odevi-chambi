@@ -2,7 +2,6 @@ package org.kodluyoruz.group1.library.model.entities;
 
 import lombok.Data;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

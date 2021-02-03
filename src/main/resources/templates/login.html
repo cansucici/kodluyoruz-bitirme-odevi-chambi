@@ -1,68 +1,78 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
-<head>
-    <title> CHAMBI LIBRARY </title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>CHAMBI LIBRARY</title>
     <head th:replace="fragments/header :: header"></head>
-</head>
-<body>
+  </head>
+  <body>
+    <nav th:replace="fragments/header :: navigation"></nav>
 
-<nav th:replace="fragments/header :: navigation"></nav>
+    <div class="container">
+      <div class="row" style="margin-top: 20px">
+        <div
+          class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"
+        >
+          <form th:action="@{/login}" method="post">
+            <fieldset>
+              <h1>GİRİŞ YAPINIZ</h1>
 
-<div class="container">
+              <div th:if="${param.error}">
+                <div class="alert alert-danger">
+                  Geçersiz kullanıcı adı veya şifre.
+                </div>
+              </div>
+              <div th:if="${param.logout}">
+                <div class="alert alert-info">Çıkış Yaptınız.</div>
+              </div>
 
-    <div class="row" style="margin-top:20px">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form th:action="@{/login}" method="post">
-                <fieldset>
-                    <h1>GİRİŞ YAPINIZ</h1>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  class="form-control input-lg"
+                  placeholder="Kullanıcı Adı"
+                  required="true"
+                  autofocus="true"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  class="form-control input-lg"
+                  placeholder="Şifre"
+                  required="true"
+                />
+              </div>
 
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">
-                            Geçersiz kullanıcı adı veya şifre.
-                        </div>
-                    </div>
-                    <div th:if="${param.logout}">
-                        <div class="alert alert-info">
-                            Çıkış Yaptınız.
-                        </div>
-                    </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <input
+                    type="submit"
+                    class="btn btn-lg btn-primary btn-block"
+                    value="Giriş Yap"
+                  />
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6"></div>
+              </div>
+            </fieldset>
+          </form>
 
-                    <div class="form-group">
-                        <input type="text" name="username" id="username" class="form-control input-lg"
-                               placeholder="Kullanıcı Adı" required="true" autofocus="true"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-lg"
-                               placeholder="Şifre" required="true"/>
-                    </div>
+          <a class="btn btn-danger" th:href="@{/new-password}" th:method="GET">
+            <i class="fas fa-edit"></i>
+            Şifremi Unuttum
+          </a>
 
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Giriş Yap"/>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                        </div>
-                    </div>
-
-                </fieldset>
-            </form>
-
-            <a class="btn btn-danger" th:href="@{/new-password}" th:method="GET">
-                <i class="fas fa-edit"></i>
-                Şifremi Unuttum
-            </a>
-
-            <a class="btn btn-info" th:href="@{/new-record}" th:method="GET">
-                <i class="sign-in-alt"></i>
-                Yeni Kayıt
-            </a>
+          <a class="btn btn-info" th:href="@{/new-record}" th:method="GET">
+            <i class="sign-in-alt"></i>
+            Yeni Kayıt
+          </a>
         </div>
+      </div>
     </div>
 
-</div>
-
-<div th:replace="fragments/footer :: footer"/>
-
-</body>
+    <div th:replace="fragments/footer :: footer" />
+  </body>
 </html>

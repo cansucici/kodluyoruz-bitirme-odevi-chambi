@@ -17,7 +17,6 @@ import org.kodluyoruz.group1.library.service.IMemberService;
 import org.kodluyoruz.group1.library.utils.SecurityUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -108,7 +107,8 @@ public class MemberService implements IMemberService {
                 && !userName.equals(prevMember.getUserName())) {
             throw new AlreadyExistException("Bu userName kullanılmakta Lütfen başka bir userName giriniz");
         }
-        if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(), false) && !userName.equals(prevMember.getUserName())) {
+        if (memberRepository.existsByEmailAndDeleted(memberDTO.getEmail(), false)
+                && !userName.equals(prevMember.getUserName())) {
             throw new AlreadyExistException("Bu email zaten var!");
         }
 
@@ -159,7 +159,6 @@ public class MemberService implements IMemberService {
         }
         return bookRepository.save(book);
     }
-
 
     @Override
     public Member findByUserName(String userName) {

@@ -13,7 +13,6 @@
             <div id="errors" class="alert alert-danger" th:if="${(param.error != null) and (param.error[0] == 'true')}">
                 Lütfen Zorunlu Alanları Doldurunuz.
             </div>
-            <!-- SAVE METHODDD  BİZDE POST METHOD CREATE -->
             <form action="#" th:action="@{/saveAuthor}" th:object="${authorDTO}" method="POST">
 
                 <div class="form-group row">

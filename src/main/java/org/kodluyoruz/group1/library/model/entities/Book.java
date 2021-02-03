@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.kodluyoruz.group1.library.model.enums.LanguagesEnum;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +41,7 @@ public class Book extends BaseEntity {
     private StatusEnum status;
 
     @ManyToMany
-    @JoinTable(name = "book_author",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id")
-    )
+    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors = new ArrayList<>();
 
     @ManyToOne
