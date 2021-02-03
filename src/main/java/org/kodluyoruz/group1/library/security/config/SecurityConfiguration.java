@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/new-member", "/authorslist", "/booklist",
                         "/showSearchResult", "/new-password").permitAll()
                 .antMatchers("/member/update/**", "/take-book/**").hasRole("USER")
-                .antMatchers("/saveBook", "/update/**", "/delete/**", "/member",
+                .antMatchers("/member/update/**", "/saveBook", "/update/**", "/delete/**", "/member",
                         "/member/delete/**", "/member-status/", "/saveAuthor", "/updateAuthor",
                         "/updateAuthor/**", "/deleteAuthor/**", "/memberlist").hasRole("ADMIN")
                 .and().formLogin()
