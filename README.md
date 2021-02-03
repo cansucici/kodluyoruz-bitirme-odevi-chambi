@@ -1,6 +1,6 @@
 # **CHAMBI KÜTÜPHANESİ**
 
-# You can access the link ->  https://chambi-org.kodluyoruz.group1.library.herokuapp.com/ 
+# You can access the link ->  http://chambi-library.herokuapp.com/
 
 
 ## _Kütüphane Kitap Yönetim Sistemi_
