@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:fragment="header">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" rel="stylesheet"/>
+
+    <!-- <div th:fragment="header-css">
+            this is header-css -->
+
+    <style type="text/css">
+        #buttonDesign {
+            background-color: lightGray;
+            border-radius: 10px;
+            margin-left: 4px;
+        }
+
+        .headerList li {
+            display: inline;
+            margin: 10px;
+            position: relative;
+            float: left;
+        }
+
+        .navright li {
+            display: inline;
+            margin: 10px;
+            position: relative;
+            float: right;
+        }
+
+        body {
+            /*background-image: url("https://i2.wp.com/girisimturkiye.com/wp-content/uploads/2016/04/books.jpg?fit=700%2C466&ssl=1");*/
+            background-image: url("https://alexandriacapital.com/january2017/wp-content/uploads/2018/05/OAYT5G0-1.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position-y: bottom;
+        }
+
+
+    </style>
+    <title></title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 20px;" th:fragment="navigation">
+    <a class="navbar-brand" href="/" style="padding-right: 1px; color: #17A1B7;">
+        <h2>CHAMBI KÜTÜPHANESİ</h2>
+    </a>
+    <ul class="nav">
+
+        <li class="nav-item" id="booklist"><a class="nav-link" href="/booklist"><i class="fas fa-book"></i>
+            Kitap Listesi </a>
+        </li>
+
+        <li class="nav-item" id="authorslist"><a class="nav-link" href="/authorslist"><i class="fas fa-pen"></i>
+            Yazar Listesi
+        </a></li>
+
+        <li class="nav-item" id="saveBook" th:if="${#request.userPrincipal != null}">
+            <a class="nav-link" href="/saveBook">
+                <i class="fas fa-plus"></i>
+                Yeni Kitap Ekle
+            </a>
+        </li>
+
+        <li class="nav-item" id="saveAuthor" th:if="${#request.userPrincipal != null}">
+            <a class="nav-link" href="/saveAuthor">
+                <i class="fas fa-plus"></i>
+                Yeni Yazar Ekle
+            </a>
+        </li>
+
+        <li class="nav-item" id="new-member">
+            <a class="nav-link" href="/new-member">
+                <i class="sign-in-alt"></i>
+                Kayıt
+            </a>
+        </li>
+
+        <li class="nav-item" id="login" th:if="${#request.userPrincipal == null}">
+            <a class="nav-link" href="/login">
+                <i class="fas fa-sign-in-alt"></i>
+                Giriş
+            </a>
+        </li>
+
+        <li class="nav-item" id="sign_out" th:if="${#request.userPrincipal != null}">
+            <a class="nav-link" th:href="@{/logout}">
+                <i class="fas fa-sign-in-alt"></i>
+                Çıkış
+            </a>
+        </li>
+
+        <li class="nav-item" id="memberlist" th:if="${#request.userPrincipal != null}">
+            <a class="nav-link" href="/memberlist">
+                <i class="fas fa-users"></i>
+                Üye Listesi
+            </a>
+        </li>
+        <li class="nav-item" id="buttonDesign" th:if="${#request.userPrincipal != null}">
+            <a class="nav-link" th:href="@{/member/update/{userNamee}(userNamee=${#request.userPrincipal.getName()})}">
+                <i class="fas fa-edit"></i>
+                Bilgilerimi Güncelle
+            </a>
+        </li>
+    </ul>
+    <form class="form-inline " method="POST" th:action="@{/showSearchResult}">
+        <input aria-label="Search" class="form-inline" id="searchWord"
+               name="searchWord" placeholder="Kitap Adı" required size="15px" style="margin-left: 10px;" type="text">
+        <button class="btn btn-outline-info" style="margin-left: 10px;" type="submit">Ara</button>
+    </form>
+
+
+</nav>
+
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body style="background-image:none">
+	<nav th:replace="fragments/header :: navigation"></nav>
+	<div class="container">
+		<span th:switch="${foundedBooksSize}">
+		<span th:case="'0'">
+				<br>
+				<center>
+					<h2>
+						<div class="alert alert-danger">
+							<i class="fas fa-exclamation-triangle"></i> <b>
+								"[[${searchWord}]]"</b> İle İlgili Sonuç Bulunamadı!
+						</div>
+					</h2>
+				</center>
+		</span> <span th:case="*">
+				<h3>
+					<b>"[[${searchWord}]]"</b> İle İlgili Sonuçlar.
+				</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th >Kitap Adı</th>
+							<th >Basımevi</th>
+							<th >Yazar Adı Soyadı</th>
+							<th >Türü</th>
+							<th >Sayfa Sayısı</th>
+							<th >Baskı Sayısı </th>
+							<th >Dil</th>
+							<th >Barkod No</th>
+	
+	
+						</tr>
+					</thead>
+					
+                <tbody>
+                    <tr th:each="book, stat : ${foundedBooks}" th:object="${book}">
+                        <td th:text="${book.bookName}"></td>
+                        <td th:text="${book.publisherName}"></td>
+                        <td>
+                            <span th:each="author, iterator1: ${book.authors}" th:remove="tag">
+                                <span th:utext="${iterator1.index+1+'. ' + author.nameSurname+' <br/>'}" />
+                            </span>
+                        </td>
+                        <td th:text="${book.category}"></td>
+                        <td th:text="${book.pageNumber}"></td>
+                        <td th:text="${book.editionNumber}"></td>
+                        <td th:text="${book.languagesEnum}"></td>
+                        <td th:text="${book.isbn}"></td>
+
+                        <td><a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-info" th:method="GET">
+                                <i class="fas fa-edit"></i> GÜNCELLE </a>
+                            <form action="#" th:action="@{/delete/{id}(id = ${book.id})}" th:method="POST">
+                                <button class="btn btn-danger" type="submit" id="deleteButton">SİL</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+				</table>
+		</span>
+		</span>
+	</div>
+</body>
+</html>

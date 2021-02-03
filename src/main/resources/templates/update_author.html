@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body style="background-image:none">
+    <nav th:replace="fragments/header :: navigation"></nav>
+    <div class="container">
+        <div>
+            <h1>Yazar Güncelle</h1>
+
+            <form action="#" th:action="@{/updateAuthor/{id}(id = ${authorDTO.id})}" th:object="${authorDTO}"
+                th:method="POST">
+                <div class="form-group">
+                    <div class="form-group" style="margin-left: 30px;">
+                        <label for="nameSurname">Yazar Adı(*)</label> </br>
+                        <input type="text" id="nameSurname" name="NameSurname" th:field="*{nameSurname}"
+                            th:required="required">
+                    </div>
+
+                    <div class="form-group" style="margin-left: 30px;">
+                        <label for="about">Yazar Hakkında(*)</label></br>
+                        <input type="text" id="about" class="About" th:field="*{about}" th:required="required">
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">GÜNCELLE</button>
+
+            </form>
+        </div>
+
+
+      </div>
+    </div>
+    <div style="width: 100%; height: 80px;"></div>
+
+    <div th:replace="fragments/footer :: footer"/>
+
+</body>
+
+</html>

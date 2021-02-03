@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+
+<nav th:replace="fragments/header :: navigation"></nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>403 - Erişim Engellendi</h1>
+        <div th:inline="text">
+            Bu sayfaya erişim yetkiniz yok!.</div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
