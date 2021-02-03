@@ -35,7 +35,8 @@
                 <td th:if="${#request.userPrincipal != null}">
                     <table>
                         <tr>
-                            <td>
+                            <td
+                                    th:if="${#request.isUserInRole('ADMIN')}">
                                 <a
                                         class="btn btn-info"
                                         th:href="@{/updateAuthor/{id}(id=${authorDTO.id})}"
@@ -44,7 +45,8 @@
                                     <i class="fas fa-edit"></i> GÜNCELLE
                                 </a>
                             </td>
-                            <td>
+                            <td
+                                    th:if="${#request.isUserInRole('ADMIN')}">
                                 <form
                                         action="#"
                                         th:action="@{/deleteAuthor/{id}(id = ${authorDTO.id})}"

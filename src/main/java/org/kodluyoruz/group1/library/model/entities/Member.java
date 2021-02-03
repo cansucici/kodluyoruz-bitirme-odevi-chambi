@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.kodluyoruz.group1.library.model.enums.StatusEnum;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;

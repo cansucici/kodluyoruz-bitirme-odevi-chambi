@@ -1,7 +1,6 @@
-
 # **CHAMBI KÜTÜPHANESİ**
 
-# You can access the link ->  https://chambi-library.herokuapp.com/ 
+# You can access the link ->  https://chambi-org.kodluyoruz.group1.library.herokuapp.com/ 
 
 
 ## _Kütüphane Kitap Yönetim Sistemi_
@@ -31,18 +30,27 @@
 
 ## **Uygulama Özellikleri** 
 ---
-*	Ana ekranımızda bir text giriş alanı olacak. Buraya kitap adı yazılıp, sistemde olup olmadığı bilgisine ulaşılabilecek. Eğer kayıtlı bir kullanıcıysa kitabı ÖDÜNÇ AL butonuyla alabilecek.
+*   Sisteme kayıt olunduğunda default olarak **USER** rolü ile kayıt olunur.
+    
+*   Sistemin tüm yetkilerinden sorumlu sadece bir **ADMIN** vardır. 
 
-*	 Sisteme kayıtlı bir kullanıcı değilse ÖDÜNÇ AL butonunu kullanamaz.
+    * Kullanıcı adı :admin
+    * Şifre : admin
+
+*	Ana ekranımızda bir text giriş alanı olacak. Buraya kitap adı yazılıp, sistemde olup olmadığı bilgisine ulaşılabilecek. Eğer kayıtlı bir kullanıcıysa kitabı **ÖDÜNÇ AL** butonuyla alabilecek.
+
+*	Sisteme kayıtlı bir kullanıcı değilse **ÖDÜNÇ AL** butonunu kullanamaz.
 
 *	Kütüphanemizde 2 tane rolümüz olacak.
 
     * Kütüphane Yetkilisi(Admin)
     * Üye(User)	
 
-*	Sisteme kayıt olmak için kayıt formu sayfasına yönlendirme yapılacak.Gerekli bilgiler girildikten sonra login olunacak. Bu sayede tüm kitap listesine, tüm yazar bilgisine ulaşabilecek ve isterse kendi bilgilerini güncelleyebilecek.
+*	Sisteme kayıt olmak için kayıt formu sayfasına yönlendirme yapılacak.Gerekli bilgiler girildikten sonra **LOGIN** olunacak. Bu sayede tüm kitap listesine, tüm yazar bilgisine ulaşabilecek ve isterse kendi bilgilerini güncelleyebilecek.
 
-*	 Sisteme girdikten sonra ekrandaki arama alanında dilerse kitap adını girip arama gerçekleştirebilir. Kitap ACTIVE ise ÖDÜNÇ AL butonunu kullanabilir. 
+*	Sisteme girdikten sonra ekrandaki arama alanında dilerse kitap adını girip arama gerçekleştirebilir. Kitap **ACTIVE** ise **ÖDÜNÇ AL** butonunu kullanabilir. 
+
+*   Kitap ÖDÜNÇ alındıktan sonra durumu **PASSIVE** olarak güncellenecek. İADE edildiğinde tekrar **ACTIVE** görünecek. 
 
 *	Kullanıcı sisteme kullanıcı adı-şifre kombinasyonu ile girebilir. 
 
@@ -50,9 +58,9 @@
 
 *	Kütüphane yetkilimiz yeni kitap ve yeni yazar ekleme,silme,güncelleme yetkilerine sahiptir. Sistemdeki bütün üyelerin bilgilerini de yine kütüphane yetkilimiz görebilir.
 
-*	Bir kitap,bir yazar yada üye silinmek istenirse veritabanında ki durumu “DELETED” olarak değiştirilecek.
+*	Bir kitap,bir yazar ya da üye silinmek istenirse veritabanında ki durumu **DELETED** olarak değiştirilecek. Ancak veritabanındaki bilgileri saklanmaya devam edecek.
 
-*	Bir üye yada admin giriş yapmamışsa ekranda sadece kitap listesi,yazar listesi,kayıt,giriş ve arama alanlarına erişebilir.
+*	Bir üye ya da admin giriş yapmamışsa ekranda sadece kitap listesi,yazar listesi,kayıt,giriş ve arama alanlarına erişebilir.
 
 
 ## **Modeller**
@@ -157,7 +165,7 @@
 
 ### **KİTAP-ÜYE İLİŞKİSİ**
 ---
-* Bir üye birden çok kitap ödünç alabilir (OneToMany)
+* Bir üye birden çok kitap ödünç alabilir (**_OneToMany_**)
 * Birden fazla kitapta bir üye tarafından alınabilir.(**_ManyToOne_**)
 
 ### **ÜYE-ROLE İLİŞKİSİ**

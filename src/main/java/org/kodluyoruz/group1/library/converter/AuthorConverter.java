@@ -1,10 +1,10 @@
 package org.kodluyoruz.group1.library.converter;
 
+import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.AuthorDTO;
 import org.kodluyoruz.group1.library.model.entities.Author;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor

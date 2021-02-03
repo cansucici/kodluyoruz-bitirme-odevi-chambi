@@ -15,7 +15,11 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
+<<<<<<< HEAD
+.idea/libraries
+=======
 .idea/
+>>>>>>> 031bd0211c132b6fe69d4b40f4b61f5ec1fc23d1
 *.iws
 *.iml
 *.ipr

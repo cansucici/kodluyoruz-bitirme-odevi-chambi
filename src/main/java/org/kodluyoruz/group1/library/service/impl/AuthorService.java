@@ -9,6 +9,7 @@ import org.kodluyoruz.group1.library.exceptions.AuthorNotFoundException;
 import org.kodluyoruz.group1.library.model.entities.Author;
 import org.kodluyoruz.group1.library.service.IAuthorService;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class AuthorService implements IAuthorService {
     @Override
     public Author save(AuthorDTO dto) {
         
-        boolean isExist = authorRepository.existsAuthorsByNameSurname(dto.getNameSurname());
+        boolean isExist = authorRepository.existsAuthorsByNameSurnameAndDeletedIsFalse(dto.getNameSurname());
         if (isExist) {
             throw new AlreadyExistException("Zaten böyle bir yazar var.");
         }
