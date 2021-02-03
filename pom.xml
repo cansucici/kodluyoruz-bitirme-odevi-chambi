@@ -11,8 +11,8 @@
 	<groupId>org.kodluyoruz.group1</groupId>
 	<artifactId>library</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>library</name>
-	<description>library project for Spring Boot</description>
+	<name>org.kodluyoruz.group1.library</name>
+	<description>org.kodluyoruz.group1.library project for Spring Boot</description>
 
 	<properties>
 		<java.version>8</java.version>

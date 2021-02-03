@@ -2,7 +2,7 @@
 <html
         lang="en"
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org">
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <!--        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"-->
 
 <head th:replace="fragments/header :: header">
@@ -14,10 +14,12 @@
 <nav th:replace="fragments/header :: navigation"></nav>
 <div class="container">
     <div>
+
         <a th:if="${#request.userPrincipal != null}" th:href="@{/saveBook}">
             <div class="btn btn-info">
                 <i class="fas fa-plus-circle"></i> Yeni Kitap Ekle
             </div>
+
         </a>
         <h1>Kitaplar</h1>
         <table class="table table-striped table-responsive">
@@ -66,25 +68,32 @@
 
                     <table>
                         <tr>
-                            <td>
-                                <a class="btn btn-info"
+                            <td
+                                    th:if="${#request.isUserInRole('ADMIN')}">
+                                <a
                                    th:href="@{/update/{id}(id=${book.id})}"
                                    th:method="GET">
+
+                                    <button class="btn btn-info"
+                                            id="updateButton" type="submit">
                                     <i class="fas fa-edit"></i>
                                     GÜNCELLE
+                                    </button>
                                 </a>
                             </td>
-                            <td>
-
+                            <td
+                                    th:if="${#request.isUserInRole('ADMIN')}">
                                 <form action="#"
                                       th:action="@{/delete/{id}(id = ${book.id})}"
                                       th:method="POST">
+
                                     <button class="btn btn-danger"
                                             id="deleteButton"
-                                            type="submit">
+                                    type="submit">
                                         <i class="fas fa-trash"></i>
                                         SİL
                                     </button>
+
                                 </form>
                             </td>
 
@@ -105,10 +114,10 @@
                                 <form action="#"
                                       th:action="@{/give-book/{id}(id=${book.id})}"
                                       th:method="POST">
-                                    <button class="btn btn-primary"
+                                    <button class="btn btn-success"
                                             id="iade"
                                             type="submit">
-                                        <i class="fab fa-get-pocket"></i>
+                                        <i class="fas fa-check"></i>
                                         İADE
                                     </button>
                                 </form>

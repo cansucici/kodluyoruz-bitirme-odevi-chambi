@@ -1,12 +1,13 @@
 package org.kodluyoruz.group1.library.dto;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.kodluyoruz.group1.library.model.entities.Book;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import lombok.*;
-import org.kodluyoruz.group1.library.model.entities.Book;
+import java.util.List;
 
 @Data
 @NoArgsConstructor

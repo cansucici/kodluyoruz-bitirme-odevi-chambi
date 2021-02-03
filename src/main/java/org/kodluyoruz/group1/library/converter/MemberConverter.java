@@ -1,11 +1,11 @@
 package org.kodluyoruz.group1.library.converter;
 
+import lombok.RequiredArgsConstructor;
 import org.kodluyoruz.group1.library.dto.MemberDTO;
 import org.kodluyoruz.group1.library.model.entities.Member;
 import org.kodluyoruz.group1.library.model.entities.Role;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 

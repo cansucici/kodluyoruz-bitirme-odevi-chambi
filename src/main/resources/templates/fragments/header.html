@@ -66,14 +66,14 @@
             Yazar Listesi
         </a></li>
 
-        <li class="nav-item" id="saveBook" th:if="${#request.userPrincipal != null}">
+        <li class="nav-item" id="saveBook" th:if="${#request.isUserInRole('ADMIN')}">
             <a class="nav-link" href="/saveBook">
                 <i class="fas fa-plus"></i>
                 Yeni Kitap Ekle
             </a>
         </li>
 
-        <li class="nav-item" id="saveAuthor" th:if="${#request.userPrincipal != null}">
+        <li class="nav-item" id="saveAuthor" th:if="${#request.isUserInRole('ADMIN')}">
             <a class="nav-link" href="/saveAuthor">
                 <i class="fas fa-plus"></i>
                 Yeni Yazar Ekle
@@ -101,7 +101,7 @@
             </a>
         </li>
 
-        <li class="nav-item" id="memberlist" th:if="${#request.userPrincipal != null}">
+        <li class="nav-item" id="memberlist" th:if="${#request.isUserInRole('ADMIN')}">
             <a class="nav-link" href="/memberlist">
                 <i class="fas fa-users"></i>
                 Üye Listesi
