@@ -17,6 +17,7 @@ import org.kodluyoruz.group1.library.service.IMemberService;
 import org.kodluyoruz.group1.library.utils.SecurityUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -140,8 +141,11 @@ public class MemberService implements IMemberService {
         }
 
         Book book = bookConverter.convertToEntity(bookService.getBookById(bookId));
-        book.setStatus(StatusEnum.PASSIVE);
-        book.setMember(currentUser);
+
+        if (book.getStatus() != StatusEnum.PASSIVE) {
+            book.setStatus(StatusEnum.PASSIVE);
+            book.setMember(currentUser);
+        }
         return bookRepository.save(book);
     }
 

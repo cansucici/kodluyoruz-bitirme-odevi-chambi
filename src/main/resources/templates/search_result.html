@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="fragments/header :: header"></head>
+<head th:replace="fragments/header :: header"></head>
 
-  <body style="background-image: none">
-    <nav th:replace="fragments/header :: navigation"></nav>
-    <div class="container">
+<body style="background-image: none">
+<nav th:replace="fragments/header :: navigation"></nav>
+<div class="container">
       <span th:switch="${foundedBooksSize}">
         <span th:case="'0'">
-          <br />
+          <br/>
           <center>
             <h2>
               <div class="alert alert-danger">
@@ -42,37 +42,28 @@
                 <td th:text="${book.bookName}"></td>
                 <td th:text="${book.publisherName}"></td>
                 <td>
-                  <span
-                    th:each="author, iterator1: ${book.authors}"
-                    th:remove="tag"
-                  >
-                    <span
-                      th:utext="${iterator1.index+1+'. ' + author.nameSurname+' <br/>'}"
-                    />
+                  <span th:each="author, iterator1: ${book.authors}"
+                        th:remove="tag">
+                    <span th:utext="${iterator1.index+1+'. ' + author.nameSurname+' <br/>'}"></span>
                   </span>
                 </td>
 
                 <td th:text="${book.category}"></td>
                 <td th:text="${book.pageNumber}"></td>
                 <td th:text="${book.editionNumber}"></td>
-                <td th:text="${book.languagesEnum}"></td>
+                <td th:text="${book.languagesEnum.getValue()}"></td>
                 <td th:text="${book.isbn}"></td>
-                <td th:text="${book.status}"></td>
+                <td th:text="${book.status.getValue()}"></td>
 
                 <td th:if="${#request.userPrincipal != null}">
                   <table>
                     <tr>
+
                       <td th:if="${#request.isUserInRole('ADMIN')}">
-                        <a
-                          th:href="@{/update/{id}(id=${book.id})}"
-                          class="btn btn-info"
-                          th:method="GET"
-                        >
-                          <button
-                            class="btn btn-info"
-                            id="updateButton"
-                            type="submit"
-                          >
+                        <a class="btn btn-info"
+                           th:href="@{/update/{id}(id=${book.id})}"
+                           th:method="GET">
+                          <button class="btn btn-info" id="updateButton" type="submit">
                             <i class="fas fa-edit"></i>
                             GÜNCELLE
                           </button>
@@ -80,55 +71,37 @@
                       </td>
 
                       <td th:if="${#request.isUserInRole('ADMIN')}">
-                        <form
-                          action="#"
-                          th:action="@{/delete/{id}(id = ${book.id})}"
-                          th:method="POST"
-                        >
-                          <button
-                            class="btn btn-danger"
-                            type="submit"
-                            id="deleteButton"
-                          >
+                        <form action="#" th:action="@{/delete/{id}(id = ${book.id})}"
+                              th:method="POST">
+                          <button class="btn btn-danger" id="deleteButton" type="submit">
                             <i class="fas fa-trash"></i>
                             SİL
                           </button>
                         </form>
                       </td>
 
-                      <td>
-                        <form
-                          action="#"
-                          th:action="@{/take-book/{id}(id=${book.id})}"
-                          th:method="POST"
-                        >
-                          <button
-                            class="btn btn-primary"
-                            id="odunc_al"
-                            type="submit"
-                          >
+                      <td th:hidden="${book.status.name() == 'PASSIVE'}"
+                          th:if="${#request.isUserInRole('USER')}">
+                        <form action="#" th:action="@{/take-book/{id}(id=${book.id})}"
+                              th:method="POST">
+                          <button class="btn btn-primary" id="odunc_al" type="submit">
                             <i class="fab fa-get-pocket"></i>
                             ÖDÜNÇ AL
                           </button>
                         </form>
                       </td>
 
-                      <td>
-                        <form
-                          action="#"
-                          th:action="@{/give-book/{id}(id=${book.id})}"
-                          th:method="POST"
-                        >
-                          <button
-                            class="btn btn-success"
-                            id="iade"
-                            type="submit"
-                          >
+                      <td th:hidden="${book.status.name() == 'ACTIVE'}"
+                          th:if="${#request.isUserInRole('USER')}">
+                        <form action="#" th:action="@{/give-book/{id}(id=${book.id})}"
+                              th:method="POST">
+                          <button class="btn btn-success" id="iade" type="submit">
                             <i class="fas fa-check"></i>
                             İADE
                           </button>
                         </form>
                       </td>
+
                     </tr>
                   </table>
                 </td>
@@ -137,7 +110,7 @@
           </table>
         </span>
       </span>
-    </div>
-    <div th:replace="fragments/footer :: footer" />
-  </body>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
 </html>
