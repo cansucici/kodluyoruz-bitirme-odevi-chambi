@@ -4,7 +4,6 @@ import org.kodluyoruz.group1.library.model.entities.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -20,8 +19,6 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query("update Author a set a.deleted=true where a.id=:id")
     void deleteAuthor(Long id);
 
-
-
-boolean existsAuthorsByNameSurnameAndDeletedIsFalse(String nameSurname);
+    boolean existsAuthorsByNameSurnameAndDeletedIsFalse(String nameSurname);
 
 }

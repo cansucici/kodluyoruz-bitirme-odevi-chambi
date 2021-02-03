@@ -62,7 +62,7 @@
                 <td th:if="${#request.userPrincipal != null}">
                   <table>
                     <tr>
-                      <td  th:if="${#request.isUserInRole('ADMIN')}">
+                      <td th:if="${#request.isUserInRole('ADMIN')}">
                         <a
                           th:href="@{/update/{id}(id=${book.id})}"
                           class="btn btn-info"

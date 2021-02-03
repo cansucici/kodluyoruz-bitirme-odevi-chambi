@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Component;
 
-
 @Component
 @RequiredArgsConstructor
 public class BookConverter implements IBaseConverter<Book, BookDTO> {
@@ -23,8 +22,8 @@ public class BookConverter implements IBaseConverter<Book, BookDTO> {
         if (typeMap == null) {
             typeMap = modelMapper.createTypeMap(Book.class, BookDTO.class);
 
-            typeMap.addMappings(mapping -> mapping.using(new AuthorsListConverter())
-                    .map(Book::getAuthors, BookDTO::setAuthors));
+            typeMap.addMappings(
+                    mapping -> mapping.using(new AuthorsListConverter()).map(Book::getAuthors, BookDTO::setAuthors));
         }
 
         return modelMapper.map(entity, BookDTO.class);

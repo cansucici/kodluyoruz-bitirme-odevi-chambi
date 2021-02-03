@@ -1,97 +1,152 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="fragments/header :: header">
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="fragments/header :: header">
     <title>KAYIT</title>
-</head>
+  </head>
 
-<body style="background-image:none">
-<nav th:replace="fragments/header :: navigation"></nav>
-<div class="container">
-    <div>
+  <body style="background-image: none">
+    <nav th:replace="fragments/header :: navigation"></nav>
+    <div class="container">
+      <div>
         <nav class="navbar navbar-light bg-light mb-4">
-            <span class="navbar-brand mb-0 h1">
-                <h2>YENİ ÜYE KAYIT FORMU</h2>
-            </span>
+          <span class="navbar-brand mb-0 h1">
+            <h2>YENİ ÜYE KAYIT FORMU</h2>
+          </span>
         </nav>
-        <div class="alert alert-danger" id="errors" th:if="${(param.error != null) and (param.error[0] == 'true')}">
-            Lütfen Zorunlu Alanları Doldurunuz.
+        <div
+          class="alert alert-danger"
+          id="errors"
+          th:if="${(param.error != null) and (param.error[0] == 'true')}"
+        >
+          Lütfen Zorunlu Alanları Doldurunuz.
         </div>
 
-        <form action="#" method="POST" th:action="@{/new-member}" th:object="${memberDTO}">
-
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="userName">Kullanıcı Adı(*)</label>
-                <div class="col-sm-10">
-                    <input class="w-25 form-control" id="userName" placeholder="Kullanıcı Adı" th:field="*{userName}"
-                           th:required="required" type="text">
-                </div>
+        <form
+          action="#"
+          method="POST"
+          th:action="@{/new-member}"
+          th:object="${memberDTO}"
+        >
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="userName"
+              >Kullanıcı Adı(*)</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="w-25 form-control"
+                id="userName"
+                placeholder="Kullanıcı Adı"
+                th:field="*{userName}"
+                th:required="required"
+                type="text"
+              />
             </div>
+          </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="firstName">İsim(*)</label>
-                <div class="col-sm-10">
-                    <input class="w-25 form-control" id="firstName" th:field="*{firstName}"
-                           th:required="required"
-                           type="text">
-                </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="firstName"
+              >İsim(*)</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="w-25 form-control"
+                id="firstName"
+                th:field="*{firstName}"
+                th:required="required"
+                type="text"
+              />
             </div>
+          </div>
 
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="lastName"> Soyisim(*) </label>
-                <div class="col-sm-10">
-                    <input class="w-25 form-control" id="lastName" th:field="*{lastName}" th:required="required"
-                           type="text">
-                </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="lastName">
+              Soyisim(*)
+            </label>
+            <div class="col-sm-10">
+              <input
+                class="w-25 form-control"
+                id="lastName"
+                th:field="*{lastName}"
+                th:required="required"
+                type="text"
+              />
             </div>
+          </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="email"> Email(*) </label>
-                <div class="col-sm-10">
-                    <input class="w-25 form-control" id="email" th:field="*{email}" th:required="required"
-                           type="text">
-                </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="email">
+              Email(*)
+            </label>
+            <div class="col-sm-10">
+              <input
+                class="w-25 form-control"
+                id="email"
+                th:field="*{email}"
+                th:required="required"
+                type="text"
+              />
             </div>
+          </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="phone">Telefon numarası(*)</label>
-                <div class="col-sm-10">
-                    <input class="w-25 form-control" id="phone" th:field="*{phoneNumber}"
-                           th:required="required"
-                           type="text">
-                </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="phone"
+              >Telefon numarası(*)</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="w-25 form-control"
+                id="phone"
+                th:field="*{phoneNumber}"
+                th:required="required"
+                type="text"
+              />
             </div>
+          </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="adress">Adres(*)</label>
-                <div class="col-sm-10">
-                    <input class="w-25 form-control" id="adress" th:field="*{adress}"
-                           th:required="required"
-                           type="text">
-                </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="adress">Adres(*)</label>
+            <div class="col-sm-10">
+              <input
+                class="w-25 form-control"
+                id="adress"
+                th:field="*{adress}"
+                th:required="required"
+                type="text"
+              />
             </div>
+          </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="password">Şifre(*)</label>
-                <div class="col-sm-10">
-                    <input class="w-25 form-control" id="password" th:field="*{password}"
-                           th:required="required"
-                           type="text">
-                </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="password"
+              >Şifre(*)</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="w-25 form-control"
+                id="password"
+                th:field="*{password}"
+                th:required="required"
+                type="text"
+              />
             </div>
+          </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">(*) Zorunlu Alan</label><br>
-                <div class="col-sm-2">
-                    <button class="btn btn-primary" id="button" type="submit">ÜYE OL</button>
-                </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">(*) Zorunlu Alan</label
+            ><br />
+            <div class="col-sm-2">
+              <button class="btn btn-primary" id="button" type="submit">
+                ÜYE OL
+              </button>
             </div>
-
+          </div>
         </form>
+      </div>
     </div>
-</div>
-<div th:replace="fragments/footer :: footer"/>
-</body>
+    <div th:replace="fragments/footer :: footer" />
+  </body>
 </html>
