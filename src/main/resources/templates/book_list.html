@@ -14,7 +14,7 @@
 <nav th:replace="fragments/header :: navigation"></nav>
 <div class="container">
     <div>
-        <a th:href="@{/saveBook}">
+        <a th:if="${#request.userPrincipal != null}" th:href="@{/saveBook}">
             <div class="btn btn-info">
                 <i class="fas fa-plus-circle"></i> Yeni Kitap Ekle
             </div>
@@ -32,7 +32,7 @@
                 <th>Dil</th>
                 <th>Barkod No</th>
                 <th>Durumu</th>
-                <th></th>
+                <th th:if="${#request.userPrincipal != null}"></th>
             </tr>
             </thead>
 
@@ -52,9 +52,7 @@
                 <td th:text="${book.isbn}"></td>
                 <td th:text="${book.status}"></td>
 
-                <td>
-
-
+                <td th:if="${#request.userPrincipal != null}">
                     <!--                            -->
                     <!--                            <div class="form-group" th:if="${'ADMIN'.equals(isAdmin) and myObjct.name!=null}">-->
                     <!--                                -->

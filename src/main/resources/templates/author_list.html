@@ -12,7 +12,7 @@
 <nav th:replace="fragments/header :: navigation"></nav>
 <div class="container">
     <div>
-        <a th:href="@{/saveAuthor}">
+        <a th:if="${#request.userPrincipal != null}" th:href="@{/saveAuthor}">
             <div class="btn btn-info">
                 <i class="fas fa-plus-circle"></i> Yazar Ekle
             </div>
@@ -23,7 +23,7 @@
             <tr>
                 <th>Yazar Adı Soyadı</th>
                 <th>Yazar Hakkında</th>
-                <th></th>
+                <th th:if="${#request.userPrincipal != null}"></th>
             </tr>
             </thead>
 
@@ -32,7 +32,7 @@
                 <td th:text="${authorDTO.nameSurname}"></td>
                 <td th:text="${authorDTO.about}"></td>
 
-                <td>
+                <td th:if="${#request.userPrincipal != null}">
                     <table>
                         <tr>
                             <td>
